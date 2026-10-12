@@ -23,9 +23,21 @@ Chaque fichier `qml/<famille>/<nom>.qml` correspond exactement à
 `sld/<nom>.sld` et `mbstyle/<nom>.json`, produits par :
 
 ```bash
-python cnig_qml2sld_geoserver.py --local-source <dossier_qml> --backend styleforge \
+python cnig_qml2sld_geoserver.py --local-source <dossier_source> --backend styleforge \
     --mbstyle --all --out <dossier_sortie> --clean
 ```
+
+**Attention à `<dossier_source>`** : il doit pointer vers une copie du
+dépôt CNIG qui conserve les fichiers `.svg` à côté des `.qml` (un clone
+git de la branche `SYMBOLISATION`, ou le dossier `.cache_cnig` déjà
+rempli par une exécution précédente en mode `github`) — **pas** le
+dossier `qml/` de ce répertoire d'exemples, qui ne contient QUE les 17
+`.qml` extraits, sans les pictogrammes qui les accompagnent dans le
+dépôt source. Lancer la commande sur `qml/` seul reste possible et
+produit bien des SLD/MBStyle valides, mais avec beaucoup moins de
+pictogrammes résolus (environ 127 contre 873 ici) — le compteur
+"Pictogrammes SVG déployés" de `rapport_conversion.md` en dépend
+directement, ce n'est pas une variation aléatoire.
 
 État au moment de la génération de ces exemples : **17/17 fichiers
 convertis avec succès en SLD 1.0.0 et en Mapbox GL Style**, 0 échec,

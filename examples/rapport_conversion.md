@@ -1,8 +1,10 @@
-# Rapport de conversion QML CNIG -> SLD GeoServer
+# Rapport de conversion QML CNIG -> SLD / MBStyle GeoServer
 
-- Styles convertis : **17/17**
-- Échecs : **0**
-- Conversions avec avertissement : **17**
+- Styles SLD convertis : **17/17**
+- Échecs SLD : **0**
+- Conversions SLD avec avertissement : **17**
+- MBStyle produits : **17/17**
+- MBStyle en échec : **0**
 - Pictogrammes SVG déployés : **873**
 
 ## Correctifs appliqués en phase 4
@@ -30,6 +32,11 @@ Comprises par GeoServer, nécessaires au rendu, mais refusées par un validateur
 | Extension | Occurrences |
 |---|---:|
 | matchCase sur PropertyIsLike (extension GeoServer) | 77 |
+
+## MBStyle
+
+**17/17** fichier(s) SLD produit(s) avec succès ont également donné lieu à un MBStyle.
+Aucun échec.
 
 ## Avertissements
 
