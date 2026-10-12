@@ -47,21 +47,47 @@ réécritures de filtre, etc.) et `docs/geoserver.md` pour ce qu'il faut
 installer côté GeoServer pour que ces sorties fonctionnent réellement
 (sprites, vendor options).
 
+## sld/svg/cnig/
+
+Les 873 pictogrammes SVG référencés par les `<OnlineResource>` des
+fichiers `sld/*.sld` (357 références réellement utilisées par ce corpus
+de 17 fichiers ; le CLI déploie systématiquement la totalité du catalogue
+source découvert, pas seulement le sous-ensemble utilisé — voir
+`deploy_svg()` dans `cnig_qml2sld_geoserver.py`). Sans ce dossier, les
+`.sld` de cet exemple référencent des images absentes : ils restent du
+XML valide, mais GeoServer ne pourra pas résoudre les pictogrammes au
+rendu. Les chemins sont relatifs (`svg/cnig/<nom>.svg` depuis chaque
+`.sld`) — ce dossier doit donc rester au même niveau que `sld/*.sld`,
+exactement la convention que décrit `docs/geoserver.md`.
+
 ## rapport_conversion.md
 
 Le rapport de synthèse produit par CETTE exécution exacte (celle qui a
 généré les fichiers de `sld/` et `mbstyle/` ci-contre) : décompte par
 correctif appliqué en phase 4 (réécritures d'`onlineResource`, hachures
 réparées, `VendorOption` injectées, etc.), résultat de l'audit PHASE 6
-("Conforme — aucun défaut détecté"), et le détail exhaustif,
-**fichier par fichier**, de chaque avertissement émis pendant la
-conversion — jamais une approximation silencieuse, toujours tracée.
-C'est la meilleure illustration concrète de ce que `docs/limites.md`
-décrit en théorie : chaque ligne y renvoie au fichier QML, au
-symbolizer et à la propriété concernés.
+("Conforme — aucun défaut détecté"), et, **fichier par fichier**, un
+échantillon des avertissements émis pendant la conversion.
 
-Le rapport existe aussi en JSON (`rapport_conversion.json`, même contenu,
-exploitable par script) — non inclus ici pour limiter la taille du dépôt
+Chaque avertissement est préfixé par le document qu'il concerne —
+**`Lecture QML :`** (lecture du pivot, commun au SLD ET au MBStyle,
+puisque les deux en sont dérivés), **`SLD :`** (spécifique à
+l'écrivain SLD) ou **`MBStyle :`** (spécifique à l'écrivain MBStyle) —
+et l'échantillonnage, par fichier, se fait **séparément pour chacune de
+ces trois catégories** (jusqu'à 6 avertissements chacune) : une
+catégorie nombreuse (typiquement « Lecture QML », qui porte souvent
+plusieurs dizaines d'entrées par fichier) ne masque donc jamais les
+avertissements d'une autre catégorie moins nombreuse. Toute troncature
+est dite explicitement (`… et N autre(s) avertissement(s) « <catégorie>
+» non affiché(s) ici`) — jamais une coupe silencieuse. C'est une bonne
+illustration concrète de ce que `docs/limites.md` décrit en théorie :
+chaque ligne renvoie au fichier QML, au symbolizer et à la propriété
+concernés.
+
+**Liste exhaustive, non échantillonnée** : `rapport_conversion.json`
+(clé `phase2_conversion`, champ `avertissements` par fichier, tous
+préfixés de la même façon) — même contenu que le `.md`, mais complet et
+exploitable par script. Non inclus ici pour limiter la taille du dépôt
 (environ 1,5 Mo sur ce corpus) ; régénérez-le en relançant la commande
 ci-dessus, il est produit automatiquement à côté du dossier de sortie.
 
