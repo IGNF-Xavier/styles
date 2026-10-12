@@ -8,8 +8,11 @@ version = "0.1.0"
 description = "Service HTTP (synchrone et asynchrone) de conversion de styles cartographiques, construit sur styleforge-core."
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
+license = { text = "GPL-3.0-or-later" }
 authors = [{ name = "Xavier Thauvin" }]
+classifiers = [
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+]
 dependencies = [
     "styleforge-core>=0.1.0",
     "fastapi>=0.110",

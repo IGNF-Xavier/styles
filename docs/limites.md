@@ -80,9 +80,9 @@ de GeoServer.
 
 ## 5. Oracle PyQGIS — limite de l'oracle, pas du format cible
 
-Historique utile pour comprendre le tableau 1 : certaines limites
-initialement attribuées au format MBStyle lui-même (ex. `strMatches`,
-section 1 ci-dessus) se sont révélées être des limites du convertisseur
+Historique utile pour comprendre le tableau de la section 1 ci-dessus :
+certaines limites initialement attribuées au format MBStyle lui-même (ex.
+`strMatches`) se sont révélées être des limites du convertisseur
 `QgsMapBoxGlStyleConverter` de QGIS — utilisé comme **oracle de test**
 dans ce projet, jamais comme dépendance d'exécution — et non du format
 Mapbox GL Style en lui-même. Quand un tel écart apparaît, la vérification

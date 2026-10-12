@@ -57,4 +57,4 @@ versionnage (tout changement de champ du pivot = version majeure).
 
 ## Licence
 
-MIT — voir `LICENSE`.
+GPL-3.0-or-later — voir `LICENSE`.

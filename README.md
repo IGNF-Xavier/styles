@@ -224,6 +224,8 @@ Résumé — détail complet dans [`docs/geoserver.md`](docs/geoserver.md).
 
 ## Licence
 
-MIT — voir [`LICENSE`](LICENSE). `styleforge-core` et `styleforge-api`
-portent chacun leur propre copie de la licence dans leur dossier
-(identique, pour qu'un package publié séparément reste autosuffisant).
+GPL-3.0-or-later — voir [`LICENSE`](LICENSE). `styleforge-core` et
+`styleforge-api` portent chacun leur propre copie de la licence dans leur
+dossier (identique, pour qu'un package publié séparément reste
+autosuffisant). Licence copyleft forte : toute redistribution, modifiée ou
+non, doit rester sous GPL-3.0-or-later et fournir son code source.

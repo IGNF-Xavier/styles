@@ -79,4 +79,4 @@ est introuvable dans l'environnement d'exécution.
 
 ## Licence
 
-MIT — voir `../styleforge-core/LICENSE`.
+GPL-3.0-or-later — voir `LICENSE`.

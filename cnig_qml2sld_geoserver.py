@@ -7,7 +7,7 @@
 ================================================================================
 
  Auteur    : chaîne outillée pour les documents d'urbanisme CNIG (PLU / SUP / SCoT)
- Licence   : à définir par l'équipe (MIT recommandé si publication)
+ Licence   : GPL-3.0-or-later (voir LICENSE à la racine du dépôt)
  Python    : 3.9+   (testé 3.9 / 3.11 / 3.12)
  Plateforme: Windows / PowerShell (chemins gérés via pathlib, aucun appel shell)
 
