@@ -1,0 +1,2765 @@
+{
+  "version": 8,
+  "sources": {
+    "cnig": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=workspace:sup_ass&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/x-protobuf;type=mapbox-vector&TILECOL={x}&TILEROW={y}"
+      ]
+    }
+  },
+  "layers": [
+    {
+      "id": "A1|gen|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "A1|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 0.625
+      }
+    },
+    {
+      "id": "A1|gen|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "A1|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_f9233c469a"
+      }
+    },
+    {
+      "id": "A10|gen|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "A10|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "A10|gen|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "A10|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_5045d68d65"
+      }
+    },
+    {
+      "id": "A2|gen|ass",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "A2|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 3.75,
+        "line-dasharray": [
+          6.25,
+          6.25
+        ]
+      }
+    },
+    {
+      "id": "A3|gen|ass",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "A3|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 2.5,
+        "line-dasharray": [
+          22.5,
+          22.5
+        ]
+      }
+    },
+    {
+      "id": "A4|gen|ass",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "A4|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 2.5,
+        "line-dasharray": [
+          2.5,
+          5.0
+        ]
+      }
+    },
+    {
+      "id": "A5|gen_eaupotable|ass",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "A5|gen_eaupotable|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 3.75,
+        "line-dasharray": [
+          12.5,
+          5.0
+        ]
+      }
+    },
+    {
+      "id": "A6|gen|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "A6|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 0.625
+      }
+    },
+    {
+      "id": "A6|gen|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "A6|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_fb2803a26b"
+      }
+    },
+    {
+      "id": "A7|gen|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "A7|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 0.625
+      }
+    },
+    {
+      "id": "A7|gen|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "A7|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_f9233c469a"
+      }
+    },
+    {
+      "id": "A8|gen_montagne|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "A8|gen_montagne|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 0.625
+      }
+    },
+    {
+      "id": "A8|gen_montagne|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "A8|gen_montagne|ass"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_f9233c469a"
+      }
+    },
+    {
+      "id": "A9|gen|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "A9|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "A9|gen|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "A9|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_5045d68d65"
+      }
+    },
+    {
+      "id": "AC1|gen_classe|ass_abor-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AC1|gen_classe|ass_abor"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AC1|gen_classe|ass_abor-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AC1|gen_classe|ass_abor"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff8000",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "AC1|gen_classe|ass_mh-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AC1|gen_classe|ass_mh"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff8000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "AC1|gen_classe|ass_mh-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AC1|gen_classe|ass_mh"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_e6ada32b31"
+      }
+    },
+    {
+      "id": "AC2|gen_classe|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AC2|gen_classe|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff8000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "AC2|gen_classe|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AC2|gen_classe|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_vertline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AC2|gen_classe|ass-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AC2|gen_classe|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AC2|gen_inscrit|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AC2|gen_inscrit|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff8000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "AC2|gen_inscrit|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AC2|gen_inscrit|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_vertline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AC2|gen_inscrit|ass-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AC2|gen_inscrit|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AC3|gen_reservenatnationale|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AC3|gen_reservenatnationale|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff8000",
+        "line-opacity": 1.0,
+        "line-width": 0.625
+      }
+    },
+    {
+      "id": "AC3|gen_reservenatnationale|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AC3|gen_reservenatnationale|ass"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_fb2803a26b"
+      }
+    },
+    {
+      "id": "AC4|gen|ass-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AC4|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AC4|gen|ass-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AC4|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff8000",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "AC4bis|gen|ass-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AC4bis|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AC4bis|gen|ass-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AC4bis|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff8000",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "AR1|gen|ass_sol-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AR1|gen|ass_sol"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AR1|gen|ass_sol-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AR1|gen|ass_sol"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#800080",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "AR2|gen|ass_sol-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AR2|gen|ass_sol"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AR2|gen|ass_sol-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AR2|gen|ass_sol"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#800080",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "AR3|gen|ass_isolement-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AR3|gen|ass_isolement"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AR3|gen|ass_isolement-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AR3|gen|ass_isolement"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#800080",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "AR3|gen|ass_prohibition1-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AR3|gen|ass_prohibition1"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AR3|gen|ass_prohibition1-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AR3|gen|ass_prohibition1"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#800080",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "AR4|gen|ass",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AR4|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#800080",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "AR5|gen|ass-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AR5|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AR5|gen|ass-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AR5|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#800080",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "AR6|gen|ass-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AR6|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AR6|gen|ass-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AR6|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#800080",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "AS1|gen_eauminerale|ass-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AS1|gen_eauminerale|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AS1|gen_eauminerale|ass-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AS1|gen_eauminerale|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00aaff",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "AS1|gen_eaupotable|ass_eloigne-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AS1|gen_eaupotable|ass_eloigne"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AS1|gen_eaupotable|ass_eloigne-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AS1|gen_eaupotable|ass_eloigne"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00aaff",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "AS1|gen_eaupotable|ass_rapproche-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AS1|gen_eaupotable|ass_rapproche"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AS1|gen_eaupotable|ass_rapproche-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AS1|gen_eaupotable|ass_rapproche"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00aaff",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "AS2|gen|ass-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AS2|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "AS2|gen|ass-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "AS2|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00c0c0",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "EL10|gen|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL10|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "EL10|gen|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL10|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_5045d68d65"
+      }
+    },
+    {
+      "id": "EL11|gen|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL11|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 2.5
+      }
+    },
+    {
+      "id": "EL11|gen|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL11|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "EL2bis|gen|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL2bis|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "EL2bis|gen|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL2bis|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_e6ada32b31"
+      }
+    },
+    {
+      "id": "EL3|gen|ass_halage",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL3|gen|ass_halage"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.25,
+        "line-dasharray": [
+          5.0,
+          2.5,
+          2.5,
+          2.5
+        ]
+      }
+    },
+    {
+      "id": "EL3|gen|ass_marchepied",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL3|gen|ass_marchepied"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.25,
+        "line-dasharray": [
+          6.25,
+          3.75
+        ]
+      }
+    },
+    {
+      "id": "EL4|gen|ass_sol-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL4|gen|ass_sol"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "EL4|gen|ass_sol-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL4|gen|ass_sol"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_e25025c8c5"
+      }
+    },
+    {
+      "id": "EL5|gen|ass",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL5|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 2.5,
+        "line-dasharray": [
+          6.25,
+          3.75
+        ]
+      }
+    },
+    {
+      "id": "EL6|gen|ass",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL6|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "EL7|gen|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL7|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "EL7|gen|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL7|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "EL8|gen|ass_sol-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL8|gen|ass_sol"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "EL8|gen|ass_sol-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL8|gen|ass_sol"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "EL9|gen_limdompubmaritim|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL9|gen_limdompubmaritim|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 2.5
+      }
+    },
+    {
+      "id": "EL9|gen_limdompubmaritim|ass-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "EL9|gen_limdompubmaritim|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ffff00",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "I1|gen_canalgaz|ass",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I1|gen_canalgaz|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.25,
+        "line-dasharray": [
+          5.0,
+          2.5,
+          2.5,
+          2.5
+        ]
+      }
+    },
+    {
+      "id": "I10|gen|ass-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I10|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "I10|gen|ass-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I10|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "I2|gen_pyloneturbine|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I2|gen_pyloneturbine|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "I2|gen_pyloneturbine|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I2|gen_pyloneturbine|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "I3|gen_canalgaz|ass_passage-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I3|gen_canalgaz|ass_passage"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 0.625
+      }
+    },
+    {
+      "id": "I3|gen_canalgaz|ass_passage-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I3|gen_canalgaz|ass_passage"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_fb2803a26b"
+      }
+    },
+    {
+      "id": "I3|gen_canalgaz|ass_protection",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I3|gen_canalgaz|ass_protection"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.25,
+        "line-dasharray": [
+          5.0,
+          2.5,
+          2.5,
+          2.5
+        ]
+      }
+    },
+    {
+      "id": "I4|gen_cableaerien_inf45|ass",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I4|gen_cableaerien_inf45|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "I4|gen_cablesouterrain|ass",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I4|gen_cablesouterrain|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.25,
+        "line-dasharray": [
+          5.0,
+          2.5,
+          2.5,
+          2.5
+        ]
+      }
+    },
+    {
+      "id": "I4|gen_supportligne_inf45|ass",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I4|gen_supportligne_inf45|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "I5|gen_canalisation|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I5|gen_canalisation|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 0.625
+      }
+    },
+    {
+      "id": "I5|gen_canalisation|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I5|gen_canalisation|ass"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_fb2803a26b"
+      }
+    },
+    {
+      "id": "I6|gen|ass",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I6|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.25,
+        "line-dasharray": [
+          5.0,
+          2.5,
+          2.5,
+          2.5
+        ]
+      }
+    },
+    {
+      "id": "I7|gen|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I7|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "I7|gen|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I7|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_vertline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "I7|gen|ass-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I7|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "I9|gen|ass",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "I9|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "INT1|gen|ass-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "INT1|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "INT1|gen|ass-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "INT1|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "JS1|gen|ass",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "JS1|gen|ass"
+      ],
+      "paint": {
+        "line-pattern": "cnig_picto_b695fd51a9"
+      }
+    },
+    {
+      "id": "PM1|gen_pprnp|ass-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM1|gen_pprnp|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PM1|gen_pprnp|ass-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM1|gen_pprnp|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "PM1bis|gen|ass-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM1bis|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PM1bis|gen|ass-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM1bis|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "PM2|gen_icpe|ass-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM2|gen_icpe|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PM2|gen_icpe|ass-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM2|gen_icpe|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "PM3|gen|ass-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM3|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PM3|gen|ass-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM3|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "PM4|gen|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM4|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 0.625
+      }
+    },
+    {
+      "id": "PM4|gen|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM4|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_fb2803a26b"
+      }
+    },
+    {
+      "id": "PM5|gen|ass-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM5|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_vertline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PM5|gen|ass-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM5|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "PM6|gen|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM6|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "PM6|gen|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM6|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_81f5a5deb0"
+      }
+    },
+    {
+      "id": "PM7|gen|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM7|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 0.625
+      }
+    },
+    {
+      "id": "PM7|gen|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM7|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_fb2803a26b"
+      }
+    },
+    {
+      "id": "PM8|gen_pointdeau|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM8|gen_pointdeau|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "PM8|gen_pointdeau|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PM8|gen_pointdeau|ass"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_81f5a5deb0"
+      }
+    },
+    {
+      "id": "PT1|gen_niveau1|ass_garde-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PT1|gen_niveau1|ass_garde"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PT1|gen_niveau1|ass_garde-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PT1|gen_niveau1|ass_garde"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#807dff",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "PT1|gen_niveau1|ass_protection-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PT1|gen_niveau1|ass_protection"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PT1|gen_niveau1|ass_protection-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PT1|gen_niveau1|ass_protection"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#807dff",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "PT2|gen|ass_primaire_sol-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PT2|gen|ass_primaire_sol"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PT2|gen|ass_primaire_sol-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PT2|gen|ass_primaire_sol"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#807dff",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "PT2|gen|ass_secondaire_sol-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PT2|gen|ass_secondaire_sol"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PT2|gen|ass_secondaire_sol-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PT2|gen|ass_secondaire_sol"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#807dff",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "PT3|gen|ass",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PT3|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#807dff",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "T1|gen_passageniveau|ass-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "T1|gen_passageniveau|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "T1|gen_passageniveau|ass-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "T1|gen_passageniveau|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "T2|gen|ass_sol",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "T2|gen|ass_sol"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "T3|gen|ass-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "T3|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "T3|gen|ass-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "T3|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "T4|gen|ass_sol",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "T4|gen|ass_sol"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "T5|gen|ass_sol-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "T5|gen|ass_sol"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "T5|gen|ass_sol-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "T5|gen|ass_sol"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_c0c560b864"
+      }
+    },
+    {
+      "id": "T6|gen|ass-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "T6|gen|ass"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "T6|gen|ass-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "T6|gen|ass"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_3a708bf7a5"
+      }
+    },
+    {
+      "id": "T7|gen|ass_sol",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "T7|gen|ass_sol"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "T9|gen|ass_passage",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "T9|gen|ass_passage"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "SYMBOLE=NULL",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "sup_ass",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "NULL"
+      ],
+      "paint": {
+        "fill-color": "#4853d2",
+        "fill-outline-color": "#232323"
+      }
+    }
+  ],
+  "name": "sup_ass",
+  "sprite": "http://localhost:8080/geoserver/styles/sprite",
+  "glyphs": "http://localhost:8080/geoserver/styles/{fontstack}/{range}.pbf"
+}

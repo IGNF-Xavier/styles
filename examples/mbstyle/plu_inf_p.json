@@ -1,0 +1,82 @@
+{
+  "version": 8,
+  "sources": {
+    "cnig": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=workspace:plu_inf_p&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/x-protobuf;type=mapbox-vector&TILECOL={x}&TILEROW={y}"
+      ]
+    }
+  },
+  "layers": [
+    {
+      "id": "INF-P_16-00_001",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_inf_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "INF-P_16-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_bdc49c9371",
+        "icon-size": 0.12893671874999998,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "INF-P_19-01_001",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_inf_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "INF-P_19-01_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_f26ef2b329",
+        "icon-size": 0.19881249999999998,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "INF-P_99-00_001",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_inf_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "INF-P_99-00_001"
+      ],
+      "paint": {
+        "circle-color": "#9c9c9c",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#000000",
+        "circle-stroke-width": 0.0,
+        "circle-stroke-opacity": 0.0,
+        "circle-radius": 3.75
+      }
+    }
+  ],
+  "name": "plu_inf_p",
+  "sprite": "http://localhost:8080/geoserver/styles/sprite",
+  "glyphs": "http://localhost:8080/geoserver/styles/{fontstack}/{range}.pbf"
+}

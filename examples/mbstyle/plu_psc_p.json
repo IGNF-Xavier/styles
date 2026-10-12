@@ -1,0 +1,1490 @@
+{
+  "version": 8,
+  "sources": {
+    "cnig": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=workspace:plu_psc_p&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/x-protobuf;type=mapbox-vector&TILECOL={x}&TILEROW={y}"
+      ]
+    }
+  },
+  "layers": [
+    {
+      "id": "PSC-P_01-00_001",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_01-00_001"
+      ],
+      "paint": {
+        "circle-color": "#268c00",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#000000",
+        "circle-stroke-width": 0.0,
+        "circle-stroke-opacity": 0.0,
+        "circle-radius": 4.374999999999999
+      }
+    },
+    {
+      "id": "PSC-P_01-03_001",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_01-03_001"
+      ],
+      "paint": {
+        "circle-color": "#00a884",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#000000",
+        "circle-stroke-width": 0.0,
+        "circle-stroke-opacity": 0.0,
+        "circle-radius": 4.374999999999999
+      }
+    },
+    {
+      "id": "PSC-P_02-00_001",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-00_001"
+      ],
+      "paint": {
+        "circle-color": "#6e6e6e",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#6e6e6e",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-00_110",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-00_110"
+      ],
+      "paint": {
+        "circle-color": "#6e6e6e",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#004da8",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-00_120",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-00_120"
+      ],
+      "paint": {
+        "circle-color": "#6e6e6e",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#734c00",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-00_140-0",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-00_140"
+      ],
+      "paint": {
+        "circle-color": "#6e6e6e",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#000000",
+        "circle-stroke-width": 0.0,
+        "circle-stroke-opacity": 0.0,
+        "circle-radius": 9.787687499999999
+      }
+    },
+    {
+      "id": "PSC-P_02-00_140-1",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-00_140"
+      ],
+      "paint": {
+        "circle-color": "#6e6e6e",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#e1e1e1",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-00_160",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-00_160"
+      ],
+      "paint": {
+        "circle-color": "#6e6e6e",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#ff5500",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-00_200",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-00_200"
+      ],
+      "paint": {
+        "circle-color": "#6e6e6e",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#73004c",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-01_001",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-01_001"
+      ],
+      "paint": {
+        "circle-color": "#df73e1",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#df73e1",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-01_110",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-01_110"
+      ],
+      "paint": {
+        "circle-color": "#df73e1",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#004da8",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-01_120",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-01_120"
+      ],
+      "paint": {
+        "circle-color": "#df73e1",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#734c00",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-01_140-0",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-01_140"
+      ],
+      "paint": {
+        "circle-color": "#df73e1",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#000000",
+        "circle-stroke-width": 0.0,
+        "circle-stroke-opacity": 0.0,
+        "circle-radius": 9.787687499999999
+      }
+    },
+    {
+      "id": "PSC-P_02-01_140-1",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-01_140"
+      ],
+      "paint": {
+        "circle-color": "#df73e1",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#e1e1e1",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-01_160",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-01_160"
+      ],
+      "paint": {
+        "circle-color": "#df73e1",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#ff5500",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-01_200",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-01_200"
+      ],
+      "paint": {
+        "circle-color": "#df73e1",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#73004c",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-02_001",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-02_001"
+      ],
+      "paint": {
+        "circle-color": "#ffa77f",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#ffa77f",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-02_110",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-02_110"
+      ],
+      "paint": {
+        "circle-color": "#ffa77f",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#004da8",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-02_120",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-02_120"
+      ],
+      "paint": {
+        "circle-color": "#ffa77f",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#734c00",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-02_140-0",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-02_140"
+      ],
+      "paint": {
+        "circle-color": "#ffa77f",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#000000",
+        "circle-stroke-width": 0.0,
+        "circle-stroke-opacity": 0.0,
+        "circle-radius": 9.787687499999999
+      }
+    },
+    {
+      "id": "PSC-P_02-02_140-1",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-02_140"
+      ],
+      "paint": {
+        "circle-color": "#ffa77f",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#e1e1e1",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-02_160",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-02_160"
+      ],
+      "paint": {
+        "circle-color": "#ffa77f",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#ff5500",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_02-02_200",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_02-02_200"
+      ],
+      "paint": {
+        "circle-color": "#ffa77f",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#73004c",
+        "circle-stroke-width": 1.875,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.525125
+      }
+    },
+    {
+      "id": "PSC-P_03-00_001",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_03-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_6301bc8191",
+        "icon-size": 0.19853125,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_05-00_001",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_05-00_001"
+      ],
+      "paint": {
+        "circle-color": "#c1dffe",
+        "circle-opacity": 0.0,
+        "circle-stroke-color": "#9c9c9c",
+        "circle-stroke-width": 0.5,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 3.125
+      }
+    },
+    {
+      "id": "PSC-P_05-01_001",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_05-01_001"
+      ],
+      "paint": {
+        "circle-color": "#c1dffe",
+        "circle-opacity": 0.0,
+        "circle-stroke-color": "#e600a9",
+        "circle-stroke-width": 0.5,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 3.125
+      }
+    },
+    {
+      "id": "PSC-P_05-02_001",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_05-02_001"
+      ],
+      "paint": {
+        "circle-color": "#c1dffe",
+        "circle-opacity": 0.0,
+        "circle-stroke-color": "#a80084",
+        "circle-stroke-width": 0.5,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 3.125
+      }
+    },
+    {
+      "id": "PSC-P_05-03_001",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_05-03_001"
+      ],
+      "paint": {
+        "circle-color": "#c1dffe",
+        "circle-opacity": 0.0,
+        "circle-stroke-color": "#73004c",
+        "circle-stroke-width": 0.5,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 3.125
+      }
+    },
+    {
+      "id": "PSC-P_05-04_001",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_05-04_001"
+      ],
+      "paint": {
+        "circle-color": "#c1dffe",
+        "circle-opacity": 0.0,
+        "circle-stroke-color": "#70a800",
+        "circle-stroke-width": 0.5,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 3.125
+      }
+    },
+    {
+      "id": "PSC-P_05-05_001",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_05-05_001"
+      ],
+      "paint": {
+        "circle-color": "#c1dffe",
+        "circle-opacity": 0.0,
+        "circle-stroke-color": "#8f21aa",
+        "circle-stroke-width": 0.5,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 3.125
+      }
+    },
+    {
+      "id": "PSC-P_05-06_001",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_05-06_001"
+      ],
+      "paint": {
+        "circle-color": "#c1dffe",
+        "circle-opacity": 0.0,
+        "circle-stroke-color": "#343434",
+        "circle-stroke-width": 0.5,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 3.125
+      }
+    },
+    {
+      "id": "PSC-P_05-08_001",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_05-08_001"
+      ],
+      "paint": {
+        "circle-color": "#c1dffe",
+        "circle-opacity": 0.0,
+        "circle-stroke-color": "#0070ff",
+        "circle-stroke-width": 0.5,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 3.125
+      }
+    },
+    {
+      "id": "PSC-P_07-00_001-0",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_07-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_f59268a6e3",
+        "icon-size": 0.18844609375,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_07-00_001-1",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_07-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_cbf2e5c3a6",
+        "icon-size": 0.12248984375,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_07-01_001-0",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_07-01_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_f59268a6e3",
+        "icon-size": 0.18844609375,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_07-01_001-1",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_07-01_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_cbf2e5c3a6",
+        "icon-size": 0.12248984375,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_07-02_001-0",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_07-02_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_f59268a6e3",
+        "icon-size": 0.18844609375,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_07-02_001-1",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_07-02_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_cbf2e5c3a6",
+        "icon-size": 0.12248984375,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_07-03_001-0",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_07-03_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_f59268a6e3",
+        "icon-size": 0.18844609375,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_07-03_001-1",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_07-03_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_cbf2e5c3a6",
+        "icon-size": 0.12248984375,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_07-04_001-0",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_07-04_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_f59268a6e3",
+        "icon-size": 0.18844609375,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_07-04_001-1",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_07-04_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_cbf2e5c3a6",
+        "icon-size": 0.12248984375,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_07-05_001-0",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_07-05_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_f59268a6e3",
+        "icon-size": 0.18844609375,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_07-05_001-1",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_07-05_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_cbf2e5c3a6",
+        "icon-size": 0.12248984375,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_15-00_001-0",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_15-00_001"
+      ],
+      "paint": {
+        "circle-color": "#ffffff",
+        "circle-opacity": 0.698,
+        "circle-stroke-color": "#ff0000",
+        "circle-stroke-width": 0.625,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 6.25
+      }
+    },
+    {
+      "id": "PSC-P_15-00_001-1",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_15-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_e6cfaa3aa8",
+        "icon-size": 0.10393339843749999,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_15-00_001-2",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_15-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_22b76932b2",
+        "icon-size": 0.1168271484375,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_16-00_001",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_16-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_bdb24b6839",
+        "icon-size": 0.129023828125,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_16-03_001",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_16-03_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_bdb24b6839",
+        "icon-size": 0.129023828125,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_22-00_001",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_22-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_1019119634",
+        "icon-size": 0.15625,
+        "icon-rotate": -45.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_25-00_001",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_25-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_28371e9738",
+        "icon-size": 0.23449804687499998,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_28-00_001",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_28-00_001"
+      ],
+      "paint": {
+        "circle-color": "#df99ff",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#000000",
+        "circle-stroke-width": 0.0,
+        "circle-stroke-opacity": 0.0,
+        "circle-radius": 3.125
+      }
+    },
+    {
+      "id": "PSC-P_31-00_001",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_31-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_8cc4b48967",
+        "icon-size": 0.11901855468749999,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_34-00_001",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_34-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_d39c66b8cc",
+        "icon-size": 0.20828320312499998,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_39-00_001",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_39-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_567d38d5ea",
+        "icon-size": 0.23803710937499997,
+        "icon-rotate": -270.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_40-00_001",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_40-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_d7760c0a05",
+        "icon-size": 0.23803710937499997,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_41-00_001-0",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_41-00_001"
+      ],
+      "paint": {
+        "circle-color": "#ffffff",
+        "circle-opacity": 0.698,
+        "circle-stroke-color": "#fdbf6f",
+        "circle-stroke-width": 0.625,
+        "circle-stroke-opacity": 1.0,
+        "circle-radius": 9.375
+      }
+    },
+    {
+      "id": "PSC-P_41-00_001-1",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_41-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_cb3e366a36",
+        "icon-size": 0.0171558203125,
+        "icon-rotate": -90.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_41-00_001-2",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_41-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_9d3dc021b6",
+        "icon-size": 0.183245703125,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_43-00_001-0",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_43-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_85fdb9462f",
+        "icon-size": 0.1171875,
+        "icon-rotate": -45.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_43-00_001-1",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_43-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_713e57251f",
+        "icon-size": 0.18844609375,
+        "icon-rotate": -90.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_47-00_001",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_47-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_211020451b",
+        "icon-size": 0.21938671875,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_48-00_001",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_48-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_3755331718",
+        "icon-size": 0.12567304687499997,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_50-00_001",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_50-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_2f5824d984",
+        "icon-size": 0.18844609375,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_51-00_001",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_51-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_4c6e69f7d2",
+        "icon-size": 0.202833984375,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_52-00_001",
+      "type": "symbol",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_52-00_001"
+      ],
+      "layout": {
+        "icon-image": "cnig_picto_adafa58580",
+        "icon-size": 0.20619140625000001,
+        "icon-rotate": 0.0
+      },
+      "paint": {
+        "icon-opacity": 1.0
+      }
+    },
+    {
+      "id": "PSC-P_99-00_001",
+      "type": "circle",
+      "source": "cnig",
+      "source-layer": "plu_psc_p",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-P_99-00_001"
+      ],
+      "paint": {
+        "circle-color": "#000000",
+        "circle-opacity": 1.0,
+        "circle-stroke-color": "#000000",
+        "circle-stroke-width": 0.0,
+        "circle-stroke-opacity": 0.0,
+        "circle-radius": 3.75
+      }
+    }
+  ],
+  "name": "plu_psc_p",
+  "sprite": "http://localhost:8080/geoserver/styles/sprite",
+  "glyphs": "http://localhost:8080/geoserver/styles/{fontstack}/{range}.pbf"
+}

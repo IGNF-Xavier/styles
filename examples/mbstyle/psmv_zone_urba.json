@@ -1,0 +1,43 @@
+{
+  "version": 8,
+  "sources": {
+    "cnig": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=workspace:psmv_zone_urba&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/x-protobuf;type=mapbox-vector&TILECOL={x}&TILEROW={y}"
+      ]
+    }
+  },
+  "layers": [
+    {
+      "id": "ZONE_U_001",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "psmv_zone_urba",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "ZONE_U_001"
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "miter"
+      },
+      "paint": {
+        "line-color": "#cd64ff",
+        "line-opacity": 1.0,
+        "line-width": 3.75,
+        "line-dasharray": [
+          3.75,
+          2.5
+        ]
+      }
+    }
+  ],
+  "name": "psmv_zone_urba",
+  "sprite": "http://localhost:8080/geoserver/styles/sprite",
+  "glyphs": "http://localhost:8080/geoserver/styles/{fontstack}/{range}.pbf"
+}

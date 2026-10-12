@@ -1,0 +1,221 @@
+{
+  "version": 8,
+  "sources": {
+    "cnig": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=workspace:plu_zone_urba_pe&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/x-protobuf;type=mapbox-vector&TILECOL={x}&TILEROW={y}"
+      ]
+    }
+  },
+  "layers": [
+    {
+      "id": "ZONE_A_001_pe-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_zone_urba_pe",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "ZONE_A_001_pe"
+      ],
+      "paint": {
+        "fill-color": "rgba(255,255,0,0.6)",
+        "fill-outline-color": "rgba(0,0,0,0.0)"
+      }
+    },
+    {
+      "id": "ZONE_A_001_pe-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_zone_urba_pe",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "ZONE_A_001_pe"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#393939",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "ZONE_AUc_001_pe-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_zone_urba_pe",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "ZONE_AUc_001_pe"
+      ],
+      "paint": {
+        "fill-color": "rgba(255,101,101,0.6)",
+        "fill-outline-color": "rgba(0,0,0,0.0)"
+      }
+    },
+    {
+      "id": "ZONE_AUc_001_pe-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_zone_urba_pe",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "ZONE_AUc_001_pe"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#393939",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "ZONE_AUs_001_pe-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_zone_urba_pe",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "ZONE_AUs_001_pe"
+      ],
+      "paint": {
+        "fill-color": "rgba(254,204,190,0.6)",
+        "fill-outline-color": "rgba(0,0,0,0.0)"
+      }
+    },
+    {
+      "id": "ZONE_AUs_001_pe-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_zone_urba_pe",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "ZONE_AUs_001_pe"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#393939",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "ZONE_N_001_pe-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_zone_urba_pe",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "ZONE_N_001_pe"
+      ],
+      "paint": {
+        "fill-color": "rgba(86,170,2,0.6)",
+        "fill-outline-color": "rgba(0,0,0,0.0)"
+      }
+    },
+    {
+      "id": "ZONE_N_001_pe-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_zone_urba_pe",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "ZONE_N_001_pe"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#393939",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "ZONE_U_001_pe-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_zone_urba_pe",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "ZONE_U_001_pe"
+      ],
+      "paint": {
+        "fill-color": "rgba(230,0,0,0.6)",
+        "fill-outline-color": "rgba(0,0,0,0.0)"
+      }
+    },
+    {
+      "id": "ZONE_U_001_pe-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_zone_urba_pe",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "ZONE_U_001_pe"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#393939",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    }
+  ],
+  "name": "plu_zone_urba_pe",
+  "sprite": "http://localhost:8080/geoserver/styles/sprite",
+  "glyphs": "http://localhost:8080/geoserver/styles/{fontstack}/{range}.pbf"
+}

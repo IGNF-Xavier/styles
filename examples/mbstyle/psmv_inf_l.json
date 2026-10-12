@@ -1,0 +1,117 @@
+{
+  "version": 8,
+  "sources": {
+    "cnig": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=workspace:psmv_inf_l&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/x-protobuf;type=mapbox-vector&TILECOL={x}&TILEROW={y}"
+      ]
+    }
+  },
+  "layers": [
+    {
+      "id": "INF-L_16-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "psmv_inf_l",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "INF-L_16-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#d7b09e",
+        "line-opacity": 1.0,
+        "line-width": 1.875,
+        "line-dasharray": [
+          7.5,
+          12.5
+        ]
+      }
+    },
+    {
+      "id": "INF-L_16-00_001-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "psmv_inf_l",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "INF-L_16-00_001"
+      ],
+      "paint": {
+        "line-pattern": "cnig_picto_6c2e8cb9d1"
+      }
+    },
+    {
+      "id": "INF-L_19-01_001",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "psmv_inf_l",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "INF-L_19-01_001"
+      ],
+      "paint": {
+        "line-pattern": "cnig_picto_f26ef2b329"
+      }
+    },
+    {
+      "id": "INF-L_22-00_001",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "psmv_inf_l",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "INF-L_22-00_001"
+      ],
+      "paint": {
+        "line-pattern": "cnig_picto_ef5696200e"
+      }
+    },
+    {
+      "id": "INF-L_99-00_001",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "psmv_inf_l",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "INF-L_99-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#9c9c9c",
+        "line-opacity": 1.0,
+        "line-width": 2.5
+      }
+    }
+  ],
+  "name": "psmv_inf_l",
+  "sprite": "http://localhost:8080/geoserver/styles/sprite",
+  "glyphs": "http://localhost:8080/geoserver/styles/{fontstack}/{range}.pbf"
+}

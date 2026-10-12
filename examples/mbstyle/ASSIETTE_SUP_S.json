@@ -1,0 +1,4372 @@
+{
+  "version": 8,
+  "sources": {
+    "cnig": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=workspace:ASSIETTE_SUP_S&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/x-protobuf;type=mapbox-vector&TILECOL={x}&TILEROW={y}"
+      ]
+    }
+  },
+  "layers": [
+    {
+      "id": "Protection des bois et forêts à Mayotte - A1-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "a1-"
+      ],
+      "paint": {
+        "fill-pattern": "glyphe_Wingdings_0x00f1_000000"
+      }
+    },
+    {
+      "id": "Protection des bois et forêts à Mayotte - A1-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "a1-"
+      ],
+      "paint": {
+        "fill-color": "#0000ff",
+        "fill-outline-color": "#00ff00"
+      }
+    },
+    {
+      "id": "Conduites d'irrigation - A2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "a2-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 3.0
+      }
+    },
+    {
+      "id": "Entretien des canaux d'irigation - A3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "a3-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 2.0,
+        "line-dasharray": [
+          18.0,
+          10.0
+        ]
+      }
+    },
+    {
+      "id": "Lits et berges des cours d'eau - A4",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "a4-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 2.0,
+        "line-dasharray": [
+          4.0,
+          5.0
+        ]
+      }
+    },
+    {
+      "id": "Canalisations publiques d'eau et assainissement - A5",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "a5-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 3.0
+      }
+    },
+    {
+      "id": "Ecoulement des eaux nuisibles - A6-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "a6-"
+      ],
+      "paint": {
+        "fill-pattern": "glyphe_Marianne_0x005e_000000"
+      }
+    },
+    {
+      "id": "Ecoulement des eaux nuisibles - A6-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "a6-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "Forêts dites de protection - A7-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "a7-"
+      ],
+      "paint": {
+        "fill-pattern": "glyphe_Wingdings_0x00f1_000000"
+      }
+    },
+    {
+      "id": "Forêts dites de protection - A7-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "a7-"
+      ],
+      "paint": {
+        "fill-color": "#0000ff",
+        "fill-outline-color": "#00ff00"
+      }
+    },
+    {
+      "id": "Terrains en montagne et dunes - A8-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "a8-"
+      ],
+      "paint": {
+        "fill-pattern": "glyphe_Wingdings_0x00f1_000000"
+      }
+    },
+    {
+      "id": "Terrains en montagne et dunes - A8-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "a8-"
+      ],
+      "paint": {
+        "fill-color": "#0000ff",
+        "fill-outline-color": "#00ff00"
+      }
+    },
+    {
+      "id": "Zones agricoles protégées - A9-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "a9-"
+      ],
+      "paint": {
+        "fill-pattern": "glyphe_Wingdings_0x00a7_000000"
+      }
+    },
+    {
+      "id": "Zones agricoles protégées - A9-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "a9-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 1.2
+      }
+    },
+    {
+      "id": "Protection naturelle, agricole et forestière du plateau de Saclay - A10-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "a10-"
+      ],
+      "paint": {
+        "fill-pattern": "glyphe_Wingdings_0x00a7_000000"
+      }
+    },
+    {
+      "id": "Protection naturelle, agricole et forestière du plateau de Saclay - A10-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "a10-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#00ff00",
+        "line-opacity": 1.0,
+        "line-width": 1.2
+      }
+    },
+    {
+      "id": "Périmètre des abords - AC1-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "ac1-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Périmètre des abords"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Périmètre des abords - AC1-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "ac1-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Périmètre des abords"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#ff8000",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Monuments historiques - AC1-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "ac1-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Monument historique"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "marque_circle_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Monuments historiques - AC1-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "ac1-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Monument historique"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#ff8000",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Sites inscrits - AC2-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "ac2-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "type"
+          ],
+          "Inscrit"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_vertline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Sites inscrits - AC2-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "ac2-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "type"
+          ],
+          "Inscrit"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Sites inscrits - AC2-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "ac2-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "type"
+          ],
+          "Inscrit"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#ff8000",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "Sites classés - AC2-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "ac2-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "type"
+          ],
+          "Classé"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_vertline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Sites classés - AC2-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "ac2-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "type"
+          ],
+          "Classé"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Sites classés - AC2-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "ac2-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "type"
+          ],
+          "Classé"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#ff8000",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "Réserves naturelles - AC3-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "ac3-"
+      ],
+      "paint": {
+        "fill-pattern": "glyphe_Marianne_0x005e_000000"
+      }
+    },
+    {
+      "id": "Réserves naturelles - AC3-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "ac3-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#ff8000",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Sites patrimoniaux remarquables - AC4-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "ac4-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Sites patrimoniaux remarquables - AC4-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "ac4-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#ff8000",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Plans de Valorisation de l'Architecture et du Patrimoine - AC4bis-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          7
+        ],
+        "ac4bis-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Plans de Valorisation de l'Architecture et du Patrimoine - AC4bis-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          7
+        ],
+        "ac4bis-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#ff8000",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Champs de vue pour la navigation maritime - AR1-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "ar1-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Champs de vue pour la navigation maritime - AR1-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "ar1-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#800080",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Ouvrages de défense ou de sécurité maritime - AR2-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "ar2-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Ouvrages de défense ou de sécurité maritime - AR2-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "ar2-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#800080",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Magasins à poudre - zones de prohibition - AR3-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "ar3-"
+        ],
+        [
+          "any",
+          [
+            "==",
+            [
+              "get",
+              "typeass"
+            ],
+            "Zone de prohibition 1"
+          ],
+          [
+            "==",
+            [
+              "get",
+              "typeass"
+            ],
+            "Zone de prohibition 2"
+          ]
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Magasins à poudre - zones de prohibition - AR3-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "ar3-"
+        ],
+        [
+          "any",
+          [
+            "==",
+            [
+              "get",
+              "typeass"
+            ],
+            "Zone de prohibition 1"
+          ],
+          [
+            "==",
+            [
+              "get",
+              "typeass"
+            ],
+            "Zone de prohibition 2"
+          ]
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#800080",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Magasins à poudre - zones d'isolement - AR3-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "ar3-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Zone d'isolement"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Magasins à poudre - zones d'isolement - AR3-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "ar3-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Zone d'isolement"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#800080",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Terrains d'atterrissage militaires - AR4",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "ar4-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#800080",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Fortifications et ouvrages militaires - AR5-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "ar5-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Fortifications et ouvrages militaires - AR5-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "ar5-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#800080",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Champs de tir - AR6-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "ar6-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Champs de tir - AR6-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "ar6-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#800080",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Protection des eaux - périmètre de protection immédiate - AS1-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "as1-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Périmètre de protection immédiate"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Protection des eaux - périmètre de protection immédiate - AS1-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "as1-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Périmètre de protection immédiate"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#00c0c0",
+        "line-opacity": 1.0,
+        "line-width": 0.5
+      }
+    },
+    {
+      "id": "Protection des eaux - périmètre de protection rapprochée - AS1-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "as1-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Périmètre de protection rapprochée"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Protection des eaux - périmètre de protection rapprochée - AS1-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "as1-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Périmètre de protection rapprochée"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#00aaff",
+        "line-opacity": 1.0,
+        "line-width": 0.5
+      }
+    },
+    {
+      "id": "Protection des eaux - périmètre de protection éloignée - AS1-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "as1-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Périmètre de protection éloignée"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Protection des eaux - périmètre de protection éloignée - AS1-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "as1-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Périmètre de protection éloignée"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#00aaff",
+        "line-opacity": 1.0,
+        "line-width": 0.5
+      }
+    },
+    {
+      "id": "Protection des eaux - périmètre de protection eau minérale - AS1-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "as1-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Périmètre de protection eau minérale"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Protection des eaux - périmètre de protection eau minérale - AS1-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "as1-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Périmètre de protection eau minérale"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#00aaff",
+        "line-opacity": 1.0,
+        "line-width": 0.5
+      }
+    },
+    {
+      "id": "Établissements conchylicoles - AS2-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "as2-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Établissements conchylicoles - AS2-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "as2-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#00c0c0",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Loire et ses affluents - EL2bis-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          7
+        ],
+        "el2bis-"
+      ],
+      "paint": {
+        "fill-pattern": "marque_circle_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Loire et ses affluents - EL2bis-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          7
+        ],
+        "el2bis-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Cours d’eau - Halage - EL3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "el3-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Halage"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Cours d’eau - Marchepied - EL3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "el3-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Marchepied"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Développement et protection des montagnes - EL4-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "el4-"
+      ],
+      "paint": {
+        "fill-pattern": "marque_circle_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Développement et protection des montagnes - EL4-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "el4-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "Visibilité sur les voies publiques - EL5",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "el5-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Réserve de terrains nécessaires aux routes - EL6",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "el6-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "Alignement des voies publiques - EL7-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "el7-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Alignement des voies publiques - EL7-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "el7-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "Champs de vue pour la navigation maritime - EL8-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "el8-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Champs de vue pour la navigation maritime - EL8-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "el8-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Littoral - EL9-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "el9-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Littoral - EL9-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "el9-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#ffff00",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "Parcs nationaux - EL10-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          5
+        ],
+        "el10-"
+      ],
+      "paint": {
+        "fill-pattern": "glyphe_Wingdings_0x00a7_000000"
+      }
+    },
+    {
+      "id": "Parcs nationaux - EL10-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          5
+        ],
+        "el10-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.2
+      }
+    },
+    {
+      "id": "Interdictions d'accès en bord de routes - EL11-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          5
+        ],
+        "el11-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Interdictions d'accès en bord de routes - EL11-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          5
+        ],
+        "el11-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 3.0
+      }
+    },
+    {
+      "id": "Maitrise des canalisations de gaz, d’hydrocarbures et de produits chimiques - I1 ",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "i1-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Energie hydraulique - I2-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "i2-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Energie hydraulique - I2-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "i2-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Canalisations de transport de gaz, hydrocarbures et produits chimiques - I3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            3
+          ],
+          "i3-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Zone de protection"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Canalisations de transport de gaz, hydrocarbures et produits chimiques - I3-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            3
+          ],
+          "i3-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Zone de passage"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "glyphe_Marianne_0x005e_000000"
+      }
+    },
+    {
+      "id": "Canalisations de transport de gaz, hydrocarbures et produits chimiques - I3-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            3
+          ],
+          "i3-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Zone de passage"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Canalisations électriques - I4",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            3
+          ],
+          "i4-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "type"
+          ],
+          "Aérien"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Canalisation électriques - I4",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            3
+          ],
+          "i4-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "type"
+          ],
+          "Souterrain"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Canalisations de distribution de gaz - I5-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "i5-"
+      ],
+      "paint": {
+        "fill-pattern": "glyphe_Marianne_0x005e_000000"
+      }
+    },
+    {
+      "id": "Canalisations de distribution de gaz - I5-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "i5-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Mines et carrières - I6",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "i6-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Stockage souterrain de gaz, hydrocarbures et produits chimiques - I7-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "i7-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Stockage souterrain de gaz, hydrocarbures et produits chimiques - I7-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "i7-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_vertline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Stockage souterrain de gaz, hydrocarbures et produits chimiques - I7-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "i7-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Canalisation de transport et de distribution de chaleur - I9",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "i9-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Travaux miniers-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "i10-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Travaux miniers-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "i10-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#fa00fa",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Cimetières - INT1-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          5
+        ],
+        "int1-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Cimetières - INT1-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          5
+        ],
+        "int1-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Equipements sportifs - JS1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "js1-"
+      ],
+      "paint": {
+        "line-pattern": "marque_triangle_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Plans de prévention des risques naturels et miniers - PM1-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pm1-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Plans de prévention des risques naturels et miniers - PM1-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pm1-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Inondations pour la rétention des crues du Rhin - PM1bis-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          7
+        ],
+        "pm1bis-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Inondations pour la rétention des crues du Rhin - PM1bis-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          7
+        ],
+        "pm1bis-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Installations classées et sites constituant un risque pour la sécurité et la salubrité publique - PM2-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pm2-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Installations classées et sites constituant un risque pour la sécurité et la salubrité publique - PM2-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pm2-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Plans de prévention des risques technologiques - PM3-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pm3-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Plans de prévention des risques technologiques - PM3-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pm3-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Zones de rétention d'eau et de mobilité des cours d'eau - PM4-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pm4-"
+      ],
+      "paint": {
+        "fill-pattern": "glyphe_Marianne_0x005e_000000"
+      }
+    },
+    {
+      "id": "Zones de rétention d'eau et de mobilité des cours d'eau - PM4-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pm4-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Ouvrages hydrauliques- PM5-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pm5-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_vertline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Ouvrages hydrauliques- PM5-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pm5-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Installations nucléaires de base - PM6-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pm6-"
+      ],
+      "paint": {
+        "fill-pattern": "marque_circle_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Installations nucléaires de base - PM6-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pm6-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Ouvrage anti inondation et submersion - PM7-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pm7-"
+      ],
+      "paint": {
+        "fill-pattern": "glyphe_Marianne_0x005e_000000"
+      }
+    },
+    {
+      "id": "Ouvrage anti inondation et submersion - PM7-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pm7-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Point d'eau, piste DFCI, zone de coupure de combustible - PM8-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pm8-"
+      ],
+      "paint": {
+        "fill-pattern": "marque_circle_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Point d'eau, piste DFCI, zone de coupure de combustible - PM8-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pm8-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#a81616",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Communications électroniques - Zone de protection - PT1 -0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "pt1-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Zone de protection"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Communications électroniques - Zone de protection - PT1 -1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "pt1-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Zone de protection"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#807dff",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Communications électroniques - Zone de garde - PT1 -0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "pt1-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Zone de garde"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Communications électroniques - Zone de garde - PT1 -1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "pt1-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Zone de garde"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#807dff",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Communications électroniques - Zone primaire de dégagement - PT2-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "pt2-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Zone primaire de dégagement"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Communications électroniques - Zone primaire de dégagement - PT2-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "pt2-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Zone primaire de dégagement"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#807dff",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Communications électroniques - Zone secondaire, spéciale et secteur de dégagement -  PT2-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "pt2-"
+        ],
+        [
+          "in",
+          [
+            "get",
+            "typeass"
+          ],
+          [
+            "literal",
+            [
+              "Zone secondaire de dégagement",
+              "Zone spéciale de dégagement",
+              "Secteur de dégagement"
+            ]
+          ]
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Communications électroniques - Zone secondaire, spéciale et secteur de dégagement -  PT2-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            4
+          ],
+          "pt2-"
+        ],
+        [
+          "in",
+          [
+            "get",
+            "typeass"
+          ],
+          [
+            "literal",
+            [
+              "Zone secondaire de dégagement",
+              "Zone spéciale de dégagement",
+              "Secteur de dégagement"
+            ]
+          ]
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#807dff",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Réseaux de télécommunication - PT3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          4
+        ],
+        "pt3-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#807dff",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Voies ferrées et visibilité sur les voies publiques - T1-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "t1-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Voies ferrées et visibilité sur les voies publiques - T1-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "t1-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Survol au profit des téléphériques - T2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "t2-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Tréfonds - T3-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "t3-"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Tréfonds - T3-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "t3-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Aéronautique de balisage - T4",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "t4-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Circulation aérienne - T5-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "t5-"
+      ],
+      "paint": {
+        "fill-pattern": "marque_line_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Circulation aérienne - T5-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "t5-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Terrains nécessaires à la navigation aérienne - T6-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "t6-"
+      ],
+      "paint": {
+        "fill-pattern": "marque_square_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Terrains nécessaires à la navigation aérienne - T6-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "t6-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "Extérieur des zones de dégagament - T7",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "t7-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "Installations de navigation et d'atterrissage - Zone primaire de dégagement - T8 -0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            3
+          ],
+          "t8-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Zone primaire de dégagement"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Installations de navigation et d'atterrissage - Zone primaire de dégagement - T8 -1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            3
+          ],
+          "t8-"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "typeass"
+          ],
+          "Zone primaire de dégagement"
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Installations de navigation et d'atterrissage  -Zone secondaire, spéciale et secteur de dégagement - T8 -0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            3
+          ],
+          "t8-"
+        ],
+        [
+          "in",
+          [
+            "get",
+            "typeass"
+          ],
+          [
+            "literal",
+            [
+              "Zone secondaire de dégagement",
+              "Zone spéciale de dégagement",
+              "Secteur de dégagement"
+            ]
+          ]
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "Installations de navigation et d'atterrissage  -Zone secondaire, spéciale et secteur de dégagement - T8 -1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "slice",
+            [
+              "downcase",
+              [
+                "get",
+                "idass"
+              ]
+            ],
+            0,
+            3
+          ],
+          "t8-"
+        ],
+        [
+          "in",
+          [
+            "get",
+            "typeass"
+          ],
+          [
+            "literal",
+            [
+              "Zone secondaire de dégagement",
+              "Zone spéciale de dégagement",
+              "Secteur de dégagement"
+            ]
+          ]
+        ]
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "Transport par câble - T9",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "ASSIETTE_SUP_S",
+      "filter": [
+        "==",
+        [
+          "slice",
+          [
+            "downcase",
+            [
+              "get",
+              "idass"
+            ]
+          ],
+          0,
+          3
+        ],
+        "t9-"
+      ],
+      "layout": {
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.5
+      }
+    }
+  ],
+  "name": "ASSIETTE_SUP_S",
+  "sprite": "http://localhost:8080/geoserver/styles/sprite",
+  "glyphs": "http://localhost:8080/geoserver/styles/{fontstack}/{range}.pbf"
+}

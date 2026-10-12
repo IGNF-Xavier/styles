@@ -1,0 +1,5174 @@
+{
+  "version": 8,
+  "sources": {
+    "cnig": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=workspace:plu_psc_s&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/x-protobuf;type=mapbox-vector&TILECOL={x}&TILEROW={y}"
+      ]
+    }
+  },
+  "layers": [
+    {
+      "id": "PSC-S_01-00_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_01-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "marque_circle_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_01-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_01-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "marque_square_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_01-00_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_01-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#56aa02",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "PSC-S_01-03_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_01-03_001"
+      ],
+      "paint": {
+        "fill-pattern": "marque_circle_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_01-03_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_01-03_001"
+      ],
+      "paint": {
+        "fill-pattern": "marque_square_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_01-03_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_01-03_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00a884",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "PSC-S_02-00_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_001-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_001-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#6e6e6e",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-00_110-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_110"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_110-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_110"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_110-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_110"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_110-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_110"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#004da8",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-00_120-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_120"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_120-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_120"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_120-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_120"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_120-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_120"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#734c00",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-00_140-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_140"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_140-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_140"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_140-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_140"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_140-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_140"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#e1e1e1",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-00_160-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_160"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_160-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_160"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_160-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_160"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_160-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_160"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff5500",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-00_200-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_200"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_200-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_200"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_200-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_200"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-00_200-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-00_200"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#73004c",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-01_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_001-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_001-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#df73e1",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-01_110-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_110"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_110-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_110"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_110-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_110"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_110-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_110"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#004da8",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-01_120-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_120"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_120-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_120"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_120-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_120"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_120-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_120"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#734c00",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-01_140-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_140"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_140-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_140"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_140-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_140"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_140-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_140"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#e1e1e1",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-01_160-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_160"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_160-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_160"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_160-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_160"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_160-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_160"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff5500",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-01_200-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_200"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_200-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_200"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_200-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_200"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-01_200-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-01_200"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#73004c",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-02_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_001-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_001-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ffa77f",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-02_110-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_110"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_110-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_110"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_110-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_110"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_110-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_110"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#004da8",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-02_120-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_120"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_120-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_120"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_120-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_120"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_120-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_120"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#734c00",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-02_140-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_140"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_140-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_140"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_140-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_140"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_140-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_140"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#e1e1e1",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-02_160-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_160"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_160-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_160"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_160-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_160"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_160-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_160"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff5500",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_02-02_200-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_200"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_200-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_200"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_200-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_200"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_02-02_200-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_02-02_200"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#73004c",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_03-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_03-00_001"
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#343434",
+        "line-opacity": 1.0,
+        "line-width": 1.25,
+        "line-dasharray": [
+          2.5,
+          13.749999999999998
+        ]
+      }
+    },
+    {
+      "id": "PSC-S_03-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_03-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_f43198285d"
+      }
+    },
+    {
+      "id": "PSC-S_03-00_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_03-00_001"
+      ],
+      "paint": {
+        "line-pattern": "cnig_picto_01b73419c5"
+      }
+    },
+    {
+      "id": "PSC-S_04-00_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_04-00_001"
+      ],
+      "paint": {
+        "fill-color": "rgba(255,240,185,0.0)",
+        "fill-outline-color": "rgba(0,0,0,0.0)"
+      }
+    },
+    {
+      "id": "PSC-S_04-00_001-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_04-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff5500",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "PSC-S_05-00_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-00_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#9c9c9c",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_05-00_002-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-00_002"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-00_002-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-00_002"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-00_002-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-00_002"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#9c9c9c",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_05-01_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-01_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-01_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-01_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-01_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-01_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#e600a9",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_05-01_002-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-01_002"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-01_002-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-01_002"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-01_002-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-01_002"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#e600a9",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_05-02_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-02_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-02_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-02_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-02_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-02_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#a80084",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_05-02_002-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-02_002"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-02_002-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-02_002"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-02_002-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-02_002"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#a80084",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_05-03_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-03_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-03_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-03_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-03_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-03_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#73004c",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_05-03_002-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-03_002"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-03_002-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-03_002"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-03_002-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-03_002"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#73004c",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_05-04_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-04_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-04_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-04_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-04_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-04_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#70a800",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_05-04_002-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-04_002"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-04_002-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-04_002"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-04_002-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-04_002"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#70a800",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_05-05_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-05_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-05_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-05_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-05_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-05_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#8f21aa",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_05-05_002-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-05_002"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-05_002-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-05_002"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-05_002-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-05_002"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#8f21aa",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_05-06_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-06_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-06_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-06_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-06_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-06_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#343434",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_05-06_002-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-06_002"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-06_002-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-06_002"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-06_002-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-06_002"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#343434",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_05-07_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-07_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_cd46e60ef6"
+      }
+    },
+    {
+      "id": "PSC-S_05-07_001-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-07_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff5500",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_05-08_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-08_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-08_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-08_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-08_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-08_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#0070ff",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_05-08_002-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-08_002"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-08_002-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-08_002"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_05-08_002-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_05-08_002"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#0070ff",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_07-00_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_f59268a6e3"
+      }
+    },
+    {
+      "id": "PSC-S_07-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_cbf2e5c3a6"
+      }
+    },
+    {
+      "id": "PSC-S_07-00_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#38a800",
+        "line-opacity": 1.0,
+        "line-width": 1.0,
+        "line-dasharray": [
+          6.25,
+          6.25
+        ]
+      }
+    },
+    {
+      "id": "PSC-S_07-00_001-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#730000",
+        "line-opacity": 1.0,
+        "line-width": 1.0,
+        "line-dasharray": [
+          6.25,
+          6.25
+        ]
+      }
+    },
+    {
+      "id": "PSC-S_07-01_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-01_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#730000",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_07-01_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-01_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_f59268a6e3"
+      }
+    },
+    {
+      "id": "PSC-S_07-01_001-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-01_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_cbf2e5c3a6"
+      }
+    },
+    {
+      "id": "PSC-S_07-02_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-02_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_f59268a6e3"
+      }
+    },
+    {
+      "id": "PSC-S_07-02_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-02_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_cbf2e5c3a6"
+      }
+    },
+    {
+      "id": "PSC-S_07-02_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-02_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#730000",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_07-03_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-03_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_f59268a6e3"
+      }
+    },
+    {
+      "id": "PSC-S_07-03_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-03_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_cbf2e5c3a6"
+      }
+    },
+    {
+      "id": "PSC-S_07-03_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-03_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#730000",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_07-04_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-04_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_f59268a6e3"
+      }
+    },
+    {
+      "id": "PSC-S_07-04_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-04_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_cbf2e5c3a6"
+      }
+    },
+    {
+      "id": "PSC-S_07-04_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-04_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#38a800",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_07-05_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-05_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_f59268a6e3"
+      }
+    },
+    {
+      "id": "PSC-S_07-05_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-05_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_cbf2e5c3a6"
+      }
+    },
+    {
+      "id": "PSC-S_07-05_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_07-05_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#38a800",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_08-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_08-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#2d6837",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_08-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_08-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_91b77b62a1"
+      }
+    },
+    {
+      "id": "PSC-S_13-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_13-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#b2b2b2",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_13-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_13-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "marque_square_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_14-00_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_14-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_vertline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_14-00_001-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_14-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_15-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_15-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff0000",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_15-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_15-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_vertline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_15-00_001-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_15-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_b3cb99c10f"
+      }
+    },
+    {
+      "id": "PSC-S_16-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_16-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ffaa00",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_16-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_16-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_bdb24b6839"
+      }
+    },
+    {
+      "id": "PSC-S_16-03_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_16-03_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#f57a7a",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_16-03_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_16-03_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_bdb24b6839"
+      }
+    },
+    {
+      "id": "PSC-S_17-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_17-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#8f21aa",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_17-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_17-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_ed16351bd5"
+      }
+    },
+    {
+      "id": "PSC-S_17-00_001-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_17-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_7e0997aa4e"
+      }
+    },
+    {
+      "id": "PSC-S_17-00_001-3",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_17-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_ed16351bd5"
+      }
+    },
+    {
+      "id": "PSC-S_17-00_001-4",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_17-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_7e0997aa4e"
+      }
+    },
+    {
+      "id": "PSC-S_18-00_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_18-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_horline_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_18-00_001-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_18-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff5500",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_19-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_19-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#894444",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_19-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_19-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_e44f6d1b2a"
+      }
+    },
+    {
+      "id": "PSC-S_20-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_20-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#268c00",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_20-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_20-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "marque_circle_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_22-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_22-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#828282",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_22-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_22-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_cd46e60ef6"
+      }
+    },
+    {
+      "id": "PSC-S_23-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_23-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ffaa00",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_23-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_23-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "marque_circle_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_24-00_001",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_24-00_001"
+      ],
+      "paint": {
+        "line-pattern": "cnig_picto_c108040295"
+      }
+    },
+    {
+      "id": "PSC-S_25-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_25-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#004da8",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "PSC-S_25-00_001-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_25-00_001"
+      ],
+      "paint": {
+        "line-pattern": "cnig_picto_927f4c2298"
+      }
+    },
+    {
+      "id": "PSC-S_26-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_26-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#268c00",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_26-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_26-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_cd46e60ef6"
+      }
+    },
+    {
+      "id": "PSC-S_27-00_001",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_27-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#895a44",
+        "line-opacity": 1.0,
+        "line-width": 2.5
+      }
+    },
+    {
+      "id": "PSC-S_28-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_28-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#df99ff",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_28-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_28-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "marque_square_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_29-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_29-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00c5ff",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_29-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_29-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "marque_circle_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_30-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_30-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#e60000",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_30-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_30-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "marque_square_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_31-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_31-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#004da8",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_31-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_31-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_3b0a193ef2"
+      }
+    },
+    {
+      "id": "PSC-S_32-00_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_32-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_32-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_32-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_32-00_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_32-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#0000ff",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_33-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_33-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#008a8c",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_33-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_33-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_b48a86e344"
+      }
+    },
+    {
+      "id": "PSC-S_34-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_34-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#39d881",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_34-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_34-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_d39c66b8cc"
+      }
+    },
+    {
+      "id": "PSC-S_35-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_35-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#39d881",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_35-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_35-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_d8da12e6f0"
+      }
+    },
+    {
+      "id": "PSC-S_36-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_36-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#90704c",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_36-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_36-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "marque_circle_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_37-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_37-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff6565",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_37-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_37-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_8392fd6bbe"
+      }
+    },
+    {
+      "id": "PSC-S_37-00_001-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_37-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_718e82b303"
+      }
+    },
+    {
+      "id": "PSC-S_38-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_38-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#8a4dd3",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_38-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_38-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_67e21be4f9"
+      }
+    },
+    {
+      "id": "PSC-S_39-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_39-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#8a4dd3",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_39-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_39-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_567d38d5ea"
+      }
+    },
+    {
+      "id": "PSC-S_40-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_40-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#8a4dd3",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_40-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_40-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_478d48ad83"
+      }
+    },
+    {
+      "id": "PSC-S_41-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_41-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fdbf6f",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_41-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_41-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_56ed353c4b"
+      }
+    },
+    {
+      "id": "PSC-S_42-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_42-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#56aa02",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_42-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_42-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_d980be19d4"
+      }
+    },
+    {
+      "id": "PSC-S_43-00_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_43-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_slash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_43-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_43-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_43-00_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_43-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#00a884",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "PSC-S_44-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_44-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#808080",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_44-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_44-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_cc9dbe592c"
+      }
+    },
+    {
+      "id": "PSC-S_45-00_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_45-00_001"
+      ],
+      "paint": {
+        "fill-color": "rgba(255,127,127,0.6)",
+        "fill-outline-color": "rgba(0,0,0,0.0)"
+      }
+    },
+    {
+      "id": "PSC-S_45-00_001-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_45-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff0000",
+        "line-opacity": 1.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "PSC-S_46-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_46-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#56aa02",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_46-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_46-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "marque_circle_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_47-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_47-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#732600",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_47-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_47-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_d892b51317"
+      }
+    },
+    {
+      "id": "PSC-S_48-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_48-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#004c73",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_48-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_48-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_7cb4ed5706"
+      }
+    },
+    {
+      "id": "PSC-S_49-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_49-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ff6564",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_49-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_49-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_94174fcb4d"
+      }
+    },
+    {
+      "id": "PSC-S_50-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_50-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#940abd",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_50-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_50-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_85da52b4ca"
+      }
+    },
+    {
+      "id": "PSC-S_51-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_51-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#940abd",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_51-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_51-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_bd76b237c9"
+      }
+    },
+    {
+      "id": "PSC-S_52-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_52-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ac570d",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_52-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_52-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_0ae7063c45"
+      }
+    },
+    {
+      "id": "PSC-S_53-00_001-0",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_53-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#e60000",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_53-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_53-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_53-00_001-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_53-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "motif_backslash_000000_none_1_8_0"
+      }
+    },
+    {
+      "id": "PSC-S_54-01_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_54-01_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_378baafa12"
+      }
+    },
+    {
+      "id": "PSC-S_54-01_001-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_54-01_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#005ce6",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "PSC-S_54-01_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_54-01_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#a83800",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_54-02_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_54-02_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_378baafa12"
+      }
+    },
+    {
+      "id": "PSC-S_54-02_001-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_54-02_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#73b2ff",
+        "line-opacity": 1.0,
+        "line-width": 2.0
+      }
+    },
+    {
+      "id": "PSC-S_54-02_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_54-02_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#a83800",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_55-01_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_55-01_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_7af82ef803"
+      }
+    },
+    {
+      "id": "PSC-S_55-01_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_55-01_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_7af82ef803"
+      }
+    },
+    {
+      "id": "PSC-S_55-01_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_55-01_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ffff00",
+        "line-opacity": 1.0,
+        "line-width": 3.75
+      }
+    },
+    {
+      "id": "PSC-S_55-01_001-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_55-01_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#55ff00",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "PSC-S_55-02_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_55-02_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_7af82ef803"
+      }
+    },
+    {
+      "id": "PSC-S_55-02_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_55-02_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_7af82ef803"
+      }
+    },
+    {
+      "id": "PSC-S_55-02_001-2",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_55-02_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ffff00",
+        "line-opacity": 1.0,
+        "line-width": 3.75
+      }
+    },
+    {
+      "id": "PSC-S_55-02_001-3",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_55-02_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#ffbebe",
+        "line-opacity": 1.0,
+        "line-width": 1.875
+      }
+    },
+    {
+      "id": "PSC-S_56-00_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_56-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_29f6a23cd2"
+      }
+    },
+    {
+      "id": "PSC-S_56-00_001-1",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_56-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_6652ef873b"
+      }
+    },
+    {
+      "id": "PSC-S_56-00_001-2",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_56-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_53f1cd3455"
+      }
+    },
+    {
+      "id": "PSC-S_56-00_001-3",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_56-00_001"
+      ],
+      "paint": {
+        "fill-pattern": "cnig_picto_dd01c76a67"
+      }
+    },
+    {
+      "id": "PSC-S_56-00_001-4",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_56-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#73004c",
+        "line-opacity": 1.0,
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "PSC-S_97-00_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_97-00_001"
+      ],
+      "paint": {
+        "fill-color": "rgba(254,179,188,0.0)",
+        "fill-outline-color": "rgba(0,0,0,0.0)"
+      }
+    },
+    {
+      "id": "PSC-S_97-00_001-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_97-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#6e6e6e",
+        "line-opacity": 0.0,
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "PSC-S_97-01_001-0",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_97-01_001"
+      ],
+      "paint": {
+        "fill-color": "rgba(182,254,182,0.0)",
+        "fill-outline-color": "rgba(0,0,0,0.0)"
+      }
+    },
+    {
+      "id": "PSC-S_97-01_001-1",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_97-01_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 2.5,
+        "line-dasharray": [
+          10.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0
+        ]
+      }
+    },
+    {
+      "id": "PSC-S_99-00_001",
+      "type": "line",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        "PSC-S_99-00_001"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1.0,
+        "line-width": 2.5
+      }
+    },
+    {
+      "id": "SYMBOLE=",
+      "type": "fill",
+      "source": "cnig",
+      "source-layer": "plu_psc_s",
+      "filter": [
+        "==",
+        [
+          "get",
+          "SYMBOLE"
+        ],
+        ""
+      ],
+      "paint": {
+        "fill-color": "#d13131",
+        "fill-outline-color": "#232323"
+      }
+    }
+  ],
+  "name": "plu_psc_s",
+  "sprite": "http://localhost:8080/geoserver/styles/sprite",
+  "glyphs": "http://localhost:8080/geoserver/styles/{fontstack}/{range}.pbf"
+}
