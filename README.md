@@ -19,8 +19,8 @@ Ce document a trois entrées indépendantes, chacune autosuffisante — allez
 directement à celle qui vous concerne :
 
 1. [Utilisateur CLI](#1-utilisateur-cli--un-dossier-de-qml-vers-sld--mbstyle) — convertir un dossier de `.qml` en un dossier de `.sld`/`.json`.
-2. [Déployeur d'API](#2-déployeur-dapi) — installer et lancer le service HTTP (synchrone + asynchrone).
-3. [Mainteneur GeoServer](#3-mainteneur-geoserver) — ce qu'il faut installer/configurer côté GeoServer pour que les sorties fonctionnent réellement.
+2. [Administrateur de l'API](#2-administrateur-de-lapi) — installer et lancer le service HTTP (synchrone + asynchrone).
+3. [Administrateur GeoServer](#3-administrateur-geoserver) — ce qu'il faut installer/configurer côté GeoServer pour que les sorties fonctionnent réellement.
 
 Limites connues et contournements, consolidés : [`docs/limites.md`](docs/limites.md).
 Exemples réels (CNIG GPU) avec leurs sorties : [`examples/`](examples/SOURCES.md).
@@ -75,7 +75,7 @@ commande donnée dans [`examples/SOURCES.md`](examples/SOURCES.md).
 
 | Option | Effet |
 |---|---|
-| `--mbstyle-base-url URL` | URL de base GeoServer à inscrire dans le champ `"sprite"` du MBStyle produit (voir [section GeoServer](#3-mainteneur-geoserver)) |
+| `--mbstyle-base-url URL` | URL de base GeoServer à inscrire dans le champ `"sprite"` du MBStyle produit (voir [section GeoServer](#3-administrateur-geoserver)) |
 | `--mbstyle-workspace NOM` | Workspace GeoServer cible, si le style y sera publié |
 | `--analyze-only` | N'écrit rien ; rapporte seulement ce qui serait fait |
 | `--no-hatch-fix` | Désactive la correction automatique des hachures `shape://` dégradées |
@@ -95,7 +95,7 @@ dépend de la police installée côté poste de génération et côté serveur.
 
 ---
 
-## 2. Déployeur d'API
+## 2. Administrateur de l'API
 
 `styleforge-api` expose `styleforge-core` en service HTTP : une route
 **synchrone** pour une conversion immédiate, une route **asynchrone**
@@ -189,12 +189,12 @@ interface, sans toucher à `routers.batch` ni `jobs`.
 ### Limites GeoServer applicables aux sorties de l'API
 
 Les documents produits par `/v1/convert` ont les mêmes besoins côté
-GeoServer que ceux du CLI — voir la [section mainteneur GeoServer](#3-mainteneur-geoserver)
+GeoServer que ceux du CLI — voir la [section administrateur GeoServer](#3-administrateur-geoserver)
 ci-dessous (module MBStyle, sprites, polices).
 
 ---
 
-## 3. Mainteneur GeoServer
+## 3. Administrateur GeoServer
 
 Résumé — détail complet dans [`docs/geoserver.md`](docs/geoserver.md).
 

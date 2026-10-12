@@ -1,6 +1,6 @@
 # Ce qu'il faut installer/configurer côté GeoServer
 
-Ce document s'adresse au mainteneur GeoServer : qu'installer, qu'activer, et
+Ce document s'adresse à l'administrateur GeoServer : qu'installer, qu'activer, et
 pourquoi — pour que les SLD et MBStyle produits par cet outil se comportent
 réellement comme prévu une fois déployés, pas seulement en théorie.
 
@@ -93,7 +93,8 @@ les fichiers de style dans le répertoire de données GeoServer
 (`<data_dir>/styles/`), puis renseigner `--mbstyle-base-url` (et
 `--mbstyle-workspace` si le style est publié dans un workspace) lors de la
 conversion pour que le champ `"sprite"` du JSON produit pointe vers la
-bonne URL dès la génération — voir le CLI, section « déployeur ».
+bonne URL dès la génération — voir le README, section « Utilisateur CLI »,
+tableau des options utiles.
 
 ### Glyphes de police non rasterisés (`sprite_glyphes_a_generer.json`)
 
