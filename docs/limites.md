@@ -78,7 +78,32 @@ ignorerait cet attribut. Sans contournement nécessaire sur GeoServer ;
 pertinent seulement si le SLD/filtre produit doit être réutilisé en dehors
 de GeoServer.
 
-## 5. Oracle PyQGIS — limite de l'oracle, pas du format cible
+## 5. Pourquoi SLD 1.0.0 et pas SLD/SE 1.1.0
+
+Choix délibéré, pas un oubli : il n'existe pas vraiment de "SLD 1.1.0"
+unique à viser. Après SLD 1.0.0 (2005), l'OGC a scindé ce périmètre en
+deux spécifications distinctes, toutes deux numérotées 1.1.0 :
+**Symbology Encoding (SE) 1.1.0** (les symbolizers) et le **profil SLD de
+WMS 1.1.0** (le branchement sur `GetMap`). La documentation GeoServer le
+dit explicitement : *"GeoServer implements the SLD 1.0.0 standard, as
+well as some parts of the SE 1.1.0 and WMS-SLD 1.1.0 standards."*
+(https://docs.geoserver.org/main/en/user/styling/sld/reference/index.html)
+— support partiel et non détaillé, et ni l'éditeur de styles GeoServer ni
+son API REST n'exposent SE 1.1.0 comme format sélectionnable au même
+titre que SLD, CSS, YSLD ou MBStyle.
+
+Deuxième raison, propre à ce projet : l'écrivain SLD est vérifié contre
+`QgsVectorLayer.loadSldStyle()`/`saveSldStyle()` de QGIS, qui sert
+d'**oracle de test** (voir le docstring de
+`styleforge_core/writers/sld.py`) — et qui ne lit/écrit que du SLD 1.0.0.
+Viser SE 1.1.0 supprimerait le seul moyen de vérifier objectivement la
+sortie produite, contraire au principe du projet (jamais d'approximation
+non vérifiée). SLD 1.0.0 reste donc la cible la plus solide des options
+disponibles : support GeoServer complet, oracle QGIS disponible, écosystème
+réel — contrairement à SE 1.1.0, partiellement supporté et sans moyen de
+vérification indépendant.
+
+## 6. Oracle PyQGIS — limite de l'oracle, pas du format cible
 
 Historique utile pour comprendre le tableau de la section 1 ci-dessus :
 certaines limites initialement attribuées au format MBStyle lui-même (ex.
@@ -90,7 +115,7 @@ se fait contre la spécification de référence
 (`@maplibre/maplibre-gl-style-spec`), pas contre l'oracle seul, avant de
 conclure à une impossibilité structurelle.
 
-## 6. Portée du corpus de test
+## 7. Portée du corpus de test
 
 Testé et validé sur les 17 fichiers `.qml` officiels CNIG GPU
 (familles PLU, PSMV, SUP — voir `examples/SOURCES.md`), produits pour
