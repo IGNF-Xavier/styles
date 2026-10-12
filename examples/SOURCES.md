@@ -35,6 +35,35 @@ réécritures de filtre, etc.) et `docs/geoserver.md` pour ce qu'il faut
 installer côté GeoServer pour que ces sorties fonctionnent réellement
 (sprites, vendor options).
 
+## rapport_conversion.md
+
+Le rapport de synthèse produit par CETTE exécution exacte (celle qui a
+généré les fichiers de `sld/` et `mbstyle/` ci-contre) : décompte par
+correctif appliqué en phase 4 (réécritures d'`onlineResource`, hachures
+réparées, `VendorOption` injectées, etc.), résultat de l'audit PHASE 6
+("Conforme — aucun défaut détecté"), et le détail exhaustif,
+**fichier par fichier**, de chaque avertissement émis pendant la
+conversion — jamais une approximation silencieuse, toujours tracée.
+C'est la meilleure illustration concrète de ce que `docs/limites.md`
+décrit en théorie : chaque ligne y renvoie au fichier QML, au
+symbolizer et à la propriété concernés.
+
+Le rapport existe aussi en JSON (`rapport_conversion.json`, même contenu,
+exploitable par script) — non inclus ici pour limiter la taille du dépôt
+(environ 1,5 Mo sur ce corpus) ; régénérez-le en relançant la commande
+ci-dessus, il est produit automatiquement à côté du dossier de sortie.
+
+## NOTICE_DEPLOIEMENT.txt
+
+Notice générée par le CLI à chaque exécution : comment déployer le
+dossier `styles/` produit dans le `GEOSERVER_DATA_DIR`, recharger la
+configuration GeoServer, associer un style à une couche, vérifier le
+rendu, et les points de vigilance connus (encodage UTF-8 sans BOM,
+espacement des hachures, glyphes de police non fournis par GeoServer par
+défaut, unités QGIS/SLD). Un complément pratique à `docs/geoserver.md`,
+du point de vue de l'opération de déploiement plutôt que de
+l'installation du serveur.
+
 ## sprites/
 
 `sprite.png` / `sprite@2x.png` et leurs index JSON sont la feuille de

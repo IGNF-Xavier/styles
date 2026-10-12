@@ -1,0 +1,116 @@
+================================================================================
+ NOTICE DE DÉPLOIEMENT DANS LE GEOSERVER_DATA_DIR
+================================================================================
+
+1. LOCALISER LE RÉPERTOIRE DE DONNÉES
+   Interface d'admin GeoServer : « À propos & état » > « Répertoire de données ».
+   Valeurs usuelles :
+     - Windows (installeur) : C:\ProgramData\GeoServer\data_dir
+     - Windows (binaire)    : C:\GeoServer\data_dir
+     - Linux / Docker       : /var/lib/geoserver_data  ou  /opt/geoserver_data
+   En ligne de commande, la variable d'environnement GEOSERVER_DATA_DIR fait foi.
+
+2. COPIER L'ARBORESCENCE PRODUITE
+   Le dossier <sortie>/styles reproduit exactement la structure attendue :
+
+       styles/
+         |- plu_zonage.sld
+         |- plu_prescriptions.sld
+         |- ...
+         `- svg/
+            `- cnig/
+               |- prescription_surfacique.svg
+               `- ...
+
+   PowerShell (fusion sans écraser les styles existants) :
+       Copy-Item -Path ".\build\styles\*" `
+                 -Destination "$env:GEOSERVER_DATA_DIR\styles" `
+                 -Recurse -Force
+
+   /!\ Ne PAS renommer le dossier svg/cnig : les chemins relatifs inscrits dans
+   les balises <OnlineResource> en dépendent (ils sont résolus par GeoServer
+   depuis la racine du dossier styles/).
+
+3. PRENDRE EN COMPTE LES STYLES
+   Deux options :
+     a) « Rechargement de la configuration » : interface d'admin >
+        « Paramètres du serveur » > bouton « Recharger », ou
+            curl -u admin:geoserver -XPOST http://<host>/geoserver/rest/reload
+     b) Redémarrage du service GeoServer (Tomcat / service Windows).
+
+   Les fichiers .sld déposés à la main n'apparaissent dans la liste des styles
+   qu'après ce rechargement. Pour un référencement immédiat et propre, utiliser
+   l'option --geoserver-url du script, qui passe par l'API REST.
+
+4. AFFECTER UN STYLE À UNE COUCHE
+   Couches > <votre couche> > onglet « Publication » > « Style par défaut ».
+   Pour les documents d'urbanisme, associer typiquement :
+     - zone_urba            -> plu_zonage
+     - prescription_surf    -> plu_prescription_surfacique
+     - prescription_lin     -> plu_prescription_lineaire
+     - prescription_pct     -> plu_prescription_ponctuelle
+     - info_surf / lin / pct-> plu_information_*
+
+5. VÉRIFIER LE RENDU (recette « grandeur nature »)
+   - Aperçu de couche > « OpenLayers » : contrôler les hachures et les SVG.
+   - Requête WMS de contrôle (GetMap) sur une emprise connue :
+       http://<host>/geoserver/wms?service=WMS&version=1.1.0&request=GetMap
+         &layers=cnig:zone_urba&styles=plu_zonage&bbox=...&width=1024&height=1024
+         &srs=EPSG:2154&format=image/png
+   - Journal : <GEOSERVER_DATA_DIR>/logs/geoserver.log
+     Un SVG manquant s'y signale par « Failed to load external graphic ».
+   - Comparer côte à côte avec QGIS sur le « Style Étalon » identifié en phase 1.
+
+6. DÉPLOYER LES STYLES MBSTYLE (si l'export a été demandé)
+   Le dossier styles/ contient alors, à côté des .sld :
+       <nom>.json          le style MBStyle (spécification Mapbox GL, version 8)
+       sprite.png          la feuille de sprites : pictogrammes CNIG et
+       sprite.json         motifs de hachure rasterisés
+       sprite@2x.png       variante haute densité
+       sprite@2x.json
+
+   PRÉREQUIS : l'extension « mbstyle » de GeoServer, et des couches publiées en
+   tuiles vectorielles (GeoWebCache, format application/vnd.mapbox-vector-tile).
+   MBStyle ne s'applique PAS à une couche WMS classique : c'est là sa différence
+   majeure avec le SLD, qui lui fonctionne sur toute couche.
+
+   a) Copier les fichiers comme les .sld :
+        Copy-Item ".uild\styles\*.json" "$env:GEOSERVER_DATA_DIR\styles" -Force
+        Copy-Item ".uild\styles\sprite*" "$env:GEOSERVER_DATA_DIR\styles" -Force
+
+   b) Déclarer chaque style avec le bon type de média :
+        curl -u admin:geoserver -XPOST ^
+             -H "Content-type: application/vnd.geoserver.mbstyle+json" ^
+             -d @plu_psc_s.json ^
+             "http://<hote>/geoserver/rest/workspaces/cnig/styles?name=plu_psc_s"
+
+      Pour METTRE À JOUR un style déjà déclaré, utiliser PUT sur
+      .../styles/plu_psc_s au lieu de POST.
+
+   c) Associer le style à la couche tuilée, onglet « Publication », puis
+      contrôler dans un client vectoriel (aperçu OpenLayers vector tiles,
+      MapLibre, Mapbox GL JS).
+
+   /!\ LES URL SONT ÉCRITES EN DUR DANS LE JSON — celles des tuiles, du sprite
+   et des glyphes. Elles proviennent de base_url et workspace de la section
+   [mbstyle] du fichier de configuration. Renseignez-les AVANT la génération :
+   les modifier ensuite impose de régénérer, ou de reprendre chaque JSON à la
+   main. Vérification rapide :
+        Select-String -Path .uild\styles\plu_psc_s.json -Pattern '"sprite"|"tiles"'
+
+   /!\ Les glyphes (polices des étiquettes) ne sont pas fournis par GeoServer
+   par défaut. Si vos étiquettes n'apparaissent pas, renseignez glyphs_url vers
+   un service de glyphes PBF existant.
+
+7. POINTS DE VIGILANCE CONNUS
+   - Encodage : tous les SLD sont écrits en UTF-8 SANS BOM. Un BOM fait échouer
+     le parseur XML de GeoServer avec « Content is not allowed in prolog ».
+   - Validation : si l'import REST échoue, ajouter ?raw=true à l'URL PUT pour
+     court-circuiter la validation stricte, puis corriger le SLD.
+   - Espacement des hachures : piloté par <Size> de la marque shape:// et par
+     la VendorOption « graphic-margin ». Ajuster VENDOR_DEFAULTS si le rendu
+     paraît trop dense ou trop aéré par rapport à QGIS.
+   - Unités : QGIS raisonne en millimètres, SLD en pixels (1 px = 0,28 mm).
+     Les styles en « unités carte » (MapUnit) ne sont pas convertibles sans
+     échelle fixe : ils sont signalés dans rapport_conversion.md.
+================================================================================
