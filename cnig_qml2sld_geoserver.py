@@ -5785,14 +5785,43 @@ class GeoServerPublisher:
 #  SECTION 6 — RAPPORT FINAL ET NOTICE DE DÉPLOIEMENT
 # ==============================================================================
 
+def _raison_echec_mbstyle(r: "ConversionResult") -> str:
+    """Best-effort : remonte la raison d'un échec MBStyle (r.mbstyle is
+    None alors que r.ok est vrai, donc le SLD a réussi et seule la PHASE 5
+    a échoué) depuis les avertissements du résultat — il n'existe pas de
+    champ structuré dédié (voir ConversionResult, PHASE 5). Ne retourne
+    jamais une chaîne vide : l'absence de raison capturée est elle-même
+    signalée, pas masquée."""
+    for w in r.warnings:
+        if w.startswith("MBStyle"):
+            return w
+    return "raison non capturée dans les avertissements (voir la console au moment de la génération)."
+
+
 def write_reports(out_dir: Path,
                   reports: Sequence[ComplexityReport],
                   results: Sequence[ConversionResult],
                   post_stats: Counter,
                   svg_index: Dict[str, str],
                   audit_stats: Optional[Counter] = None,
-                  audit_extensions: Optional[Counter] = None) -> None:
-    """Produit rapport_conversion.json + rapport_conversion.md + README."""
+                  audit_extensions: Optional[Counter] = None,
+                  mbstyle_demande: bool = False) -> None:
+    """Produit rapport_conversion.json + rapport_conversion.md + README.
+
+    `mbstyle_demande` (nouveau) : indique si --mbstyle était actif pour
+    cette exécution. SANS ce paramètre, le rapport Markdown ne comportait
+    AUCUN compteur de succès/échec propre au MBStyle (seul le JSON gardait
+    la liste des fichiers produits, sous `phase5_mbstyle`) : un rapport
+    pouvait afficher "Styles convertis : 17/17" en ne parlant que du SLD,
+    sans jamais dire si les 17 MBStyle correspondants avaient réellement
+    été produits — une omission silencieuse contraire au principe du
+    projet, découverte à l'usage réel plutôt qu'en test unitaire."""
+    ok = [r for r in results if r.ok]
+    ko = [r for r in results if not r.ok]
+    warned = [r for r in ok if r.warnings]
+    mbstyle_ok = [r for r in ok if r.mbstyle] if mbstyle_demande else []
+    mbstyle_ko = [r for r in ok if mbstyle_demande and not r.mbstyle]
+
     payload = {
         "phase1_complexite": [
             {"fichier": r.name, "score": r.score, "regles": r.n_rules,
@@ -5810,20 +5839,23 @@ def write_reports(out_dir: Path,
         ],
         "phase3_svg": {"nombre": len(svg_index),
                        "dossier": str(SVG_SUBDIR.as_posix())},
-        "phase5_mbstyle": [
-            {"source": r.source.name, "cible": r.mbstyle.name}
-            for r in results if r.mbstyle
-        ],
+        "phase5_mbstyle": {
+            "demande": mbstyle_demande,
+            "produits": [
+                {"source": r.source.name, "cible": r.mbstyle.name}
+                for r in mbstyle_ok
+            ],
+            "echecs": [
+                {"source": r.source.name, "raison": _raison_echec_mbstyle(r)}
+                for r in mbstyle_ko
+            ],
+        },
         "phase4_posttraitement": dict(post_stats),
         "phase6_audit_geoserver": dict(audit_stats or {}),
         "phase6_extensions_geoserver": dict(audit_extensions or {}),
     }
     (out_dir / "rapport_conversion.json").write_text(
         json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
-
-    ok = [r for r in results if r.ok]
-    ko = [r for r in results if not r.ok]
-    warned = [r for r in ok if r.warnings]
 
     audit_lines: List[str] = []
     if audit_stats is not None:
@@ -5848,11 +5880,26 @@ def write_reports(out_dir: Path,
                                       key=lambda kv: -kv[1]):
                 audit_lines.append(f"| {cle} | {valeur} |")
 
+    titre = "# Rapport de conversion QML CNIG -> SLD"
+    if mbstyle_demande:
+        titre += " / MBStyle"
+    titre += " GeoServer"
+
     lines: List[str] = [
-        "# Rapport de conversion QML CNIG -> SLD GeoServer", "",
-        f"- Styles convertis : **{len(ok)}/{len(results)}**",
-        f"- Échecs : **{len(ko)}**",
-        f"- Conversions avec avertissement : **{len(warned)}**",
+        titre, "",
+        f"- Styles SLD convertis : **{len(ok)}/{len(results)}**",
+        f"- Échecs SLD : **{len(ko)}**",
+        f"- Conversions SLD avec avertissement : **{len(warned)}**",
+    ]
+    if mbstyle_demande:
+        # Compteur dédié, absent avant ce correctif (voir docstring de
+        # write_reports) : sans lui, rien dans ce rapport ne disait si les
+        # MBStyle demandés avaient réellement été produits.
+        lines += [
+            f"- MBStyle produits : **{len(mbstyle_ok)}/{len(ok)}**",
+            f"- MBStyle en échec : **{len(mbstyle_ko)}**",
+        ]
+    lines += [
         f"- Pictogrammes SVG déployés : **{len(svg_index)}**", "",
         "## Correctifs appliqués en phase 4", "",
         "| Correctif | Occurrences |", "|---|---:|",
@@ -5862,8 +5909,25 @@ def write_reports(out_dir: Path,
 
     lines += audit_lines
 
+    if mbstyle_demande:
+        lines += ["", "## MBStyle", ""]
+        if not mbstyle_ok and not mbstyle_ko:
+            lines.append("Aucun fichier SLD produit avec succès : aucun MBStyle "
+                          "n'a pu être tenté.")
+        else:
+            lines.append(f"**{len(mbstyle_ok)}/{len(ok)}** fichier(s) SLD "
+                         f"produit(s) avec succès ont également donné lieu à "
+                         f"un MBStyle.")
+            if mbstyle_ko:
+                lines += ["", "### Échecs MBStyle", ""]
+                for r in mbstyle_ko:
+                    lines.append(f"- `{r.source.name}` : "
+                                 f"{_raison_echec_mbstyle(r)}")
+            else:
+                lines.append("Aucun échec.")
+
     if ko:
-        lines += ["", "## Échecs de conversion", ""]
+        lines += ["", "## Échecs de conversion SLD", ""]
         for r in ko:
             lines.append(f"- `{r.source.name}` : {r.error}")
     if warned:
@@ -7071,7 +7135,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     # ------------------------------------------------------------- rapports
     write_reports(args.out, reports, results, post.stats, svg_index,
-                  auditeur.problemes, auditeur.extensions)
+                  auditeur.problemes, auditeur.extensions, mb_options.enabled)
     (args.out / "NOTICE_DEPLOIEMENT.txt").write_text(DEPLOY_NOTICE,
                                                      encoding="utf-8")
 
