@@ -3716,17 +3716,33 @@ class StyleforgeBackend(BaseBackend):
         except Exception as exc:                            # noqa: BLE001
             res.error = f"styleforge_core (lecture QML) a échoué : {exc}"
             return res
+        # Préfixe "Lecture QML :" : ces avertissements viennent de la
+        # construction du pivot (lire_fichier_qml), PARTAGÉ par le SLD et le
+        # MBStyle écrits ensuite depuis ce même pivot — ils concernent donc
+        # les DEUX documents produits, pas seulement le SLD.
+        res.warnings = [f"Lecture QML : {w}" for w in lecture.avertissements]
+        sld_avertissements: List[str] = []
         try:
             sld_xml = ecrire_sld(
                 lecture.style, nom_couche=safe_stem(qml.stem),
                 resoudre_image_embarquee=self._resoudre_image_embarquee,
+                avertissements=sld_avertissements,
             )
         except Exception as exc:                            # noqa: BLE001
             res.error = f"styleforge_core (écriture SLD) a échoué : {exc}"
-            res.warnings = list(lecture.avertissements)
             return res
+        # AVANT ce correctif, ecrire_sld() recevait son paramètre
+        # avertissements=... jamais câblé ici : chaque propriété de
+        # symbolizer non écrite dans le SLD (voir _avertir_proprietes_non_
+        # gerees dans styleforge_core.writers.sld) était donc perdue en
+        # silence côté CLI — 1838 avertissements de ce type rien que sur le
+        # corpus des 17 exemples du dépôt, découvert en vérifiant pourquoi
+        # un avertissement "sans préfixe" du rapport ne disait pas à quel
+        # document (SLD/MBStyle/les deux) il se rapportait. Préfixe "SLD :"
+        # : spécifique à l'écrivain SLD, ne concerne PAS le MBStyle produit
+        # à partir du même pivot (voir docstring de ecrire_sld).
+        res.warnings += [f"SLD : {w}" for w in sld_avertissements]
         res.sld = sld_xml
-        res.warnings = list(lecture.avertissements)
         res.pivot_style = lecture.style
         return res
 
@@ -5932,10 +5948,72 @@ def write_reports(out_dir: Path,
             lines.append(f"- `{r.source.name}` : {r.error}")
     if warned:
         lines += ["", "## Avertissements", ""]
+        PAR_CATEGORIE = 6
+        if mbstyle_demande:
+            # Explicite plutôt qu'à déduire du préfixe : clarifie à quel(s)
+            # document(s) produit(s) chaque avertissement se rapporte.
+            #
+            # CORRECTIF : avant, l'échantillonnage par fichier prenait les 6
+            # premiers avertissements TOUTES CATÉGORIES CONFONDUES, dans
+            # l'ordre d'ajout (Lecture QML d'abord, puis SLD, puis MBStyle).
+            # Un fichier avec >=6 avertissements "Lecture QML :" masquait donc
+            # TOUJOURS ses avertissements "SLD :"/"MBStyle :" dans ce rapport
+            # — silencieusement, sans même dire qu'il manquait quelque chose.
+            # Vérifié concrètement : sur les 17 exemples de ce dépôt, 16/17
+            # fichiers avaient au moins 6 avertissements "Lecture QML :", donc
+            # 16/17 ne montraient JAMAIS leurs avertissements "SLD :" ici, même
+            # après avoir câblé ecrire_sld(..., avertissements=...) plus haut
+            # dans ce fichier — le correctif précédent restait sans effet
+            # visible dans ce rapport pour la quasi-totalité du corpus.
+            # Chaque catégorie présente est donc désormais échantillonnée
+            # SÉPARÉMENT, et toute troncature est dite explicitement plutôt
+            # que tue.
+            lines += [
+                "Chaque avertissement précise le document concerné par son "
+                "préfixe : **`Lecture QML :`** (construction du pivot, "
+                "commun au SLD ET au MBStyle, puisque les deux en sont "
+                "dérivés), **`SLD :`** (spécifique à l'écrivain SLD) ou "
+                "**`MBStyle :`** (spécifique à l'écrivain MBStyle). Par "
+                f"fichier, chaque catégorie présente est échantillonnée "
+                f"séparément (jusqu'à {PAR_CATEGORIE} avertissements) : une "
+                "catégorie nombreuse (typiquement « Lecture QML ») ne masque "
+                "donc pas les avertissements d'une autre catégorie moins "
+                "nombreuse. Liste exhaustive, non tronquée : "
+                "`rapport_conversion.json` (`phase2_conversion`).", "",
+            ]
+        PREFIXES = ("Lecture QML : ", "SLD : ", "MBStyle : ")
         for r in warned[:60]:
             lines.append(f"- `{r.source.name}`")
-            for w in r.warnings[:6]:
-                lines.append(f"  - {w}")
+            if not mbstyle_demande:
+                # Pas de distinction SLD/MBStyle à faire (MBStyle non
+                # demandé) : un seul échantillon, mais la troncature reste
+                # explicite plutôt que silencieuse.
+                for w in r.warnings[:PAR_CATEGORIE]:
+                    lines.append(f"  - {w}")
+                reste = len(r.warnings) - PAR_CATEGORIE
+                if reste > 0:
+                    lines.append(
+                        f"  - … et {reste} autre(s) avertissement(s) non "
+                        f"affiché(s) ici — voir rapport_conversion.json.")
+                continue
+            groupes: Dict[str, List[str]] = {}
+            for w in r.warnings:
+                for p in PREFIXES:
+                    if w.startswith(p):
+                        groupes.setdefault(p[:-3], []).append(w[len(p):])
+                        break
+                else:
+                    groupes.setdefault("Autre", []).append(w)
+            for cle, items in groupes.items():
+                prefixe = f"{cle} : " if cle != "Autre" else ""
+                for w in items[:PAR_CATEGORIE]:
+                    lines.append(f"  - {prefixe}{w}")
+                reste = len(items) - PAR_CATEGORIE
+                if reste > 0:
+                    lines.append(
+                        f"  - … et {reste} autre(s) avertissement(s) "
+                        f"« {cle} » non affiché(s) ici — voir "
+                        f"rapport_conversion.json.")
     (out_dir / "rapport_conversion.md").write_text(
         "\n".join(lines) + "\n", encoding="utf-8")
     Console.ok(f"Rapports écrits : rapport_conversion.json / .md")
@@ -6926,7 +7004,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             hints, geometry = extractor.extract(res.source)
         except Exception as exc:                               # noqa: BLE001
             hints, geometry = {}, "Polygon"
-            res.warnings.append(f"Indices QML non extraits : {exc}")
+            # PHASE 4 post-traite le XML SLD déjà écrit (res.sld) : ces
+            # avertissements sont par construction spécifiques au SLD, pas
+            # au MBStyle (voir le correctif de StyleforgeBackend.convert()
+            # pour la même logique de préfixage).
+            res.warnings.append(f"SLD : Indices QML non extraits : {exc}")
         try:
             final_xml = post.process(res.sld or "", hints, geometry)
             # Écriture UTF-8 SANS BOM et fins de ligne normalisées.
@@ -6935,7 +7017,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             fixed += 1
         except Exception as exc:                               # noqa: BLE001
             failed += 1
-            res.warnings.append(f"Post-traitement échoué : {exc}")
+            res.warnings.append(f"SLD : Post-traitement échoué : {exc}")
             Console.warn(f"{res.target.name} : post-traitement échoué ({exc})")
 
     Console.ok(f"PHASE 4 terminée : {fixed} SLD corrigés, {failed} en échec.")
@@ -7026,9 +7108,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 )
             except ExpressionPivotNonEcrite as exc:
                 failed_mb += 1
-                res.warnings.append(
-                    f"MBStyle (styleforge_core.writers.mbstyle) : {exc}"
-                )
+                # Préfixe "MBStyle :" uniforme (voir _raison_echec_mbstyle,
+                # qui le recherche littéralement) — avant ce correctif, cette
+                # branche d'échec utilisait un préfixe différent de celui de
+                # la branche succès-avec-avertissements juste en dessous
+                # ("MBStyle (styleforge_core.writers.mbstyle) : ..."), ce qui
+                # aurait pu faire manquer cet échec à toute recherche/analyse
+                # du texte par préfixe.
+                res.warnings.append(f"MBStyle : {exc}")
                 Console.warn(f"{res.source.name} : MBStyle non produit ({exc})")
                 continue
             # Alignement avec la convention déjà utilisée par les backends

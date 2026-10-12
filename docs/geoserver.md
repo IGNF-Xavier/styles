@@ -94,7 +94,7 @@ les fichiers de style dans le répertoire de données GeoServer
 `--mbstyle-workspace` si le style est publié dans un workspace) lors de la
 conversion pour que le champ `"sprite"` du JSON produit pointe vers la
 bonne URL dès la génération — voir le README, section « Utilisateur CLI »,
-tableau des options utiles.
+« Options — référence complète » (groupe « Export MBStyle »).
 
 ### Glyphes de police non rasterisés (`sprite_glyphes_a_generer.json`)
 

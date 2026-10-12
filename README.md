@@ -31,18 +31,63 @@ Exemples réels (CNIG GPU) avec leurs sorties : [`examples/`](examples/SOURCES.m
 
 ### Installation
 
+Prérequis : Python 3.9+ et `git`. L'outil tourne identiquement sous
+Linux, macOS et Windows — seules les commandes d'activation de
+l'environnement virtuel diffèrent.
+
+**Linux / macOS :**
+
 ```bash
 git clone <url-de-ce-depot>
 cd styles
-python3 -m venv .venv && source .venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 pip install ./styleforge-core
 ```
 
+**Windows — PowerShell :**
+
+```powershell
+git clone <url-de-ce-depot>
+cd styles
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install .\styleforge-core
+```
+
+Si PowerShell refuse d'exécuter le script d'activation
+(`disabled on this system`), c'est la politique d'exécution par
+défaut de Windows, pas un problème propre à cet outil : autoriser les
+scripts signés pour l'utilisateur courant une fois, puis relancer
+l'activation.
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+**Windows — invite de commandes (`cmd.exe`) :**
+
+```bat
+git clone <url-de-ce-depot>
+cd styles
+python -m venv .venv
+.venv\Scripts\activate.bat
+pip install .\styleforge-core
+```
+
+Dans les trois cas, une fois l'environnement activé, l'invite affiche
+`(.venv)` et `python cnig_qml2sld_geoserver.py --help` doit répondre —
+c'est la vérification la plus simple que l'installation a réussi.
+
 `cnig_qml2sld_geoserver.py` n'a, avec `--backend styleforge` (recommandé,
 voir plus bas), **aucune dépendance autre que `styleforge-core`** —
-ni QGIS, ni `bridgestyle`, ni affichage graphique. Les backends `qgis` et
-`standalone` existent pour compatibilité/comparaison mais demandent une
-installation QGIS complète ; ignorez-les si vous démarrez de zéro.
+ni QGIS, ni `bridgestyle`, ni affichage graphique, sur **aucun** des
+trois systèmes ci-dessus. Les backends `qgis` et `standalone` existent
+pour compatibilité/comparaison mais demandent une installation QGIS
+complète (typiquement lancés depuis l'interpréteur Python fourni par
+QGIS lui-même, p. ex. `python-qgis.bat` sous Windows — voir le
+docstring de `QgisBackend` dans le script) ; ignorez-les si vous
+démarrez de zéro.
 
 ### Convertir un dossier
 
@@ -71,20 +116,88 @@ preuve).
 Pour reproduire exactement les exemples fournis (`examples/`), voir la
 commande donnée dans [`examples/SOURCES.md`](examples/SOURCES.md).
 
-### Options utiles
+### Options — référence complète
+
+Toutes les options de `python cnig_qml2sld_geoserver.py --help`,
+regroupées comme dans la sortie du script elle-même. **Aucune valeur
+n'est devinée en silence** : tout ce qui constitue un choix dans cet
+outil est un paramètre explicite, avec sa valeur par défaut documentée
+ici quand il en a une.
+
+Les 6 options déjà vues dans « Convertir un dossier » ci-dessus
+(`--local-source`, `--backend`, `--mbstyle`, `--all`, `--out`,
+`--clean`) couvrent l'usage courant ; le reste de ce tableau sert aux
+cas particuliers (autre source, proxy d'entreprise, publication directe
+sur GeoServer, etc.).
+
+**Source des styles** — sans `--local-source`, l'outil clone le dépôt
+CNIG lui-même depuis GitHub :
 
 | Option | Effet |
 |---|---|
-| `--mbstyle-base-url URL` | URL de base GeoServer à inscrire dans le champ `"sprite"` du MBStyle produit (voir [section GeoServer](#3-administrateur-geoserver)) |
-| `--mbstyle-workspace NOM` | Workspace GeoServer cible, si le style y sera publié |
-| `--analyze-only` | N'écrit rien ; rapporte seulement ce qui serait fait |
-| `--no-hatch-fix` | Désactive la correction automatique des hachures `shape://` dégradées |
-| `--geoserver-url URL` (+ `--geoserver-user`/`--geoserver-password`/`--geoserver-workspace`) | Publie directement les styles produits sur un GeoServer cible (optionnel — omettez ces options pour ne faire que générer des fichiers) |
+| `--local-source DOSSIER` | Dossier déjà cloné en local : aucun accès réseau. Voir l'avertissement sur son contenu dans [`examples/SOURCES.md`](examples/SOURCES.md) (doit conserver les `.svg` à côté des `.qml`). |
+| `--repo ORG/DEPOT` | Dépôt GitHub source (défaut : `cnigfr/DDU-SG5-SYMBOLISATION`) |
+| `--branch NOM` | Branche à cloner (défaut : `SYMBOLISATION`) |
+| `--subpath A,B,...` | Sous-dossiers à balayer dans le dépôt, séparés par des virgules ; `''` balaye tout (défaut : `PLU,PSMV,SUP,__Ressources`) |
+| `--cache DOSSIER` | Dossier de cache des téléchargements (réutilisé entre exécutions) |
+| `--github-token JETON` | Jeton GitHub (ou variable d'environnement `GITHUB_TOKEN`) pour dépasser la limite de 60 requêtes/heure sans jeton |
 
-`--help` liste l'intégralité des options (configuration réseau/proxy,
-cache de dépôt source, écriture d'un fichier de config réutilisable via
-`--write-config`, etc.) — tout ce qui constitue un choix dans cet outil
-est un paramètre explicite, jamais une valeur devinée en silence.
+**Sortie :**
+
+| Option | Effet |
+|---|---|
+| `--out DOSSIER` | Dossier de sortie, contiendra `styles/` (défaut : `build` à côté du script) |
+| `--clean` | Vide `styles/` avant génération, pour ne pas mélanger avec une exécution précédente |
+
+**Exécution :**
+
+| Option | Effet |
+|---|---|
+| `--all` | Exécute les 4 phases sur tous les fichiers trouvés (sans filtre d'échantillon) |
+| `--analyze-only` | PHASE 1 seule (classement de complexité) : n'écrit aucun style |
+| `--benchmark-only` | Ne convertit que le « Style Étalon » et la combinaison couvrante minimale (utile pour un test rapide avant un `--all` complet) |
+| `--backend {auto,qgis,standalone,styleforge}` | Backend de conversion (défaut : `auto`). `styleforge` = `styleforge-core` seul, aucune dépendance QGIS/bridgestyle (recommandé hors QGIS) ; `auto` ne le choisit jamais de lui-même |
+| `--no-hatch-fix` | Désactive la correction automatique des hachures `shape://` dégradées (PHASE 4) |
+| `--top N` | Taille du classement affiché en PHASE 1 |
+| `--sprites-bridgestyle` | Conserve le rendu de vignettes de `bridgestyle` (inutilisé par cette chaîne, et très lent) — pour comparaison uniquement |
+| `--no-auto-install` | N'installe pas `bridgestyle` automatiquement s'il manque (backends `qgis`/`standalone` seulement) ; se contente de le signaler |
+| `--bridgestyle-wheel CHEMIN` | Installe `bridgestyle` hors ligne depuis une roue `.whl` ou un dossier de roues, sans accès PyPI |
+
+**Export MBStyle (Mapbox GL Style) :**
+
+| Option | Effet |
+|---|---|
+| `--mbstyle` | Produit aussi un `.json` MBStyle par style, et la feuille de sprites associée |
+| `--no-mbstyle` | Désactive l'export MBStyle même si un fichier de configuration l'active |
+| `--mbstyle-base-url URL` | Racine GeoServer pour les URL de tuiles/sprites/glyphes inscrites dans le JSON (défaut : `http://localhost:8080/geoserver`) — voir [section GeoServer](#3-administrateur-geoserver) |
+| `--mbstyle-workspace NOM` | Workspace GeoServer cible, si le style y sera publié |
+
+**Réseau :**
+
+| Option | Effet |
+|---|---|
+| `--proxy URL` | Proxy d'entreprise, ex. `http://utilisateur:motdepasse@serveur:8080`. À défaut, l'outil lit les variables d'environnement, la configuration réseau de QGIS, puis les paramètres proxy de Windows |
+| `--no-proxy` | Force l'accès direct, sans proxy |
+
+**Publication GeoServer** (optionnelle — sans ces options, l'outil ne fait que générer des fichiers) :
+
+| Option | Effet |
+|---|---|
+| `--geoserver-url URL` | ex. `http://localhost:8080/geoserver` — active la publication directe via l'API REST |
+| `--geoserver-user NOM` | Utilisateur GeoServer |
+| `--geoserver-password MDP` | Mot de passe GeoServer |
+| `--geoserver-workspace NOM` | Workspace GeoServer cible de la publication |
+
+**Configuration** (pour ne pas retaper les mêmes options à chaque exécution) :
+
+| Option | Effet |
+|---|---|
+| `--write-config [FICHIER]` | Écrit un fichier `.ini` commenté avec les options ci-dessus, puis quitte (défaut : `./cnig_qml2sld.ini`) |
+| `--config FICHIER` | Fichier `.ini` à charger (défaut : `cnig_qml2sld.ini` cherché à côté du script puis dans le répertoire courant) |
+| `--no-config` | Ignore tout fichier de configuration détecté |
+
+`--help` reste la source de vérité en cas d'écart avec ce tableau (il
+peut évoluer plus vite que cette documentation).
 
 ### Limites
 
