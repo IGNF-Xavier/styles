@@ -54,7 +54,7 @@ l'absence de MBStyle pour cette règle précise.
   un poste où Qt peut créer une fenêtre (y compris hors écran, via
   `QT_QPA_PLATFORM=offscreen`) et où la police voulue est installée.
 
-## 3. Ressources externes (images SVG embarquées, sprites) côté API synchrone
+## 3. Ressources externes (images SVG embarquées, sprites) côté API synchrone et plugin QGIS
 
 La route `POST /v1/convert` de styleforge-api (phase 6) n'a, dans cette
 première itération, aucun service de résolution de ressources externes :
@@ -66,6 +66,16 @@ actuel : utiliser le CLI (`cnig_qml2sld_geoserver.py`), qui résout ces
 ressources localement, pour tout style qui en dépend ; lever cette limite
 côté API est un chantier séparé (résolveur de ressources par requête, ou
 stockage d'assets côté service).
+
+L'extension QGIS (`qgis-plugin/`) couvre un sous-ensemble de ce que
+résout le CLI : les SVG **embarqués en base64** (la quasi-totalité du
+corpus CNIG réel) SONT décodés et déployés côté SLD — vérifié
+empiriquement contre une vraie installation QGIS 3.40, cela fait passer
+le taux de réussite SLD du corpus d'exemples de 4/17 à 17/17. Restent
+hors de portée du plugin, comme pour l'API : un SVG référencé par un
+chemin de fichier (pas embarqué), et tout sprite MBStyle
+(pictogramme/motif pour le document Mapbox) — même message d'échec
+explicite, même contournement (le CLI).
 
 ## 4. `matchCase` sur `PropertyIsLike` — extension GeoServer
 

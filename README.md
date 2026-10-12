@@ -14,6 +14,12 @@ Conversion de styles cartographiques QGIS 3.44 (`.qml`) vers **SLD 1.0.0**
 - **`styleforge-api/`** — un service HTTP (FastAPI) construit sur
   `styleforge-core` : conversion synchrone (`POST /v1/convert`) et
   traitement de lot asynchrone (`POST /v1/batch` + worker RQ/Redis).
+- **`qgis-plugin/`** — une extension QGIS (menu *Vecteur* →
+  *Styleforge*) pour convertir la couche active, toutes les couches
+  chargées, ou un dossier de `.qml`, directement depuis QGIS — usage
+  d'aperçu/itération rapide, pas le pipeline de production complet du
+  CLI (voir [`qgis-plugin/README.md`](qgis-plugin/README.md) pour ses
+  limites propres).
 
 Ce document a trois entrées indépendantes, chacune autosuffisante — allez
 directement à celle qui vous concerne :
@@ -21,6 +27,10 @@ directement à celle qui vous concerne :
 1. [Utilisateur CLI](#1-utilisateur-cli--un-dossier-de-qml-vers-sld--mbstyle) — convertir un dossier de `.qml` en un dossier de `.sld`/`.json`.
 2. [Administrateur de l'API](#2-administrateur-de-lapi) — installer et lancer le service HTTP (synchrone + asynchrone).
 3. [Administrateur GeoServer](#3-administrateur-geoserver) — ce qu'il faut installer/configurer côté GeoServer pour que les sorties fonctionnent réellement.
+
+L'extension QGIS ([`qgis-plugin/README.md`](qgis-plugin/README.md)) est
+une quatrième porte d'entrée, à part : installation et usage dans
+QGIS lui-même, pour un aperçu rapide sans passer par le CLI.
 
 Limites connues et contournements, consolidés : [`docs/limites.md`](docs/limites.md).
 Exemples réels (CNIG GPU) avec leurs sorties : [`examples/`](examples/SOURCES.md).
