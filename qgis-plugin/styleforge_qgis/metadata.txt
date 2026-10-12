@@ -1,0 +1,46 @@
+[general]
+name=Styleforge - QML vers SLD/MBStyle
+qgisMinimumVersion=3.40
+qgisMaximumVersion=3.99
+description=Convertit les styles QGIS (.qml) vers SLD 1.0.0 et Mapbox GL Style (MBStyle) pour GeoServer, via styleforge-core.
+version=0.1.0
+author=Xavier Thauvin
+email=x.thauvin@gmail.com
+
+about=Convertit le style de la couche active, de toutes les couches
+    chargees dans le projet, ou d'un dossier de fichiers .qml, vers
+    SLD 1.0.0 et (optionnellement) Mapbox GL Style (MBStyle) pour
+    GeoServer. S'appuie sur styleforge-core, la bibliotheque de
+    conversion du depot "styles" (jamais dependante de PyQGIS a
+    l'execution : PyQGIS n'est utilise ici que par CE plugin, pour
+    lire le style des couches QGIS, jamais par styleforge-core
+    lui-meme). Les pictogrammes SVG embarques en base64 dans le QML
+    (convention QGIS - la quasi-totalite du corpus CNIG reel, verifie
+    empiriquement) sont decodes et deployes dans svg/cnig/ du dossier
+    de sortie, memes conventions que le CLI. Limites connues restantes
+    de cette version : un SVG reference par un CHEMIN DE FICHIER (pas
+    embarque), et les sprites MBStyle (pictogrammes/motifs pour le
+    document Mapbox), ne sont pas resolus (meme limite, et pour la
+    meme raison, que la route POST /v1/convert de styleforge-api - voir
+    docs/limites.md section 3 du depot) ; un style qui en depend
+    produit une exception nommee explicite pour ce document precis,
+    plutot qu'un document incomplet - utiliser cnig_qml2sld_geoserver.py
+    (CLI) pour ces cas. Aucun correctif de post-traitement GeoServer
+    (hachures, VendorOption - PHASE 4 du CLI) n'est applique : ce
+    plugin couvre un usage d'apercu/iteration rapide dans QGIS, pas le
+    pipeline de production complet du CLI. Jamais d'approximation
+    silencieuse : tout avertissement ou echec est affiche, par couche
+    ou par fichier, jamais masque.
+
+tracker=https://github.com/IGNF-Xavier/styles/issues
+repository=https://github.com/IGNF-Xavier/styles
+homepage=https://github.com/IGNF-Xavier/styles
+
+tags=sld,mbstyle,mapbox,geoserver,qml,style,conversion,cnig
+category=Vector
+icon=icon.png
+
+experimental=True
+deprecated=False
+hasProcessingProvider=no
+server=False
