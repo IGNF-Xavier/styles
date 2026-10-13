@@ -3,7 +3,7 @@ name=Styleforge - QML vers SLD/MBStyle
 qgisMinimumVersion=3.40
 qgisMaximumVersion=3.99
 description=Convertit les styles QGIS (.qml) vers SLD 1.0.0 et Mapbox GL Style (MBStyle) pour GeoServer, via styleforge-core.
-version=0.2.0
+version=0.2.1
 author=Xavier Thauvin
 email=x.thauvin@gmail.com
 
