@@ -12,9 +12,9 @@ minimum, et doit rester chargeable sans modification sous QGIS 4.x
 from __future__ import annotations
 
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
-from qgis.core import QgsProject
+from qgis.core import QgsProject, QgsVectorLayer
 from qgis.PyQt.QtCore import Qt
 from qgis.PyQt.QtWidgets import (
     QCheckBox,
@@ -90,17 +90,18 @@ class BoiteDialogueStyleforge(QDialog):
         disposition.addWidget(self.case_mbstyle)
 
         avertissement_limite = QLabel(
-            "Les pictogrammes SVG embarqués en base64 dans le QML sont "
-            "déployés automatiquement (svg/cnig/ du dossier de sortie). "
-            "En revanche, un SVG référencé par un chemin de fichier, ou "
-            "un sprite MBStyle (pictogramme/motif pour le document "
-            "Mapbox), n'est pas résolu par cette version : un style qui "
-            "en dépend échoue explicitement pour ce document précis "
-            "(voir le journal), plutôt qu'un rendu approximé. Utilisez "
-            "le CLI (cnig_qml2sld_geoserver.py) pour ces cas."
+            "Depuis la version 0.2.0 : les pictogrammes SVG embarqués en "
+            "base64 ET ceux référencés par un chemin de fichier (relatif "
+            "au .qml, au dossier du projet, ou absolu) sont déployés "
+            "automatiquement (svg/cnig/ du dossier de sortie) ; le "
+            "MBStyle produit sa propre feuille de sprites (sprite.png/"
+            "@2x + index JSON) pour les pictogrammes, motifs de hachure "
+            "et marques simples. Un chemin de fichier qui ne mène à "
+            "aucun SVG réel produit un avertissement explicite (voir le "
+            "journal), jamais une approximation silencieuse."
         )
         avertissement_limite.setWordWrap(True)
-        avertissement_limite.setStyleSheet("color: #7a5c00;")
+        avertissement_limite.setStyleSheet("color: #2d6a2d;")
         disposition.addWidget(avertissement_limite)
 
         self.journal = QPlainTextEdit()
@@ -223,11 +224,19 @@ class BoiteDialogueStyleforge(QDialog):
         mbstyle_demande = self.case_mbstyle.isChecked()
 
         self.journal.clear()
+
+        construction = self._construire_elements()
+        if construction is None:
+            return
+        elements, echecs_export = construction
+
         self.setCursor(Qt.CursorShape.WaitCursor)
         self.bouton_convertir.setEnabled(False)
-        registre_svg = convertisseur.nouveau_registre_svg()
         try:
-            resultats = self._executer_mode(dossier_sortie, mbstyle_demande, registre_svg)
+            resultats, n_svg, rapport_sprites = convertisseur.executer_pipeline(
+                elements, mbstyle_demande=mbstyle_demande,
+                dossier_sortie=dossier_sortie,
+            )
         except Exception as exc:  # noqa: BLE001 - jamais une exception muette dans l'UI
             self._log(f"✗ Erreur inattendue : {exc}")
             QMessageBox.critical(self, "Erreur", str(exc))
@@ -236,8 +245,12 @@ class BoiteDialogueStyleforge(QDialog):
             self.unsetCursor()
             self.bouton_convertir.setEnabled(True)
 
-        if resultats is None:
-            return
+        # Les couches dont l'EXPORT (saveNamedStyle) a echoue n'ont jamais
+        # atteint executer_pipeline (aucun .qml a lui donner) : on les
+        # rajoute ICI, pas avant, pour qu'elles apparaissent quand meme
+        # dans le journal ET dans rapport_conversion.md au lieu de
+        # disparaitre silencieusement du compte rendu.
+        resultats = echecs_export + resultats
 
         for resultat in resultats:
             convertisseur.ecrire_fichiers_sortie(resultat, dossier_sortie)
@@ -247,10 +260,17 @@ class BoiteDialogueStyleforge(QDialog):
             else:
                 self._log(f"✗ {resultat.nom} : {resultat.erreur}")
 
-        n_svg = convertisseur.deployer_svg_embarque(registre_svg, dossier_sortie)
         if n_svg:
             self._log(f"{n_svg} pictogramme(s) SVG déployé(s) dans "
                        f"{dossier_sortie / convertisseur.SVG_SUBDIR}.")
+
+        if mbstyle_demande and rapport_sprites:
+            n_vignettes = rapport_sprites.get("vignettes", 0) or 0
+            if n_vignettes and rapport_sprites.get("images"):
+                self._log(f"{n_vignettes} vignette(s) MBStyle (sprite.png/@2x) "
+                           f"générée(s) dans {dossier_sortie}.")
+            for avert_sprite in rapport_sprites.get("warnings", []) or []:
+                self._log(f"⚠ Sprites : {avert_sprite}")
 
         chemin_rapport = convertisseur.ecrire_rapport(
             resultats, dossier_sortie, mbstyle_demande=mbstyle_demande,
@@ -260,10 +280,34 @@ class BoiteDialogueStyleforge(QDialog):
         self._log(f"Terminé : {n_ok}/{len(resultats)} converti(s).")
         self._log(f"Rapport : {chemin_rapport}")
 
-    def _executer_mode(
-        self, dossier_sortie: Path, mbstyle_demande: bool,
-        registre_svg: dict,
-    ) -> Optional[List[convertisseur.ResultatConversion]]:
+    def _exporter_ou_echec(
+        self, couche,
+    ) -> "Tuple[Optional[Tuple[str, Path, bool]], Optional[convertisseur.ResultatConversion]]":
+        """Exporte UNE couche vers un .qml temporaire. Retourne soit
+        l'element (nom, chemin_qml, nettoyer=True) attendu par executer_
+        pipeline, soit (en cas d'echec de saveNamedStyle) un
+        ResultatConversion en echec deja pret a etre journalise/inclus
+        dans le rapport - jamais les deux, jamais aucun des deux."""
+        try:
+            chemin_qml = convertisseur.exporter_style_couche_vers_qml(couche)
+        except convertisseur.ErreurExportStyleCouche as exc:
+            echec = convertisseur.ResultatConversion(nom=couche.name())
+            echec.erreur = str(exc)
+            return None, echec
+        return (couche.name(), chemin_qml, True), None
+
+    def _construire_elements(
+        self,
+    ) -> "Optional[Tuple[List[Tuple[str, Path, bool]], List[convertisseur.ResultatConversion]]]":
+        """Construit la liste (nom, chemin_qml, nettoyer) attendue par
+        convertisseur.executer_pipeline(), selon le mode choisi - PHASE 4,
+        SVG et sprites sont tous geres a l'interieur du pipeline lui-meme,
+        pas ici (voir sa docstring). Retourne (elements, echecs_export) -
+        echecs_export recense les couches dont l'export QGIS lui-meme a
+        echoue (saveNamedStyle), AVANT meme d'atteindre styleforge-core :
+        ces couches n'ont jamais de chemin .qml a donner a executer_
+        pipeline, mais doivent neanmoins apparaitre dans le compte rendu,
+        pas disparaitre silencieusement."""
         if self.radio_couche_active.isChecked():
             couche = self.iface.activeLayer() if self.iface else None
             if couche is None:
@@ -271,20 +315,28 @@ class BoiteDialogueStyleforge(QDialog):
                                      "Sélectionnez une couche dans le panneau avant de convertir.")
                 return None
             self._log(f"Conversion de la couche active : {couche.name()}")
-            return [convertisseur.convertir_couche(
-                couche, mbstyle_demande=mbstyle_demande, registre_svg=registre_svg)]
+            element, echec = self._exporter_ou_echec(couche)
+            return ([element] if element else []), ([echec] if echec else [])
 
         if self.radio_toutes_couches.isChecked():
             projet = QgsProject.instance()
             self._log("Conversion de toutes les couches chargées…")
-            resultats = convertisseur.convertir_toutes_les_couches(
-                projet, mbstyle_demande=mbstyle_demande, registre_svg=registre_svg)
-            if not resultats:
+            elements: List[Tuple[str, Path, bool]] = []
+            echecs: List[convertisseur.ResultatConversion] = []
+            for couche in projet.mapLayers().values():
+                if not isinstance(couche, QgsVectorLayer):
+                    continue
+                element, echec = self._exporter_ou_echec(couche)
+                if element is not None:
+                    elements.append(element)
+                else:
+                    echecs.append(echec)
+            if not elements and not echecs:
                 QMessageBox.information(
                     self, "Aucune couche vectorielle",
                     "Aucune couche vectorielle n'est chargée dans ce projet.")
                 return None
-            return resultats
+            return elements, echecs
 
         # Mode dossier
         dossier_source_texte = self.champ_dossier_source.text().strip()
@@ -298,11 +350,13 @@ class BoiteDialogueStyleforge(QDialog):
                                  f"{dossier_source} n'existe pas.")
             return None
         self._log(f"Conversion du dossier : {dossier_source}")
-        resultats = convertisseur.convertir_dossier(
-            dossier_source, mbstyle_demande=mbstyle_demande, registre_svg=registre_svg)
-        if not resultats:
+        elements = [
+            (chemin.stem, chemin, False)
+            for chemin in sorted(dossier_source.rglob("*.qml"))
+        ]
+        if not elements:
             QMessageBox.information(
                 self, "Aucun fichier .qml",
                 f"Aucun fichier .qml trouvé dans {dossier_source}.")
             return None
-        return resultats
+        return elements, []

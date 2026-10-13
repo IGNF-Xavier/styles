@@ -12,22 +12,39 @@ modification sous **QGIS 4.x** (imports via `qgis.PyQt`, jamais
 aucune API dépréciée connue). `qgisMinimumVersion=3.40` dans
 `metadata.txt`.
 
-## Limites de cette version (volontaires, voir `metadata.txt`)
+## Depuis la version 0.2.0
 
-- Aucun correctif de post-traitement GeoServer (hachures, `VendorOption`
-  — PHASE 4 du CLI) : ce plugin couvre l'aperçu rapide, pas le pipeline
-  de production complet. Pour un déploiement réel, utilisez
-  `cnig_qml2sld_geoserver.py` (le CLI, à la racine du dépôt).
-- Les pictogrammes SVG **embarqués en base64** dans le QML (convention
-  QGIS — la quasi-totalité du corpus CNIG réel) sont décodés et déployés
-  dans `svg/cnig/` du dossier de sortie, mêmes conventions que le CLI.
-- Un SVG référencé par un **chemin de fichier** (pas embarqué), ou un
-  **sprite MBStyle** (pictogramme/motif pour le document Mapbox),
-  n'est pas résolu par cette version — même limite, pour la même
-  raison, que `POST /v1/convert` de `styleforge-api` (voir
-  `docs/limites.md` section 3 à la racine du dépôt). Un style qui en
-  dépend échoue avec un message explicite pour ce document précis,
-  jamais un rendu approximé.
+Ce plugin partage désormais trois blocs de code avec le CLI
+(`cnig_qml2sld_geoserver.py`) via `styleforge-core`, plutôt que deux
+copies qui dériveraient l'une de l'autre — ce qui lève les trois
+limites connues de la 0.1.0 :
+
+- **SVG par chemin de fichier** (`styleforge_core.writers.
+  sld_posttraitement`) : un pictogramme SVG référencé par un **chemin de
+  fichier** (relatif au `.qml`, au dossier du projet QGIS, ou absolu) est
+  désormais résolu, lu et déployé dans `svg/cnig/` du dossier de sortie —
+  exactement comme un SVG embarqué en base64 (convention QGIS, quasi-
+  totalité du corpus CNIG réel), qui reste pris en charge sans
+  changement. Un chemin qui ne mène à aucun fichier réel produit un
+  **avertissement explicite** nommant le chemin essayé, jamais une
+  approximation silencieuse.
+- **Sprites MBStyle** (`styleforge_core.sprites.SpriteRegistry`) : le
+  MBStyle produit, quand il est demandé, sa propre feuille de sprites
+  Mapbox GL (`sprite.png`/`sprite.json` + `@2x`) pour les pictogrammes,
+  motifs de hachure (`shape://...`) et marques simples qu'il référence.
+- **Correctifs PHASE 4** (même module `sld_posttraitement`,
+  `post_traiter_sld()`) : chaque SLD produit reçoit désormais le même
+  post-traitement GeoServer que le CLI — nettoyage des balises
+  propriétaires QGIS/ESRI, réécriture des références SVG, correction des
+  `WellKnownName`, réparation fidèle des hachures/tirets, injection des
+  `VendorOption` GeoServer.
+
+Ces trois migrations ont été vérifiées **octet pour octet** (manifeste
+MD5) par rapport au CLI non modifié, sur le corpus réel CNIG GPU (17
+fichiers) — voir `styleforge-core/CHANGELOG.md`, entrée 0.2.0.
+
+Jamais d'approximation silencieuse : tout avertissement ou échec reste
+affiché, par couche ou par fichier.
 
 ## Installation
 

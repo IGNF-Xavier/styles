@@ -3,7 +3,7 @@ name=Styleforge - QML vers SLD/MBStyle
 qgisMinimumVersion=3.40
 qgisMaximumVersion=3.99
 description=Convertit les styles QGIS (.qml) vers SLD 1.0.0 et Mapbox GL Style (MBStyle) pour GeoServer, via styleforge-core.
-version=0.1.0
+version=0.2.0
 author=Xavier Thauvin
 email=x.thauvin@gmail.com
 
@@ -14,23 +14,24 @@ about=Convertit le style de la couche active, de toutes les couches
     conversion du depot "styles" (jamais dependante de PyQGIS a
     l'execution : PyQGIS n'est utilise ici que par CE plugin, pour
     lire le style des couches QGIS, jamais par styleforge-core
-    lui-meme). Les pictogrammes SVG embarques en base64 dans le QML
-    (convention QGIS - la quasi-totalite du corpus CNIG reel, verifie
-    empiriquement) sont decodes et deployes dans svg/cnig/ du dossier
-    de sortie, memes conventions que le CLI. Limites connues restantes
-    de cette version : un SVG reference par un CHEMIN DE FICHIER (pas
-    embarque), et les sprites MBStyle (pictogrammes/motifs pour le
-    document Mapbox), ne sont pas resolus (meme limite, et pour la
-    meme raison, que la route POST /v1/convert de styleforge-api - voir
-    docs/limites.md section 3 du depot) ; un style qui en depend
-    produit une exception nommee explicite pour ce document precis,
-    plutot qu'un document incomplet - utiliser cnig_qml2sld_geoserver.py
-    (CLI) pour ces cas. Aucun correctif de post-traitement GeoServer
-    (hachures, VendorOption - PHASE 4 du CLI) n'est applique : ce
-    plugin couvre un usage d'apercu/iteration rapide dans QGIS, pas le
-    pipeline de production complet du CLI. Jamais d'approximation
-    silencieuse : tout avertissement ou echec est affiche, par couche
-    ou par fichier, jamais masque.
+    lui-meme). Depuis la version 0.2.0, ce plugin partage avec le CLI
+    (cnig_qml2sld_geoserver.py) trois blocs de code via styleforge-core,
+    et leve les trois limites connues de la 0.1.0 : (1) les pictogrammes
+    SVG, qu'ils soient embarques en base64 dans le QML (convention QGIS
+    - la quasi-totalite du corpus CNIG reel) OU references par un
+    CHEMIN DE FICHIER (relatif au .qml, au dossier du projet, ou
+    absolu), sont tous deux decodes/copies et deployes dans svg/cnig/
+    du dossier de sortie - un chemin qui ne mene a aucun fichier reel
+    produit un avertissement explicite nommant le chemin essaye, jamais
+    une approximation silencieuse ; (2) le MBStyle produit desormais sa
+    propre feuille de sprites Mapbox (sprite.png/@2x + index JSON) pour
+    les pictogrammes, motifs de hachure et marques simples ; (3) chaque
+    SLD recoit le meme post-traitement GeoServer que le CLI (PHASE 4 :
+    nettoyage des balises proprietaires QGIS/ESRI, reecriture des
+    references SVG, correction des WellKnownName, reparation des
+    hachures/tirets, injection des VendorOption GeoServer). Jamais
+    d'approximation silencieuse : tout avertissement ou echec est
+    affiche, par couche ou par fichier, jamais masque.
 
 tracker=https://github.com/IGNF-Xavier/styles/issues
 repository=https://github.com/IGNF-Xavier/styles

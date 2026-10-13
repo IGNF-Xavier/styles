@@ -67,15 +67,31 @@ ressources localement, pour tout style qui en dépend ; lever cette limite
 côté API est un chantier séparé (résolveur de ressources par requête, ou
 stockage d'assets côté service).
 
-L'extension QGIS (`qgis-plugin/`) couvre un sous-ensemble de ce que
-résout le CLI : les SVG **embarqués en base64** (la quasi-totalité du
-corpus CNIG réel) SONT décodés et déployés côté SLD — vérifié
-empiriquement contre une vraie installation QGIS 3.40, cela fait passer
-le taux de réussite SLD du corpus d'exemples de 4/17 à 17/17. Restent
-hors de portée du plugin, comme pour l'API : un SVG référencé par un
-chemin de fichier (pas embarqué), et tout sprite MBStyle
-(pictogramme/motif pour le document Mapbox) — même message d'échec
-explicite, même contournement (le CLI).
+L'extension QGIS (`qgis-plugin/`), **depuis sa version 0.2.0**, ne
+rencontre plus cette limite : elle partage désormais directement le code
+du CLI via `styleforge-core` (`styleforge_core.writers.
+sld_posttraitement` et `styleforge_core.sprites`, voir le CHANGELOG de
+`styleforge-core`) plutôt que d'en couvrir un sous-ensemble. Les SVG
+**embarqués en base64** (la quasi-totalité du corpus CNIG réel) ET ceux
+référencés par un **chemin de fichier** sont tous deux décodés/résolus
+et déployés côté SLD — vérifié empiriquement contre une vraie
+installation QGIS 3.40, cela fait passer le taux de réussite SLD du
+corpus d'exemples de 4/17 à 17/17 (base64 seul, 0.1.0) puis, avec la
+résolution par chemin de fichier (0.2.0), couvre aussi les styles qui
+n'en dépendaient pas dans ce corpus mais en dépendraient ailleurs. Le
+plugin génère également sa propre feuille de sprites MBStyle
+(pictogramme/motif/glyphe pour le document Mapbox) et applique le même
+post-traitement GeoServer (PHASE 4 : hachures, `VendorOption`) que le
+CLI à chaque SLD produit. Un chemin de fichier qui ne mène à aucun SVG
+réel continue de produire un avertissement explicite plutôt qu'une
+approximation silencieuse.
+
+La route `POST /v1/convert` de styleforge-api (ci-dessus) reste, elle,
+non concernée par cette levée de limite — elle n'a toujours aucun
+service de résolution de ressources externes, pour la raison exposée
+plus haut dans cette section ; le contournement actuel (utiliser le CLI,
+ou désormais le plugin QGIS pour un usage interactif) reste inchangé
+pour l'API.
 
 ## 4. `matchCase` sur `PropertyIsLike` — extension GeoServer
 

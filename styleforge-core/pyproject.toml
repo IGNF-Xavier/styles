@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "styleforge-core"
-version = "0.1.0"
+version = "0.2.0"
 description = "Lecture de styles QGIS (.qml) et écriture SLD 1.0.0 / Mapbox GL Style, sans dépendance QGIS au runtime."
 readme = "README.md"
 requires-python = ">=3.10"
