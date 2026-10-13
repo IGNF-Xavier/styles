@@ -5,7 +5,51 @@
 - Conversions SLD avec avertissement : **17**
 - MBStyle produits : **17/17**
 - MBStyle en échec : **0**
-- Pictogrammes SVG déployés : **873**
+- Pictogrammes SVG déployés : **127**
+
+## Catégories d'avertissements SLD/MBStyle et impact réel à l'affichage
+
+Les avertissements `SLD :` / `MBStyle :` de type « propriété de symbolizer NON
+écrite » proviennent d'un garde-fou générique (`_avertir_proprietes_non_gerees`)
+qui signale TOUTE propriété du pivot que l'écrivain ne consomme pas
+explicitement — sans distinguer, au moment où il est émis, si cette propriété
+compte réellement pour le rendu. Analyse par catégorie (hors doublons des deux
+écrivains, sur ce corpus de 17 fichiers) :
+
+| Catégorie | Occurrences | Impact réel à l'affichage |
+|---|---:|---|
+| `*Unit` (widthUnit, sizeUnit, radiusUnit, spacingUnit, strokeWidthUnit, outlineWidthUnit) | 1979 | **Aucun.** Ni SLD 1.0.0 ni Mapbox GL Style n'ont de champ « unité » séparé — la valeur numérique est déjà convertie en pixels en amont (voir les avertissements « Lecture QML »). Rien n'est perdu. |
+| `rotate` (toujours valeur 0.0, symbolizers cercle) | 71 | **Aucun.** Toujours 0.0 dans ce corpus (aucune rotation demandée), et un cercle n'a de toute façon pas d'orientation visible. |
+| `Opacity=1.0` non vérifiée par l'oracle QGIS (SLD) | 357 | **Quasi nul.** Vérifié que QGIS ignore ce tag (rendu pixel identique à Opacity=0.2), et 1.0 est la valeur « sans effet » — ne jouerait que pour une transparence réelle configurée, absente de ce corpus. Non vérifiable sous GeoServer faute d'oracle. |
+| `graphicStroke` avec un Icon imbriqué, non vérifié par l'oracle QGIS (SLD) | 89 | Écrit conformément à OGC SE 1.1.0, mais QGIS lui-même ne sait pas relire cet élément — à confirmer par un rendu GeoServer réel. |
+| **`color` sur IconSymbolizer (SVG paramétrique QGIS) non écrit** | 99 (SLD) + 99 (MBStyle) | **Réel et significatif** — voir le paragraphe dédié ci-dessous. |
+| `graphicFillPadding` non écrit (MBStyle) | 222 | Réel mais mineur — espacement du motif de hachure légèrement différent (motif jointif plutôt qu'avec marge). |
+| `spacing` MarkerLine non écrit (MBStyle) | 145 | Réel, modéré — l'espacement entre pictogrammes répétés le long d'une ligne est perdu côté MBStyle (le SLD le gère correctement). |
+| `perpendicularOffset` non écrit (MBStyle) | 91 | Réel, modéré — les doubles liserés décalés (ex. limites de zone PLU) se superposent au lieu d'être parallèles, en MBStyle uniquement (le SLD le gère correctement). |
+| `dashOffset` non écrit | 65 (SLD) + 65 (MBStyle) | Réel, mineur — décalage de phase du pointillé. |
+| `outlineWidth`/contour sur couche *fill* (MBStyle) | 66 | **Non réparable** dans ce format — la spec Mapbox GL Style elle-même n'a aucune propriété de contour pour une couche fill (le contour reste toujours un simple trait plein de largeur fixe). Contournement possible : une couche "line" séparée, hors périmètre actuel. |
+
+### Le cas `color` (pictogrammes SVG paramétriques)
+
+99 occurrences par écrivain (198 au total) concernent un `IconSymbolizer` dont
+le pivot porte un champ `color` : c'est la couleur de substitution que QGIS
+applique à un pictogramme SVG **paramétrique** (convention `fill="param(fill)"`,
+sans repli). Sur ce corpus, 871 des 873 SVG déployés par le CLI (backend
+`styleforge`, source complète) utilisent cette convention — un même
+pictogramme générique, retenté différemment selon la couche/règle QGIS.
+
+Aujourd'hui, ni l'écrivain SLD ni l'écrivain MBStyle ne consomment ce champ
+`color` : le SVG est référencé/déployé tel quel, sans sa teinte. Comme
+`fill="param(fill)"` est un attribut SVG invalide pour un moteur de rendu qui
+ne le résout pas, le résultat le plus probable sous GeoServer est un rendu en
+noir (la valeur de repli du groupe englobant du SVG) au lieu de la couleur
+configurée par règle — une perte visuelle réelle, pas cosmétique.
+
+GeoServer documente précisément ce cas (« Parametric SVG ») : la couleur se
+transmet en paramètres de requête ajoutés à l'`xlink:href`, par exemple
+`poi_peak.svg?fill=%23d7b09e` (voir la documentation GeoServer, Graphic
+symbology, section SVG parametric). C'est la correction en cours côté SLD.
+
 
 ## Correctifs appliqués en phase 4
 
@@ -43,12 +87,12 @@ Aucun échec.
 Chaque avertissement précise le document concerné par son préfixe : **`Lecture QML :`** (construction du pivot, commun au SLD ET au MBStyle, puisque les deux en sont dérivés), **`SLD :`** (spécifique à l'écrivain SLD) ou **`MBStyle :`** (spécifique à l'écrivain MBStyle). Par fichier, chaque catégorie présente est échantillonnée séparément (jusqu'à 6 avertissements) : une catégorie nombreuse (typiquement « Lecture QML ») ne masque donc pas les avertissements d'une autre catégorie moins nombreuse. Liste exhaustive, non tronquée : `rapport_conversion.json` (`phase2_conversion`).
 
 - `plu_inf_l.qml`
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_l.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (1.5Point -> 1.875px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_l.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (6.0Point -> 7.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_l.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (10.0Point -> 12.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_l.qml [SimpleLine].dashOffset : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_l.qml [MarkerLine] : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_l.qml [MarkerLine] [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (6.60156Point -> 8.252px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_inf_l.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (1.5Point -> 1.875px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_inf_l.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (6.0Point -> 7.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_inf_l.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (10.0Point -> 12.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_inf_l.qml [SimpleLine].dashOffset : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_inf_l.qml [MarkerLine] : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
+  - Lecture QML : examples/qml/PLU/plu_inf_l.qml [MarkerLine] [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (6.60156Point -> 8.252px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - … et 10 autre(s) avertissement(s) « Lecture QML » non affiché(s) ici — voir rapport_conversion.json.
   - SLD : Rule[0] (INF-L_16-00_001).symbolizers[0] : propriété de symbolizer 'dashOffset' (valeur 0.0) NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[0] (INF-L_16-00_001).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
@@ -65,12 +109,12 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[1] (INF-L_19-01_001).symbolizers[0] : propriété de symbolizer 'spacing' (valeur 20.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 4 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `plu_inf_p.qml`
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_p.qml : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_p.qml [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (6.60156Point -> 8.252px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_p.qml : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_p.qml [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (10.1792Point -> 12.724px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_p.qml [SimpleMarker].strokeWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (0.0Point -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_inf_p.qml : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
+  - Lecture QML : examples/qml/PLU/plu_inf_p.qml [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (6.60156Point -> 8.252px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_inf_p.qml : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
+  - Lecture QML : examples/qml/PLU/plu_inf_p.qml [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (10.1792Point -> 12.724px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_inf_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_inf_p.qml [SimpleMarker].strokeWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (0.0Point -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - SLD : Rule[0] (INF-P_16-00_001).symbolizers[0] : Opacity=1.0 écrit dans le SLD (construction OGC SE 1.0 standard) mais NON vérifié comme appliqué par l'oracle QGIS pour IconSymbolizer — testé par introspection des propriétés ET par rendu pixel réel (Opacity=0.2 vs 1.0 du même symbole produisent un pixel de sortie strictement identique), QGIS 3.40 ignore ce <Graphic><Opacity>. Peut fonctionner sous GeoServer (non vérifiable ici, aucun oracle GeoServer disponible).
   - SLD : Rule[0] (INF-P_16-00_001).symbolizers[0] : propriété de symbolizer 'color' (valeur '#d7b09e') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[0] (INF-P_16-00_001).symbolizers[0] : propriété de symbolizer 'sizeUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
@@ -86,12 +130,12 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[2] (INF-P_99-00_001).symbolizers[0] : propriété de symbolizer 'rotate' (valeur 0.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 1 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `plu_inf_s.qml`
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_s.qml [SimpleFill].outlineWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_s.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (1.0Point -> 1.250px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_s.qml [MarkerLine] : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_s.qml [MarkerLine] [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (4.83863Point -> 6.048px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_s.qml [MarkerLine] [SvgMarker].offset : unité QML 'Point' convertie en pixels via dpi=90.0 (-4.9e-16Point -> -0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_inf_s.qml [MarkerLine] [SvgMarker].offset : unité QML 'Point' convertie en pixels via dpi=90.0 (-4.0Point -> -5.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_inf_s.qml [SimpleFill].outlineWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_inf_s.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (1.0Point -> 1.250px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_inf_s.qml [MarkerLine] : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
+  - Lecture QML : examples/qml/PLU/plu_inf_s.qml [MarkerLine] [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (4.83863Point -> 6.048px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_inf_s.qml [MarkerLine] [SvgMarker].offset : unité QML 'Point' convertie en pixels via dpi=90.0 (-4.9e-16Point -> -0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_inf_s.qml [MarkerLine] [SvgMarker].offset : unité QML 'Point' convertie en pixels via dpi=90.0 (-4.0Point -> -5.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - … et 198 autre(s) avertissement(s) « Lecture QML » non affiché(s) ici — voir rapport_conversion.json.
   - SLD : Rule[0] (INF-S_02-00_001).symbolizers[0] : propriété de symbolizer 'outlineWidthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[0] (INF-S_02-00_001).symbolizers[1] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
@@ -108,12 +152,12 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[1] (INF-S_03-00_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 135 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `plu_psc_l.qml`
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_l.qml [MarkerLine] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (2.5Point -> 3.125px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_l.qml [MarkerLine] [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_l.qml [MarkerLine].spacing : unité QML 'Point' convertie en pixels via dpi=90.0 (11.0Point -> 13.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_l.qml [MarkerLine] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (2.5Point -> 3.125px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_l.qml [MarkerLine] [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_l.qml [MarkerLine].spacing : unité QML 'Point' convertie en pixels via dpi=90.0 (11.0Point -> 13.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_psc_l.qml [MarkerLine] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (2.5Point -> 3.125px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_psc_l.qml [MarkerLine] [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_psc_l.qml [MarkerLine].spacing : unité QML 'Point' convertie en pixels via dpi=90.0 (11.0Point -> 13.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_psc_l.qml [MarkerLine] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (2.5Point -> 3.125px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_psc_l.qml [MarkerLine] [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_psc_l.qml [MarkerLine].spacing : unité QML 'Point' convertie en pixels via dpi=90.0 (11.0Point -> 13.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - … et 332 autre(s) avertissement(s) « Lecture QML » non affiché(s) ici — voir rapport_conversion.json.
   - SLD : Rule[0] (PSC-L_01-00_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[1] (PSC-L_01-03_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
@@ -130,12 +174,12 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[2] (PSC-L_02-00_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 262 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `plu_psc_p.qml`
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (3.5Point -> 4.375px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_p.qml [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (3.5Point -> 4.375px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_p.qml [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (5.2201Point -> 6.525px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_p.qml [SimpleMarker].strokeWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (1.5Point -> 1.875px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_psc_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (3.5Point -> 4.375px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_psc_p.qml [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_psc_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (3.5Point -> 4.375px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_psc_p.qml [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_psc_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (5.2201Point -> 6.525px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_psc_p.qml [SimpleMarker].strokeWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (1.5Point -> 1.875px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - … et 134 autre(s) avertissement(s) « Lecture QML » non affiché(s) ici — voir rapport_conversion.json.
   - SLD : Rule[0] (PSC-P_01-00_001).symbolizers[0] : propriété de symbolizer 'radiusUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[0] (PSC-P_01-00_001).symbolizers[0] : propriété de symbolizer 'strokeWidthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
@@ -152,12 +196,12 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[1] (PSC-P_01-03_001).symbolizers[0] : propriété de symbolizer 'strokeWidthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 208 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `plu_psc_s.qml`
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_s.qml [PointPatternFill] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (7.0Point -> 8.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_s.qml [PointPatternFill] [SimpleMarker].strokeWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (0.25Point -> 0.312px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_s.qml [PointPatternFill] : distance_x/distance_y approximés via graphicFillPadding (marge autour du motif répété) — pas une correspondance exacte à l'espacement QGIS, dépend du moteur de rendu SLD/MBStyle final (non vérifié sur un rendu réel).
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_s.qml [PointPatternFill] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (10.0Point -> 12.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_s.qml [PointPatternFill] [SimpleMarker].strokeWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (0.25Point -> 0.312px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_psc_s.qml [PointPatternFill] : distance_x/distance_y approximés via graphicFillPadding (marge autour du motif répété) — pas une correspondance exacte à l'espacement QGIS, dépend du moteur de rendu SLD/MBStyle final (non vérifié sur un rendu réel).
+  - Lecture QML : examples/qml/PLU/plu_psc_s.qml [PointPatternFill] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (7.0Point -> 8.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_psc_s.qml [PointPatternFill] [SimpleMarker].strokeWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (0.25Point -> 0.312px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_psc_s.qml [PointPatternFill] : distance_x/distance_y approximés via graphicFillPadding (marge autour du motif répété) — pas une correspondance exacte à l'espacement QGIS, dépend du moteur de rendu SLD/MBStyle final (non vérifié sur un rendu réel).
+  - Lecture QML : examples/qml/PLU/plu_psc_s.qml [PointPatternFill] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (10.0Point -> 12.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_psc_s.qml [PointPatternFill] [SimpleMarker].strokeWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (0.25Point -> 0.312px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_psc_s.qml [PointPatternFill] : distance_x/distance_y approximés via graphicFillPadding (marge autour du motif répété) — pas une correspondance exacte à l'espacement QGIS, dépend du moteur de rendu SLD/MBStyle final (non vérifié sur un rendu réel).
   - … et 632 autre(s) avertissement(s) « Lecture QML » non affiché(s) ici — voir rapport_conversion.json.
   - SLD : Rule[0] (PSC-S_01-00_001).symbolizers[0] : graphicFillPadding=[9.9, 9.9, 9.9, 9.9] NON écrit — pas encore vérifié contre l'oracle pour cette itération (l'espacement du motif reste déterminé par Size seul, motif jointif par défaut).
   - SLD : Rule[0] (PSC-S_01-00_001).symbolizers[1] : graphicFillPadding=[9.9, 9.9, 9.9, 9.9] NON écrit — pas encore vérifié contre l'oracle pour cette itération (l'espacement du motif reste déterminé par Size seul, motif jointif par défaut).
@@ -174,12 +218,12 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[1] (PSC-S_01-03_001).symbolizers[1] : propriété de symbolizer 'graphicFillPadding' (valeur [9.9, 9.9, 9.9, 9.9]) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 272 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `plu_zone_urba_ge.qml`
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_zone_urba_ge.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (7.0Point -> 8.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_zone_urba_ge.qml [SimpleLine].perpendicularOffset : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_zone_urba_ge.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (2.5Point -> 3.125px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_zone_urba_ge.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (7.0Point -> 8.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_zone_urba_ge.qml [SimpleLine].perpendicularOffset : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_zone_urba_ge.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (2.5Point -> 3.125px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_zone_urba_ge.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (7.0Point -> 8.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_zone_urba_ge.qml [SimpleLine].perpendicularOffset : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_zone_urba_ge.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (2.5Point -> 3.125px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_zone_urba_ge.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (7.0Point -> 8.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_zone_urba_ge.qml [SimpleLine].perpendicularOffset : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_zone_urba_ge.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (2.5Point -> 3.125px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - … et 9 autre(s) avertissement(s) « Lecture QML » non affiché(s) ici — voir rapport_conversion.json.
   - SLD : Rule[0] (ZONE_A_001_ge).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[0] (ZONE_A_001_ge).symbolizers[1] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
@@ -196,12 +240,12 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[1] (ZONE_AUc_001_ge).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 14 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `plu_zone_urba_pe.qml`
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_zone_urba_pe.qml [SimpleFill].outlineWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_zone_urba_pe.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (0.8Point -> 1.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_zone_urba_pe.qml [SimpleFill].outlineWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_zone_urba_pe.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (0.8Point -> 1.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_zone_urba_pe.qml [SimpleFill].outlineWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PLU/QGIS/QML/plu_zone_urba_pe.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (0.8Point -> 1.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_zone_urba_pe.qml [SimpleFill].outlineWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_zone_urba_pe.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (0.8Point -> 1.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_zone_urba_pe.qml [SimpleFill].outlineWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_zone_urba_pe.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (0.8Point -> 1.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_zone_urba_pe.qml [SimpleFill].outlineWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PLU/plu_zone_urba_pe.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (0.8Point -> 1.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - … et 4 autre(s) avertissement(s) « Lecture QML » non affiché(s) ici — voir rapport_conversion.json.
   - SLD : Rule[0] (ZONE_A_001_pe).symbolizers[0] : propriété de symbolizer 'outlineWidthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[0] (ZONE_A_001_pe).symbolizers[1] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
@@ -218,12 +262,12 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[1] (ZONE_AUc_001_pe).symbolizers[0] : outlineWidthUnit='px' NON écrit — la spec Mapbox GL Style n'a AUCUNE propriété "paint" pour une couche "fill" contrôlant l'épaisseur, le pointillé, ou les extrémités du contour (paint_fill se limite à fill-antialias/fill-opacity/fill-color/fill-outline-color/fill-translate*/fill-pattern) : le contour d'une couche fill Mapbox est TOUJOURS un simple trait plein de largeur fixe. Ceci n'est pas une limite de conversion découverte en testant (comme pour l'écrivain SLD) mais un fait de la spec elle-même — contourner cela nécessiterait une couche "line" séparée, hors de la portée de cet écrivain pour cette itération.
   - … et 14 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `psmv_inf_l.qml`
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_l.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (1.5Point -> 1.875px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_l.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (6.0Point -> 7.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_l.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (10.0Point -> 12.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_l.qml [SimpleLine].dashOffset : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_l.qml [MarkerLine] : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_l.qml [MarkerLine] [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (6.60156Point -> 8.252px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_l.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (1.5Point -> 1.875px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_l.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (6.0Point -> 7.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_l.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (10.0Point -> 12.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_l.qml [SimpleLine].dashOffset : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_l.qml [MarkerLine] : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_l.qml [MarkerLine] [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (6.60156Point -> 8.252px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - … et 10 autre(s) avertissement(s) « Lecture QML » non affiché(s) ici — voir rapport_conversion.json.
   - SLD : Rule[0] (INF-L_16-00_001).symbolizers[0] : propriété de symbolizer 'dashOffset' (valeur 0.0) NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[0] (INF-L_16-00_001).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
@@ -240,12 +284,12 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[1] (INF-L_19-01_001).symbolizers[0] : propriété de symbolizer 'spacing' (valeur 20.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 4 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `psmv_inf_p.qml`
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_p.qml : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_p.qml [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (6.60156Point -> 8.252px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_p.qml : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_p.qml [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (10.1792Point -> 12.724px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_p.qml : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_p.qml [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (20.0Point -> 25.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_p.qml : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_p.qml [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (6.60156Point -> 8.252px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_p.qml : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_p.qml [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (10.1792Point -> 12.724px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_p.qml : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_p.qml [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (20.0Point -> 25.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - … et 22 autre(s) avertissement(s) « Lecture QML » non affiché(s) ici — voir rapport_conversion.json.
   - SLD : Rule[0] (INF-P_16-00_001).symbolizers[0] : Opacity=1.0 écrit dans le SLD (construction OGC SE 1.0 standard) mais NON vérifié comme appliqué par l'oracle QGIS pour IconSymbolizer — testé par introspection des propriétés ET par rendu pixel réel (Opacity=0.2 vs 1.0 du même symbole produisent un pixel de sortie strictement identique), QGIS 3.40 ignore ce <Graphic><Opacity>. Peut fonctionner sous GeoServer (non vérifiable ici, aucun oracle GeoServer disponible).
   - SLD : Rule[0] (INF-P_16-00_001).symbolizers[0] : propriété de symbolizer 'color' (valeur '#d7b09e') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
@@ -262,12 +306,12 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[2] (INF-P_70-00_001).symbolizers[0] : propriété de symbolizer 'sizeUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 24 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `psmv_inf_s.qml`
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_s.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_s.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (6.0Point -> 7.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_s.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (2.0Point -> 2.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_s.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_s.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (2.0Point -> 2.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_inf_s.qml [SimpleLine].dashOffset : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_s.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_s.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (6.0Point -> 7.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_s.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (2.0Point -> 2.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_s.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_s.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (2.0Point -> 2.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_inf_s.qml [SimpleLine].dashOffset : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - … et 237 autre(s) avertissement(s) « Lecture QML » non affiché(s) ici — voir rapport_conversion.json.
   - SLD : Rule[0] (INF-S_01-00_001).symbolizers[0] : propriété de symbolizer 'dashOffset' (valeur 0.0) NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[0] (INF-S_01-00_001).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
@@ -284,12 +328,12 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[1] (INF-S_02-00_001) : 2 symbolizers empilés en autant de couches Mapbox distinctes (id INF-S_02-00_001-0..1), même filtre et source-layer, dans l'ORDRE du pivot — coexistence confirmée contre l'oracle QGIS (QgsMapBoxGlStyleConverter), voir le commentaire précédant _ecrire_layers ; l'ordre de superposition visuel exact n'est, lui, pas re-vérifié indépendamment — à confirmer par un rendu GeoServer réel si cet ordre importe.
   - … et 160 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `psmv_psc_l.qml`
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_l.qml [MarkerLine] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (2.5Point -> 3.125px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_l.qml [MarkerLine] [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_l.qml [MarkerLine].spacing : unité QML 'Point' convertie en pixels via dpi=90.0 (11.0Point -> 13.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_l.qml [MarkerLine] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (2.5Point -> 3.125px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_l.qml [MarkerLine] [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_l.qml [MarkerLine].spacing : unité QML 'Point' convertie en pixels via dpi=90.0 (11.0Point -> 13.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_l.qml [MarkerLine] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (2.5Point -> 3.125px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_l.qml [MarkerLine] [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_l.qml [MarkerLine].spacing : unité QML 'Point' convertie en pixels via dpi=90.0 (11.0Point -> 13.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_l.qml [MarkerLine] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (2.5Point -> 3.125px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_l.qml [MarkerLine] [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_l.qml [MarkerLine].spacing : unité QML 'Point' convertie en pixels via dpi=90.0 (11.0Point -> 13.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - … et 346 autre(s) avertissement(s) « Lecture QML » non affiché(s) ici — voir rapport_conversion.json.
   - SLD : Rule[0] (PSC-L_01-00_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[1] (PSC-L_01-03_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
@@ -306,12 +350,12 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[2] (PSC-L_02-00_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 271 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `psmv_psc_p.qml`
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (3.5Point -> 4.375px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_p.qml [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (3.5Point -> 4.375px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_p.qml [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (5.2201Point -> 6.525px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_p.qml [SimpleMarker].strokeWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (1.5Point -> 1.875px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (3.5Point -> 4.375px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_p.qml [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (3.5Point -> 4.375px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_p.qml [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (5.2201Point -> 6.525px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_p.qml [SimpleMarker].strokeWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (1.5Point -> 1.875px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - … et 144 autre(s) avertissement(s) « Lecture QML » non affiché(s) ici — voir rapport_conversion.json.
   - SLD : Rule[0] (PSC-P_01-00_001).symbolizers[0] : propriété de symbolizer 'radiusUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[0] (PSC-P_01-00_001).symbolizers[0] : propriété de symbolizer 'strokeWidthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
@@ -328,12 +372,12 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[1] (PSC-P_01-03_001).symbolizers[0] : propriété de symbolizer 'strokeWidthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 211 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `psmv_psc_s.qml`
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_s.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (0.8Point -> 1.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_s.qml [PointPatternFill] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (5.0Point -> 6.250px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_s.qml [PointPatternFill] [SimpleMarker].strokeWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (0.4Point -> 0.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_s.qml [PointPatternFill] : distance_x/distance_y approximés via graphicFillPadding (marge autour du motif répété) — pas une correspondance exacte à l'espacement QGIS, dépend du moteur de rendu SLD/MBStyle final (non vérifié sur un rendu réel).
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_s.qml [PointPatternFill] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (2.5Point -> 3.125px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_psc_s.qml [PointPatternFill] [SimpleMarker].strokeWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (0.0Point -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_s.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (0.8Point -> 1.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_s.qml [PointPatternFill] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (5.0Point -> 6.250px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_s.qml [PointPatternFill] [SimpleMarker].strokeWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (0.4Point -> 0.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_s.qml [PointPatternFill] : distance_x/distance_y approximés via graphicFillPadding (marge autour du motif répété) — pas une correspondance exacte à l'espacement QGIS, dépend du moteur de rendu SLD/MBStyle final (non vérifié sur un rendu réel).
+  - Lecture QML : examples/qml/PSMV/psmv_psc_s.qml [PointPatternFill] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (2.5Point -> 3.125px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_psc_s.qml [PointPatternFill] [SimpleMarker].strokeWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (0.0Point -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - … et 645 autre(s) avertissement(s) « Lecture QML » non affiché(s) ici — voir rapport_conversion.json.
   - SLD : Rule[0] (PSC-S_01-00_001).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[0] (PSC-S_01-00_001).symbolizers[1] : graphicFillPadding=[4.95, 4.95, 4.95, 4.95] NON écrit — pas encore vérifié contre l'oracle pour cette itération (l'espacement du motif reste déterminé par Size seul, motif jointif par défaut).
@@ -350,21 +394,21 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[1] (PSC-S_01-03_001).symbolizers[1] : propriété de symbolizer 'graphicFillPadding' (valeur [4.95, 2.475, 4.95, 2.475]) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 298 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `psmv_zone_urba.qml`
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_zone_urba.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_zone_urba.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_zone_urba.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (2.0Point -> 2.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/PSMV/QGIS/QML/psmv_zone_urba.qml [SimpleLine].dashOffset : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_zone_urba.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_zone_urba.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_zone_urba.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (2.0Point -> 2.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/PSMV/psmv_zone_urba.qml [SimpleLine].dashOffset : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - SLD : Rule[0] (ZONE_U_001).symbolizers[0] : propriété de symbolizer 'dashOffset' (valeur 0.0) NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[0] (ZONE_U_001).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (ZONE_U_001).symbolizers[0] : propriété de symbolizer 'dashOffset' (valeur 0.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (ZONE_U_001).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
 - `ASSIETTE_SUP_S.qml`
-  - Lecture QML : .cache_cnig/SUP/QGIS/QML/ASSIETTE_SUP_S.qml : idiome QGIS string_to_array(champ,'-')[0] = 'a1' reconnu et traduit en LIKE préfixe (insensible à la casse) 'champ LIKE a1-%' — équivalent au comportement, pas une reconstruction d'un opérateur tableau générique (le pivot n'en a pas, voir _reconnaitre_idiome_prefixe_tableau).
-  - Lecture QML : .cache_cnig/SUP/QGIS/QML/ASSIETTE_SUP_S.qml [PointPatternFill] [FontMarker] : traduit en wellKnownName 'ttf://Wingdings#0x00f1' — construction correcte (le point de code vient de chr, pas deviné), mais la convention exacte de padding hexadécimal attendue par un moteur SLD donné n'a pas été vérifiée sur un rendu réel (aucun accès GeoServer depuis cet environnement) ; radius = size/2 par analogie avec les autres marqueurs, alors que la sémantique exacte de 'size' pour un glyphe de police (FontMarker n'a pas de scale_method, à la différence de SimpleMarker) n'est pas confirmée non plus.
-  - Lecture QML : .cache_cnig/SUP/QGIS/QML/ASSIETTE_SUP_S.qml [PointPatternFill] : distance_x/distance_y approximés via graphicFillPadding (marge autour du motif répété) — pas une correspondance exacte à l'espacement QGIS, dépend du moteur de rendu SLD/MBStyle final (non vérifié sur un rendu réel).
-  - Lecture QML : .cache_cnig/SUP/QGIS/QML/ASSIETTE_SUP_S.qml [SimpleFill].outlineWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (0.5Point -> 0.625px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/SUP/QGIS/QML/ASSIETTE_SUP_S.qml : idiome QGIS string_to_array(champ,'-')[0] = 'a2' reconnu et traduit en LIKE préfixe (insensible à la casse) 'champ LIKE a2-%' — équivalent au comportement, pas une reconstruction d'un opérateur tableau générique (le pivot n'en a pas, voir _reconnaitre_idiome_prefixe_tableau).
-  - Lecture QML : .cache_cnig/SUP/QGIS/QML/ASSIETTE_SUP_S.qml : idiome QGIS string_to_array(champ,'-')[0] = 'a3' reconnu et traduit en LIKE préfixe (insensible à la casse) 'champ LIKE a3-%' — équivalent au comportement, pas une reconstruction d'un opérateur tableau générique (le pivot n'en a pas, voir _reconnaitre_idiome_prefixe_tableau).
+  - Lecture QML : examples/qml/SUP/ASSIETTE_SUP_S.qml : idiome QGIS string_to_array(champ,'-')[0] = 'a1' reconnu et traduit en LIKE préfixe (insensible à la casse) 'champ LIKE a1-%' — équivalent au comportement, pas une reconstruction d'un opérateur tableau générique (le pivot n'en a pas, voir _reconnaitre_idiome_prefixe_tableau).
+  - Lecture QML : examples/qml/SUP/ASSIETTE_SUP_S.qml [PointPatternFill] [FontMarker] : traduit en wellKnownName 'ttf://Wingdings#0x00f1' — construction correcte (le point de code vient de chr, pas deviné), mais la convention exacte de padding hexadécimal attendue par un moteur SLD donné n'a pas été vérifiée sur un rendu réel (aucun accès GeoServer depuis cet environnement) ; radius = size/2 par analogie avec les autres marqueurs, alors que la sémantique exacte de 'size' pour un glyphe de police (FontMarker n'a pas de scale_method, à la différence de SimpleMarker) n'est pas confirmée non plus.
+  - Lecture QML : examples/qml/SUP/ASSIETTE_SUP_S.qml [PointPatternFill] : distance_x/distance_y approximés via graphicFillPadding (marge autour du motif répété) — pas une correspondance exacte à l'espacement QGIS, dépend du moteur de rendu SLD/MBStyle final (non vérifié sur un rendu réel).
+  - Lecture QML : examples/qml/SUP/ASSIETTE_SUP_S.qml [SimpleFill].outlineWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (0.5Point -> 0.625px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/SUP/ASSIETTE_SUP_S.qml : idiome QGIS string_to_array(champ,'-')[0] = 'a2' reconnu et traduit en LIKE préfixe (insensible à la casse) 'champ LIKE a2-%' — équivalent au comportement, pas une reconstruction d'un opérateur tableau générique (le pivot n'en a pas, voir _reconnaitre_idiome_prefixe_tableau).
+  - Lecture QML : examples/qml/SUP/ASSIETTE_SUP_S.qml : idiome QGIS string_to_array(champ,'-')[0] = 'a3' reconnu et traduit en LIKE préfixe (insensible à la casse) 'champ LIKE a3-%' — équivalent au comportement, pas une reconstruction d'un opérateur tableau générique (le pivot n'en a pas, voir _reconnaitre_idiome_prefixe_tableau).
   - … et 109 autre(s) avertissement(s) « Lecture QML » non affiché(s) ici — voir rapport_conversion.json.
   - SLD : Rule[0] (Protection des bois et forêts à Mayotte - A1).symbolizers[0] : graphicFillPadding=[7.5, 7.5, 7.5, 7.5] NON écrit — pas encore vérifié contre l'oracle pour cette itération (l'espacement du motif reste déterminé par Size seul, motif jointif par défaut).
   - SLD : Rule[0] (Protection des bois et forêts à Mayotte - A1).symbolizers[1] : propriété de symbolizer 'outlineWidthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
@@ -381,12 +425,12 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[2] (Entretien des canaux d'irigation - A3).symbolizers[0] : propriété de symbolizer 'dashOffset' (valeur 0.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 153 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `sup_ass.qml`
-  - Lecture QML : .cache_cnig/SUP/QGIS/QML/sup_ass.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (0.5Point -> 0.625px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/SUP/QGIS/QML/sup_ass.qml [PointPatternFill] : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
-  - Lecture QML : .cache_cnig/SUP/QGIS/QML/sup_ass.qml [PointPatternFill] [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (7.06992Point -> 8.837px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/SUP/QGIS/QML/sup_ass.qml [PointPatternFill] : distance_x/distance_y approximés via graphicFillPadding (marge autour du motif répété) — pas une correspondance exacte à l'espacement QGIS, dépend du moteur de rendu SLD/MBStyle final (non vérifié sur un rendu réel).
-  - Lecture QML : .cache_cnig/SUP/QGIS/QML/sup_ass.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (1.2Point -> 1.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
-  - Lecture QML : .cache_cnig/SUP/QGIS/QML/sup_ass.qml [PointPatternFill] : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
+  - Lecture QML : examples/qml/SUP/sup_ass.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (0.5Point -> 0.625px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/SUP/sup_ass.qml [PointPatternFill] : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
+  - Lecture QML : examples/qml/SUP/sup_ass.qml [PointPatternFill] [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (7.06992Point -> 8.837px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/SUP/sup_ass.qml [PointPatternFill] : distance_x/distance_y approximés via graphicFillPadding (marge autour du motif répété) — pas une correspondance exacte à l'espacement QGIS, dépend du moteur de rendu SLD/MBStyle final (non vérifié sur un rendu réel).
+  - Lecture QML : examples/qml/SUP/sup_ass.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (1.2Point -> 1.500px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
+  - Lecture QML : examples/qml/SUP/sup_ass.qml [PointPatternFill] : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
   - … et 269 autre(s) avertissement(s) « Lecture QML » non affiché(s) ici — voir rapport_conversion.json.
   - SLD : Rule[0] (A1|gen|ass).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[0] (A1|gen|ass).symbolizers[1].graphicFill : Opacity=1.0 écrit dans le SLD (construction OGC SE 1.0 standard) mais NON vérifié comme appliqué par l'oracle QGIS pour IconSymbolizer — testé par introspection des propriétés ET par rendu pixel réel (Opacity=0.2 vs 1.0 du même symbole produisent un pixel de sortie strictement identique), QGIS 3.40 ignore ce <Graphic><Opacity>. Peut fonctionner sous GeoServer (non vérifiable ici, aucun oracle GeoServer disponible).
