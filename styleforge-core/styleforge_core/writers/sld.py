@@ -104,6 +104,7 @@ from __future__ import annotations
 import re
 import xml.etree.ElementTree as ET
 from typing import Any, Callable
+from urllib.parse import quote
 from xml.dom import minidom
 
 NS_SLD = "http://www.opengis.net/sld"
@@ -529,6 +530,38 @@ def _ecrire_line(
 _FORMATS_ICON_ECRITS = {"image/svg+xml"}
 
 
+def _href_svg_parametrique(href: str, color: str | None) -> str:
+    """Ajoute, le cas échéant, le paramètre de requête 'fill' documenté par
+    GeoServer pour les SVG PARAMÉTRIQUES (convention QGIS/GeoServer partagée
+    'fill="param(fill)"' dans le SVG lui-même) — voir la documentation
+    GeoServer, Graphic symbology / "Parametric SVG"
+    (https://docs.geoserver.org/main/en/user/styling/sld/extensions/pointsymbols.html) :
+    la couleur se transmet en paramètre de requête ajouté à xlink:href, ex.
+    'poi_peak.svg?fill=%23ff0000' (le '#' est url-encodé en '%23').
+
+    'color' vient du pivot IconSymbolizer.color (lecteur QML, SvgMarker
+    uniquement — voir styleforge_core.readers.qml._lire_icone_image,
+    avec_couleur=True) : la couleur de substitution que QGIS applique à un
+    pictogramme SVG générique au moment du rendu. Jusqu'ici ce champ était
+    silencieusement abandonné par cet écrivain (ni SLD ni MBStyle ne le
+    consommaient) : le SVG déployé reste le même quelle que soit la couche,
+    mais son attribut 'fill="param(fill)"' (sans repli) est syntaxiquement
+    invalide pour un moteur de rendu qui ne le résout pas — GeoServer retombe
+    alors très probablement sur du noir plutôt que la teinte configurée dans
+    QGIS, une perte visuelle réelle, pas cosmétique (voir l'analyse du
+    2026-10-13, rapport_conversion.md du corpus CNIG : 871 des 873 SVG
+    déployés par le CLI utilisent cette convention paramétrique).
+
+    Ne s'applique qu'à un href SANS requête préexistante (cas de ce module,
+    qui ne produit que des chemins relatifs 'svg/cnig/<nom>.svg' ou des hrefs
+    déjà résolus par l'appelant) : si un '?' est déjà présent, le paramètre
+    est ajouté avec '&' plutôt que d'écraser une requête existante."""
+    if not color:
+        return href
+    separateur = "&" if "?" in href else "?"
+    return f"{href}{separateur}fill={quote(color, safe='')}"
+
+
 def _construire_graphic_icon(
     sym: dict, avertissements: list[str], contexte: str,
     *, resoudre_image_embarquee: Callable[[str], str | None] | None = None,
@@ -583,10 +616,25 @@ def _construire_graphic_icon(
             f"(syntaxe identique, fichier valide) échoue silencieusement au chargement — voir "
             f"le registre _FORMATS_ICON_ECRITS dans le module."
         )
+    couleur = sym.get("color")
+    if couleur is not None and not isinstance(couleur, str):
+        # Jamais produit par le lecteur QML actuel (toujours un hex litteral
+        # via couleur_qgis_vers_hex — voir readers.qml._lire_icone_image),
+        # mais ce module ne doit pas construire un href invalide pour un cas
+        # pivot inattendu : avertissement explicite plutot qu'un crash ou une
+        # substitution silencieusement ignoree.
+        avertissements.append(
+            f"{contexte} : IconSymbolizer.color={couleur!r} n'est pas une chaîne "
+            f"hexadécimale littérale — paramètre SVG 'fill' (GeoServer, Parametric "
+            f"SVG) NON ajouté à l'href, le pictogramme restera dans sa couleur "
+            f"par défaut du fichier SVG."
+        )
+        couleur = None
     graphic = ET.Element(_q_sld("Graphic"))
     ext = ET.SubElement(graphic, _q_sld("ExternalGraphic"))
     resource = ET.SubElement(ext, _q_sld("OnlineResource"))
-    resource.set(f"{{{NS_XLINK}}}href", _valeur_symbolizer_litterale(image, contexte, "image"))
+    href = _href_svg_parametrique(image, couleur)
+    resource.set(f"{{{NS_XLINK}}}href", _valeur_symbolizer_litterale(href, contexte, "image"))
     fmt_el = ET.SubElement(ext, _q_sld("Format"))
     fmt_el.text = fmt
     if sym.get("opacity") is not None:
@@ -617,7 +665,9 @@ def _ecrire_icon(
         sym, avertissements, contexte, resoudre_image_embarquee=resoudre_image_embarquee,
     ))
     _avertir_proprietes_non_gerees(
-        sym, {"image", "format", "opacity", "size", "rotate", "offset"}, avertissements, contexte,
+        sym,
+        {"image", "format", "opacity", "size", "rotate", "offset", "color"},
+        avertissements, contexte,
     )
     return point
 

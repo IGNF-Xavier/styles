@@ -469,6 +469,113 @@ def test_line_graphicstroke_ecrit_line_pattern_via_resolveur():
         assert layer["paint"]["line-width"] == 2
 
 
+def test_line_perpendicularoffset_ecrit_line_offset_signe_inverse():
+    """perpendicularOffset (pivot, convention SLD/QGIS "offset direct") ->
+    line-offset Mapbox, avec INVERSION DE SIGNE — vérifié contre l'oracle QGIS
+    par DEUX round-trips indépendants via le même moteur de lecture :
+    SLD <se:PerpendicularOffset>5</se:PerpendicularOffset> charge en
+    offset()==+5 (QgsVectorLayer.loadSldStyle()), alors qu'un style Mapbox
+    {"line-offset": 5} charge en offset()==-5 (QgsMapBoxGlStyleConverter) —
+    même grandeur, signe opposé selon le format source. Le pivot suit la
+    convention SLD (perpendicularOffset=3.75 écrit tel quel côté SLD), donc
+    line-offset doit être le pivot NÉGÉ."""
+    doc = _doc([_rule("r1", [{"kind": "Line", "color": "#000000", "perpendicularOffset": 3.75}])])
+    assert doc["layers"][0]["paint"]["line-offset"] == -3.75
+
+
+def test_line_perpendicularoffset_zero_ecrit_zero():
+    doc = _doc([_rule("r1", [{"kind": "Line", "color": "#000000", "perpendicularOffset": 0}])])
+    assert doc["layers"][0]["paint"]["line-offset"] == 0
+
+
+def test_line_sans_perpendicularoffset_omet_line_offset():
+    doc = _doc([_rule("r1", [{"kind": "Line", "color": "#000000"}])])
+    assert "line-offset" not in doc["layers"][0]["paint"]
+
+
+def test_line_perpendicularoffset_non_numerique_leve_exception():
+    try:
+        _doc([_rule("r1", [{"kind": "Line", "color": "#000000", "perpendicularOffset": "3.75"}])])
+        assert False, "devait lever ExpressionPivotNonEcrite"
+    except ExpressionPivotNonEcrite as e:
+        assert "perpendicularOffset" in str(e)
+
+
+def test_line_graphicstroke_avec_spacing_ecrit_couche_symbol_placement_line():
+    """MarkerLine/HashLine (graphicStroke + spacing du pivot) : Mapbox n'a
+    AUCUNE notion d'espacement pour une couche "line" (line-pattern tuile en
+    continu) — VÉRIFIÉ CONTRE L'ORACLE QGIS (QgsMapBoxGlStyleConverter) que la
+    seule construction qui porte 'spacing' est une couche "symbol" avec
+    symbol-placement:"line" + symbol-spacing, round-trip confirmé vers
+    QgsMarkerLineSymbolLayer(interval==16, rotate==1) avec icon-rotation-
+    alignment="map". Ce test confirme le type de couche ET les champs clés."""
+    doc = json.loads(ecrire_mbstyle(
+        _style([_rule("r1", [{
+            "kind": "Line",
+            "graphicStroke": {"kind": "Icon", "image": "svg/cnig/x.svg", "format": "image/svg+xml"},
+            "spacing": 16,
+        }])]),
+        resoudre_sprite=lambda jeton: "motif_x",
+        **SRC,
+    ))
+    layer = doc["layers"][0]
+    assert layer["type"] == "symbol"
+    assert layer["layout"]["symbol-placement"] == "line"
+    assert layer["layout"]["symbol-spacing"] == 16
+    assert layer["layout"]["icon-image"] == "motif_x"
+    assert layer["layout"]["icon-rotation-alignment"] == "map"
+    assert layer["layout"]["icon-allow-overlap"] is True
+    assert layer["layout"]["icon-ignore-placement"] is True
+
+
+def test_line_graphicstroke_sans_spacing_reste_couche_line():
+    """Non-régression explicite : SANS 'spacing' renseigné (motif continu,
+    ex. RasterLine), le symbolizer continue de passer par _ecrire_line_paint
+    -> couche "line" + line-pattern, inchangé par l'ajout du cas symbol."""
+    doc = json.loads(ecrire_mbstyle(
+        _style([_rule("r1", [{
+            "kind": "Line",
+            "graphicStroke": {"kind": "Mark", "wellKnownName": "shape://horline"},
+        }])]),
+        resoudre_sprite=lambda jeton: "motif_x",
+        **SRC,
+    ))
+    layer = doc["layers"][0]
+    assert layer["type"] == "line"
+    assert layer["paint"]["line-pattern"] == "motif_x"
+
+
+def test_line_graphicstroke_spacing_non_numerique_leve_exception():
+    try:
+        json.loads(ecrire_mbstyle(
+            _style([_rule("r1", [{
+                "kind": "Line",
+                "graphicStroke": {"kind": "Icon", "image": "svg/cnig/x.svg", "format": "image/svg+xml"},
+                "spacing": "16",
+            }])]),
+            resoudre_sprite=lambda jeton: "motif_x",
+            **SRC,
+        ))
+        assert False, "devait lever ExpressionPivotNonEcrite"
+    except ExpressionPivotNonEcrite as e:
+        assert "spacing" in str(e)
+
+
+def test_line_spacing_sans_resolveur_leve_exception():
+    try:
+        json.loads(ecrire_mbstyle(
+            _style([_rule("r1", [{
+                "kind": "Line",
+                "graphicStroke": {"kind": "Icon", "image": "svg/cnig/x.svg", "format": "image/svg+xml"},
+                "spacing": 16,
+            }])]),
+            **SRC,
+        ))
+        assert False, "devait lever ExpressionPivotNonEcrite"
+    except ExpressionPivotNonEcrite as e:
+        assert "resoudre_sprite" in str(e)
+
+
 # --------------------------------------------------------------------------- MarkSymbolizer(circle) -> couche "circle"
 def test_mark_circle_paint_complet():
     doc = _doc([_rule("r1", [{
@@ -688,6 +795,45 @@ def test_icon_offset_non_ecrit_avec_avertissement():
     layer = doc["layers"][0]
     assert "icon-offset" not in layer.get("layout", {})
     assert any("offset" in a and "icon-offset" in a for a in avertissements)
+
+
+def test_icon_color_ecrit_icon_color_avec_avertissement_non_oracle():
+    """IconSymbolizer.color -> icon-color (paint) : VOIR sprites.py pour le
+    mécanisme SDF correspondant. Ce point n'est PAS vérifié contre l'oracle
+    QGIS habituel (QgsMapBoxGlStyleConverter n'implémente ni icon-color ni le
+    drapeau 'sdf' — confirmé en lisant son code source C++, versions 3.28 à
+    3.40), ce qui doit être dit EXPLICITEMENT dans l'avertissement produit,
+    pas seulement dans un commentaire de code."""
+    avertissements: list[str] = []
+    doc = json.loads(ecrire_mbstyle(
+        _style([_rule("r1", [{"kind": "Icon", "image": "picto.svg", "color": "#d7b09e"}])]),
+        resoudre_sprite=lambda image: "sprite_picto",
+        avertissements=avertissements, **SRC,
+    ))
+    layer = doc["layers"][0]
+    assert layer["paint"]["icon-color"] == "#d7b09e"
+    assert any("icon-color" in a and "oracle" in a.lower() for a in avertissements)
+
+
+def test_icon_sans_color_omet_icon_color():
+    doc = json.loads(ecrire_mbstyle(
+        _style([_rule("r1", [{"kind": "Icon", "image": "picto.svg"}])]),
+        resoudre_sprite=lambda image: "sprite_picto",
+        **SRC,
+    ))
+    assert "icon-color" not in doc["layers"][0]["paint"]
+
+
+def test_icon_color_non_hex_leve_exception():
+    try:
+        json.loads(ecrire_mbstyle(
+            _style([_rule("r1", [{"kind": "Icon", "image": "picto.svg", "color": "rouge"}])]),
+            resoudre_sprite=lambda image: "sprite_picto",
+            **SRC,
+        ))
+        assert False, "devait lever ExpressionPivotNonEcrite"
+    except ExpressionPivotNonEcrite:
+        pass
 
 
 def test_symbolizer_kind_inconnu_leve_exception_nommee():

@@ -62,12 +62,61 @@ avant que PHASE 5 construise les sprites).
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
 
 from styleforge_core.writers.sld_posttraitement import safe_stem
+
+#: Reconnaît toute occurrence restante de la convention GeoServer "Parametric
+#: SVG" ('param(nom)', avec ou sans valeur de repli séparée par un espace,
+#: ex. 'param(outline-width) 0') — utilisé par _neutraliser_svg_parametrique
+#: UNIQUEMENT pour neutraliser ce qui reste APRÈS le remplacement explicite
+#: de 'fill="param(fill)"' (le seul cas qui pilote réellement le masque
+#: blanc). Confirmé exhaustif sur le corpus CNIG (examples/qml) : les seules
+#: variantes observées sont fill, fill-opacity, stroke(=outline),
+#: stroke-opacity(=outline-opacity, repli "1") et stroke-width(=outline-
+#: width, repli "0", parfois sans repli).
+_MOTIF_FALLBACK_PARAM = re.compile(r"param\([\w-]+\)(?:\s+([^\"]+))?")
+
+
+def _neutraliser_svg_parametrique(contenu: str) -> str:
+    """Transforme un SVG « paramétrique » QGIS/GeoServer (voir
+    SpriteRegistry._MOTIF_SVG_PARAMETRIQUE) en un masque opaque BLANC
+    exploitable comme sprite Mapbox GL "sdf" (teinté au rendu par
+    icon-color) :
+
+      1. fill="param(fill)" (forme EXACTE, sans repli — la seule confirmée
+         pour cet attribut) -> fill="#ffffff" : c'est elle qui pilote la
+         silhouette du masque, peu importe la couleur réellement voulue
+         (transmise séparément via icon-color, pas figée dans le sprite).
+      2. fill-opacity="param(fill-opacity)" (sans repli observé) -> "1" :
+         le masque doit rester PLEINEMENT opaque pour que icon-color le
+         teinte uniformément (l'opacité réelle, si besoin, reste portée par
+         icon-opacity côté MBStyle, indépendamment du sprite).
+      3. stroke="param(outline)" (sans repli observé) -> "none" : le
+         contour n'est PAS reproduit dans le masque — cohérent avec le
+         correctif SLD (task #46 de ce projet), qui ne transmet lui non
+         plus que 'fill' via le mécanisme GeoServer Parametric SVG, jamais
+         'outline', et avec stroke-width replié à 0 dans l'écrasante
+         majorité des occurrences du corpus (contour invisible par défaut).
+      4. Tout 'param(nom) repli' restant (stroke-opacity, stroke-width, ou
+         toute variante future AVEC repli documenté) -> repli pris
+         LITTÉRALEMENT : exactement la sémantique GeoServer "Parametric
+         SVG" (paramètre non fourni -> valeur de repli), pas une
+         approximation inventée ici.
+
+    Portée délibérément bornée aux variantes confirmées sur le corpus CNIG
+    (examples/qml) : fill, fill-opacity, stroke, stroke-opacity,
+    stroke-width — voir _MOTIF_FALLBACK_PARAM."""
+    contenu = contenu.replace(SpriteRegistry._MOTIF_SVG_PARAMETRIQUE, 'fill="#ffffff"')
+    contenu = contenu.replace('fill-opacity="param(fill-opacity)"', 'fill-opacity="1"')
+    contenu = contenu.replace('stroke="param(outline)"', 'stroke="none"')
+    contenu = _MOTIF_FALLBACK_PARAM.sub(lambda m: m.group(1) or "0", contenu)
+    return contenu
+
 
 class SpriteRegistry:
     """
@@ -81,16 +130,42 @@ class SpriteRegistry:
         pour servir de fill-pattern.
     """
 
+    #: Convention QGIS/GeoServer des SVG dits « paramétriques » : l'attribut
+    #: fill d'un (ou plusieurs) élément du SVG vaut LITTÉRALEMENT
+    #: 'fill="param(fill)"' (sans repli), QGIS substituant la vraie couleur à
+    #: l'affichage depuis IconSymbolizer.color (cf. styleforge_core/readers/
+    #: qml.py, _lire_icone_image(avec_couleur=True) pour SvgMarker) — MÊME
+    #: convention et MÊME constat chiffré (871 SVG sur 873 dans le dépôt CNIG)
+    #: que documenté dans styleforge_core/writers/sld.py pour le correctif
+    #: SLD (paramètre de requête 'fill' sur xlink:href, mécanisme GeoServer
+    #: "Parametric SVG"). Côté MBStyle, aucun moteur de rendu de tuiles
+    #: vectorielles ne sait interpréter 'param(fill)' à l'affichage : la
+    #: seule façon de transmettre une couleur par-couche (et non figée dans
+    #: le fichier source) est le mécanisme Mapbox GL "SDF" (sprite enregistré
+    #: comme masque alpha, teinté au rendu par la propriété paint icon-color)
+    #: — voir register_svg/_draw_svg ci-dessous et
+    #: styleforge_core.writers.mbstyle._ecrire_icon_paint.
+    _MOTIF_SVG_PARAMETRIQUE = 'fill="param(fill)"'
+
     def __init__(self, size: int = 64) -> None:
         self.size = size
         self.svg: Dict[str, Path] = {}          # nom -> fichier SVG
+        self.svg_sdf: Dict[str, bool] = {}      # nom -> SVG paramétrique (sprite SDF)
         self.shapes: Dict[str, Dict[str, Any]] = {}   # nom -> description
         self.glyphs: Dict[str, Dict[str, Any]] = {}   # nom -> description
         self.warnings: List[str] = []
 
     # ------------------------------------------------------------- inscription
     def register_svg(self, reference: str, svg_dir: Path) -> Optional[str]:
-        """Inscrit un pictogramme SVG et retourne son nom de sprite."""
+        """Inscrit un pictogramme SVG et retourne son nom de sprite.
+
+        Détecte, au CONTENU du fichier (pas sur une liste figée de noms), la
+        convention SVG paramétrique 'fill="param(fill)"' (voir
+        _MOTIF_SVG_PARAMETRIQUE) : si elle est présente, le sprite est marqué
+        SDF (self.svg_sdf[name] = True) et sera rendu comme un masque alpha
+        par _draw_svg, pour être teinté par-couche via icon-color côté
+        MBStyle — AUTOMATIQUE et GÉNÉRAL, s'applique à tout futur QML/SVG
+        suivant la même convention, pas seulement au corpus CNIG déjà vu."""
         if not reference:
             return None
         base = Path(str(reference).replace("\\", "/")).name
@@ -104,6 +179,11 @@ class SpriteRegistry:
                     f"Pictogramme absent pour le sprite : {base}")
                 return None
             self.svg[name] = candidate
+            try:
+                contenu = candidate.read_text(encoding="utf-8", errors="replace")
+            except OSError:
+                contenu = ""
+            self.svg_sdf[name] = self._MOTIF_SVG_PARAMETRIQUE in contenu
         return name
 
     #: Marques simples dessinées centrées dans la vignette, par opposition aux
@@ -353,9 +433,11 @@ class SpriteRegistry:
                 for position, name in enumerate(names):
                     x = (position % columns) * tile
                     y = (position // columns) * tile
+                    est_sdf = False
                     if name in self.svg:
-                        self._draw_svg(painter, QSvgRenderer, QRectF,
-                                       self.svg[name], x, y, tile)
+                        est_sdf = self.svg_sdf.get(name, False)
+                        self._draw_svg(painter, QSvgRenderer, core, QRectF,
+                                       self.svg[name], x, y, tile, sdf=est_sdf)
                     elif name in self.shapes:
                         self._draw_shape(painter, gui, core,
                                          self.shapes[name], x, y, tile, ratio)
@@ -365,6 +447,21 @@ class SpriteRegistry:
                                               ratio)
                     index[name] = {"x": x, "y": y, "width": tile,
                                    "height": tile, "pixelRatio": ratio}
+                    if est_sdf:
+                        # Indicateur Mapbox GL Style ("sdf": true dans
+                        # sprite.json) : un sprite marqué ainsi est un masque
+                        # alpha teinté au rendu par icon-color (paint), voir
+                        # _draw_svg et styleforge_core.writers.mbstyle.
+                        # _ecrire_icon_paint. NON vérifié contre l'oracle
+                        # QGIS habituel de ce module (QgsMapBoxGlStyleConverter
+                        # n'implémente ni icon-color ni "sdf" — confirmé en
+                        # lisant son code source C++, versions 3.28 à 3.40 —
+                        # ce n'est donc pas une limite de conception de cet
+                        # écrivain mais de l'oracle lui-même), mais repose sur
+                        # la spec Mapbox GL Style officielle et stable, prise
+                        # en charge nativement par Mapbox GL JS/MapLibre GL JS
+                        # et le rendu vecteur-tuiles de GeoServer.
+                        index[name]["sdf"] = True
                     if pump_ui is not None:
                         pump_ui()
             finally:
@@ -379,9 +476,35 @@ class SpriteRegistry:
         return report
 
     @staticmethod
-    def _draw_svg(painter, QSvgRenderer, QRectF, path: Path,
-                  x: int, y: int, tile: int) -> None:
-        renderer = QSvgRenderer(str(path))
+    def _draw_svg(painter, QSvgRenderer, core, QRectF, path: Path,
+                  x: int, y: int, tile: int, *, sdf: bool = False) -> None:
+        """Dessine un pictogramme SVG dans la vignette.
+
+        Cas normal (sdf=False) : rendu TEL QUEL, inchangé par rapport au
+        comportement préexistant.
+
+        Cas SDF (sdf=True, SVG paramétrique 'fill="param(fill)"' — voir
+        _MOTIF_SVG_PARAMETRIQUE) : AUCUNE valeur 'param(...)' (fill,
+        fill-opacity, stroke, stroke-opacity, stroke-width — confirmées sur
+        le corpus CNIG examples/qml) n'est une valeur CSS valide —
+        QSvgRenderer ne sait interpréter aucune d'elles (constaté : un SVG
+        réel du corpus, avec plusieurs attributs param() simultanés sur le
+        même élément, ne produit AUCUN pixel opaque une fois rendu tel quel
+        — pas seulement une couleur par défaut, le renderer rejette la forme
+        entière). _neutraliser_svg_parametrique() neutralise TOUTES les
+        occurrences confirmées avant rendu (voir sa docstring pour le détail
+        par attribut), pas seulement 'fill'."""
+        if not sdf:
+            renderer = QSvgRenderer(str(path))
+            if renderer.isValid():
+                renderer.render(painter, QRectF(x, y, tile, tile))
+            return
+        try:
+            contenu = path.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            return
+        contenu_masque = _neutraliser_svg_parametrique(contenu)
+        renderer = QSvgRenderer(core.QByteArray(contenu_masque.encode("utf-8")))
         if renderer.isValid():
             renderer.render(painter, QRectF(x, y, tile, tile))
 

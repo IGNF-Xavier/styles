@@ -620,12 +620,118 @@ def _ecrire_line_paint(
         layout["line-cap"] = _valeur_symbolizer_litterale(sym["cap"], contexte, "cap")
     if sym.get("join") is not None:
         layout["line-join"] = _valeur_symbolizer_litterale(sym["join"], contexte, "join")
+    if sym.get("perpendicularOffset") is not None:
+        decalage = _valeur_symbolizer_litterale(
+            sym["perpendicularOffset"], contexte, "perpendicularOffset")
+        if not isinstance(decalage, (int, float)) or isinstance(decalage, bool):
+            raise ExpressionPivotNonEcrite(
+                f"{contexte} : perpendicularOffset={decalage!r} n'est pas un "
+                f"nombre littéral — seul ce cas est écrit par cette itération."
+            )
+        # Mapbox "line-offset" : signe INVERSÉ par rapport au pivot (qui suit
+        # la convention SLD/QGIS "offset direct", cf. styleforge_core/readers/
+        # qml.py où perpendicularOffset = SimpleLine.offset littéral converti
+        # en px, et styleforge_core/writers/sld.py où PerpendicularOffset est
+        # écrit tel quel). VÉRIFIÉ CONTRE L'ORACLE QGIS, DEUX round-trips
+        # indépendants via le même moteur de lecture (QgsVectorLayer/
+        # QgsMapBoxGlStyleConverter) :
+        #   - SLD <se:PerpendicularOffset>5</se:PerpendicularOffset> chargé
+        #     par QgsVectorLayer.loadSldStyle() -> QgsSimpleLineSymbolLayer.
+        #     offset()== +5 (Pixel) — même signe que le pivot, confirme que
+        #     la convention pivot == convention QGIS interne.
+        #   - Style Mapbox {"paint": {"line-offset": 5}} chargé par
+        #     QgsMapBoxGlStyleConverter.convert() -> offset()== -5 (Pixel) —
+        #     signe OPPOSÉ pour la même grandeur, propre au format Mapbox.
+        # D'où : line-offset = -perpendicularOffset.
+        paint["line-offset"] = -decalage
     _avertir_proprietes_non_gerees(
         sym,
         {"color", "opacity", "width", "dasharray", "cap", "join",
-         "graphicFill", "graphicStroke"},
+         "graphicFill", "graphicStroke", "perpendicularOffset"},
         avertissements, contexte,
     )
+    return paint, layout
+
+
+# --------------------------------------------------------------------------- LineSymbolizer.graphicStroke + .spacing -> Mapbox layer type "symbol" (symbol-placement:"line")
+def _ecrire_line_symbol_paint(
+    sym: dict, avertissements: list[str], contexte: str,
+    *, resoudre_sprite: Callable[[str], str | None] | None = None,
+) -> tuple[dict, dict]:
+    """LineSymbolizer.graphicStroke + .spacing (MarkerLine/HashLine du pivot —
+    motif RÉPÉTÉ À INTERVALLE RÉGULIER le long de la ligne, PAS un motif
+    continu comme graphicFill/un graphicStroke SANS spacing, voir
+    _ecrire_line_paint) -> (paint, layout) Mapbox pour une couche "symbol"
+    (PAS "line") avec layout.symbol-placement="line".
+
+    DÉCOUVERTE en vérifiant l'oracle pour la tâche "spacing" (task #48,
+    demande explicite de l'utilisateur, APRÈS l'avoir prévenu que ce n'était
+    pas un simple ajout de propriété comme perpendicularOffset — voir
+    l'échange précédent) : Mapbox GL Style N'A AUCUNE notion d'espacement
+    pour une couche "line" — line-pattern tuile le motif EN CONTINU sur toute
+    la largeur du trait, sans paramètre d'intervalle (c'est d'ailleurs pour
+    cette raison que 'spacing' n'était pas repris par _ecrire_line_paint,
+    qui route graphicFill/graphicStroke vers line-pattern). La SEULE
+    construction Mapbox qui porte une notion d'espacement le long d'une ligne
+    est une couche "symbol" avec layout.symbol-placement="line" +
+    layout.symbol-spacing : c'est pourquoi ce cas bascule sur un TYPE DE
+    COUCHE différent, décidé par l'appelant (_ecrire_layers) quand
+    graphicStroke ET spacing sont tous deux renseignés sur le symbolizer.
+
+    VÉRIFIÉ CONTRE L'ORACLE QGIS (QgsMapBoxGlStyleConverter), round-trip
+    complet : un style Mapbox {"type": "symbol", "layout": {"symbol-placement":
+    "line", "symbol-spacing": 16, "icon-image": "x", "icon-rotation-alignment":
+    "map", "icon-allow-overlap": true}} -> QgsMarkerLineSymbolLayer(interval==16,
+    interval_unit==Pixel, rotate==1), sous-symbole QgsRasterMarkerSymbolLayer.
+    Confirme à la fois :
+      - symbol-spacing : 1:1, PAS de conversion d'unité ni d'inversion de
+        signe (contrairement à perpendicularOffset/line-offset) — le champ
+        pivot 'spacing' est déjà converti en px par le lecteur (cf.
+        styleforge_core/readers/qml.py, _lire_marker_line/_lire_hash_line +
+        la conversion '_unite_espacement' dans _lire_couche).
+      - icon-rotation-alignment "map" <-> QGIS rotate==True.
+
+    icon-rotation-alignment="map" est ÉCRIT INCONDITIONNELLEMENT (ce n'est
+    PAS un choix exposé en paramètre) : ce n'est pas une préférence
+    arbitraire mais la traduction directe du sens MÊME de graphicStroke dans
+    ce pivot — côté SLD, Stroke/GraphicStroke fait TOUJOURS pivoter le motif
+    pour suivre la direction de la ligne (aucune option pour désactiver cette
+    rotation dans la spec SLD/SE 1.1.0, cf. styleforge_core/writers/sld.py),
+    et c'est aussi la valeur observée sur CHACUNE des occurrences réelles du
+    corpus CNIG inspectées (plu_inf_l.qml, QgsMarkerLineSymbolLayer.rotate==1
+    sur les trois MarkerLine du fichier). De même, icon-allow-overlap=true et
+    icon-ignore-placement=true sont écrits INCONDITIONNELLEMENT : un motif
+    répété à intervalle régulier le long d'une ligne (GraphicStroke) est une
+    répétition DÉTERMINISTE voulue par le cartographe, pas un placement de
+    LABEL soumis à évitement de collision — les laisser à leur valeur par
+    défaut (false) reviendrait à laisser le moteur de rendu Mapbox décimer
+    silencieusement certaines répétitions, une RÉGRESSION par rapport à
+    line-pattern (qui, lui, ne fait aucune détection de collision)."""
+    if sym.get("graphicStroke") is None:
+        raise ExpressionPivotNonEcrite(
+            f"{contexte} : _ecrire_line_symbol_paint appelé sans graphicStroke "
+            f"— erreur interne de dispatch (voir _ecrire_layers)."
+        )
+    nom = _resoudre_motif_sprite(
+        _normaliser(sym["graphicStroke"]), avertissements, contexte,
+        resoudre_sprite=resoudre_sprite,
+    )
+    espacement = _valeur_symbolizer_litterale(sym["spacing"], contexte, "spacing")
+    if not isinstance(espacement, (int, float)) or isinstance(espacement, bool):
+        raise ExpressionPivotNonEcrite(
+            f"{contexte} : spacing={espacement!r} n'est pas un nombre littéral "
+            f"— seul ce cas est écrit par cette itération."
+        )
+    layout: dict[str, Any] = {
+        "symbol-placement": "line",
+        "symbol-spacing": espacement,
+        "icon-image": nom,
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": True,
+        "icon-ignore-placement": True,
+    }
+    paint: dict[str, Any] = {}
+    _avertir_proprietes_non_gerees(sym, {"graphicStroke", "spacing"}, avertissements, contexte)
     return paint, layout
 
 
@@ -947,6 +1053,51 @@ def _ecrire_icon_paint(
         paint["icon-opacity"] = _valeur_symbolizer_litterale(sym["opacity"], contexte, "opacity")
     if sym.get("rotate") is not None:
         layout["icon-rotate"] = _valeur_symbolizer_litterale(sym["rotate"], contexte, "rotate")
+    if sym.get("color") is not None:
+        couleur = _valeur_symbolizer_litterale(sym["color"], contexte, "color")
+        _hex_vers_rgb(couleur, contexte, "color")  # valide le format, écrit littéralement ensuite
+        # icon-color (paint) : NON VÉRIFIÉ CONTRE L'ORACLE QGIS HABITUEL de ce
+        # module, À LA DIFFÉRENCE de tout le reste de cette fonction —
+        # confirmé en lisant le CODE SOURCE RÉEL de QgsMapBoxGlStyleConverter
+        # ::parseSymbolLayerAsRenderer (versions 3.28 à 3.40, la plus récente
+        # disponible au moment d'écrire ceci) : 'icon-color' et le drapeau
+        # 'sdf' d'un sprite n'y sont lus NULLE PART — QGIS construit toujours
+        # un QgsRasterMarkerSymbolLayer brut depuis icon-image, sans jamais
+        # tenir compte d'une teinte. L'oracle PRINCIPAL de ce module est donc
+        # structurellement incapable de confirmer ce point précis (pas une
+        # limite de cet écrivain). Écrit malgré tout car icon-color + sprite
+        # SDF (cf. styleforge_core.sprites.SpriteRegistry, détection
+        # 'fill="param(fill)"') est une fonctionnalité OFFICIELLE, stable et
+        # documentée de la spec Mapbox GL Style, nativement prise en charge
+        # par Mapbox GL JS / MapLibre GL JS et par le rendu vecteur-tuiles de
+        # GeoServer — mêmes consommateurs réels que ce document MBStyle, qui
+        # ne sont PAS QGIS. Exactement le même statut de preuve que le cas
+        # "GraphicStroke avec Icon imbriqué" côté écrivain SLD (voir
+        # styleforge_core/writers/sld.py) : écrit sur la foi de la spec
+        # officielle, jamais présenté comme vérifié au même titre que le
+        # reste de ce module, à confirmer par un rendu réel (Mapbox GL JS/
+        # MapLibre GL JS/GeoServer) avant mise en production. CONDITION
+        # D'EFFET (non vérifiable ici, documentée pour l'équipe de
+        # déploiement) : icon-color ne teinte que si le sprite RÉFÉRENCÉ par
+        # icon-image est effectivement déclaré "sdf": true dans sprite.json —
+        # c'est le cas lorsque resoudre_sprite() route vers
+        # SpriteRegistry.register_svg() sur un SVG paramétrique (voir
+        # styleforge_core/sprites.py) ; sinon la propriété est sans effet
+        # (ignorée par le moteur de rendu), jamais une erreur silencieuse côté
+        # document produit ici.
+        avertissements.append(
+            f"{contexte} : color={couleur!r} écrit en icon-color (paint) — NON "
+            f"vérifié contre l'oracle QGIS habituel (QgsMapBoxGlStyleConverter "
+            f"n'implémente ni icon-color ni le drapeau 'sdf' d'un sprite, "
+            f"confirmé en lisant son code source, versions 3.28 à 3.40), mais "
+            f"conforme à la spec Mapbox GL Style officielle (icon-color + "
+            f"sprite SDF) — n'a d'effet que si la vignette résolue est "
+            f"effectivement déclarée \"sdf\": true dans sprite.json (cf. "
+            f"styleforge_core.sprites.SpriteRegistry) : à confirmer par un "
+            f"rendu réel (Mapbox GL JS/MapLibre GL JS/GeoServer) avant mise "
+            f"en production."
+        )
+        paint["icon-color"] = couleur
     if sym.get("offset") is not None:
         avertissements.append(
             f"{contexte} : offset={sym['offset']!r} NON écrit — vérifié contre l'oracle "
@@ -956,7 +1107,7 @@ def _ecrire_icon_paint(
             f"découvert en testant, pas une limite de conception de ce module."
         )
     _avertir_proprietes_non_gerees(
-        sym, {"image", "size", "opacity", "rotate", "offset"}, avertissements, contexte,
+        sym, {"image", "size", "opacity", "rotate", "offset", "color"}, avertissements, contexte,
     )
     return paint, layout
 
@@ -1334,6 +1485,18 @@ def _ecrire_layers(
             paint, layout = _ecrire_icon_paint(
                 sym, avertissements, contexte,
                 resoudre_sprite=resoudre_sprite, taille_sprite_px=taille_sprite_px,
+            )
+        elif kind == "Line" and sym.get("graphicStroke") is not None and sym.get("spacing") is not None:
+            # MarkerLine/HashLine (motif RÉPÉTÉ à intervalle régulier le long
+            # de la ligne) : bascule vers une couche "symbol" plutôt que
+            # "line" — voir la docstring de _ecrire_line_symbol_paint pour la
+            # justification complète (Mapbox n'a pas de notion d'espacement
+            # pour une couche "line"). Un graphicStroke/graphicFill SANS
+            # 'spacing' renseigné (motif continu, ex. RasterLine) continue de
+            # passer par _ecrire_line_paint/line-pattern, inchangé.
+            type_layer = "symbol"
+            paint, layout = _ecrire_line_symbol_paint(
+                sym, avertissements, contexte, resoudre_sprite=resoudre_sprite,
             )
         else:
             entree = _ECRIVAINS_SYMBOLIZER_PAINT.get(kind)
