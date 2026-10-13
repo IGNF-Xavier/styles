@@ -28,7 +28,7 @@
               <GraphicStroke>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_bdc49c9371.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_bdc49c9371.svg?fill=%23d7b09e" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -57,7 +57,7 @@
               <GraphicStroke>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_f26ef2b329.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_f26ef2b329.svg?fill=%2300734c" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -82,7 +82,7 @@
               <GraphicStroke>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_ef5696200e.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_ef5696200e.svg?fill=%23004da8" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>

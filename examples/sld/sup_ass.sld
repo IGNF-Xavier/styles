@@ -27,7 +27,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_f9233c469a.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_f9233c469a.svg?fill=%2333a02c" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -61,7 +61,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_5045d68d65.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_5045d68d65.svg?fill=%2300ff00" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -171,7 +171,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_fb2803a26b.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_fb2803a26b.svg?fill=%2300ff00" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -205,7 +205,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_f9233c469a.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_f9233c469a.svg?fill=%2300ff00" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -239,7 +239,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_f9233c469a.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_f9233c469a.svg?fill=%23a7c135" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -273,7 +273,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_5045d68d65.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_5045d68d65.svg?fill=%2300ff00" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -343,7 +343,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_e6ada32b31.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_e6ada32b31.svg?fill=%23ff8000" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -485,7 +485,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_fb2803a26b.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_fb2803a26b.svg?fill=%23ff8000" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -969,7 +969,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_5045d68d65.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_5045d68d65.svg?fill=%23000000" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -1039,7 +1039,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_e6ada32b31.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_e6ada32b31.svg?fill=%23000000" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -1111,7 +1111,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_e25025c8c5.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_e25025c8c5.svg?fill=%23000000" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -1374,7 +1374,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_fb2803a26b.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_fb2803a26b.svg?fill=%23fa00fa" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -1482,7 +1482,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_fb2803a26b.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_fb2803a26b.svg?fill=%23fa00fa" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -1637,7 +1637,7 @@
               <GraphicStroke>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_b695fd51a9.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_b695fd51a9.svg?fill=%23000000" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -1815,7 +1815,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_fb2803a26b.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_fb2803a26b.svg?fill=%23a81616" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -1885,7 +1885,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_81f5a5deb0.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_81f5a5deb0.svg?fill=%23a81616" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -1919,7 +1919,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_fb2803a26b.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_fb2803a26b.svg?fill=%23a81616" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -1953,7 +1953,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_81f5a5deb0.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_81f5a5deb0.svg?fill=%23a81616" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -2257,7 +2257,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_c0c560b864.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_c0c560b864.svg?fill=%237f7f7f" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>
@@ -2291,7 +2291,7 @@
               <GraphicFill>
                 <Graphic>
                   <ExternalGraphic>
-                    <OnlineResource xlink:href="svg/cnig/cnig_picto_3a708bf7a5.svg" xlink:type="simple"/>
+                    <OnlineResource xlink:href="svg/cnig/cnig_picto_3a708bf7a5.svg?fill=%23000000" xlink:type="simple"/>
                     <Format>image/svg+xml</Format>
                   </ExternalGraphic>
                   <Opacity>1.0</Opacity>

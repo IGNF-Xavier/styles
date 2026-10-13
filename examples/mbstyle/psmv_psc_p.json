@@ -534,7 +534,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#000000"
       }
     },
     {
@@ -578,7 +579,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ff0000"
       }
     },
     {
@@ -600,7 +602,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#732600"
       }
     },
     {
@@ -622,7 +625,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#38a800"
       }
     },
     {
@@ -644,7 +648,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#730000"
       }
     },
     {
@@ -666,7 +671,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#a87000"
       }
     },
     {
@@ -688,7 +694,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#732600"
       }
     },
     {
@@ -710,7 +717,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#a8a800"
       }
     },
     {
@@ -732,7 +740,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#732600"
       }
     },
     {
@@ -754,7 +763,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#d1ff73"
       }
     },
     {
@@ -776,7 +786,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#38a800"
       }
     },
     {
@@ -798,7 +809,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#a8a800"
       }
     },
     {
@@ -820,7 +832,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#38a800"
       }
     },
     {
@@ -842,7 +855,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#d1ff73"
       }
     },
     {
@@ -886,7 +900,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#000000"
       }
     },
     {
@@ -908,7 +923,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#666666"
       }
     },
     {
@@ -930,7 +946,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ffffff"
       }
     },
     {
@@ -1018,7 +1035,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ff0000"
       }
     },
     {
@@ -1040,7 +1058,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ff0000"
       }
     },
     {
@@ -1062,7 +1081,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ffaa00"
       }
     },
     {
@@ -1084,7 +1104,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#f57a7a"
       }
     },
     {
@@ -1106,7 +1127,8 @@
         "icon-rotate": -45.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#828282"
       }
     },
     {
@@ -1128,7 +1150,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#004da8"
       }
     },
     {
@@ -1172,7 +1195,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#004da8"
       }
     },
     {
@@ -1194,7 +1218,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#39d881"
       }
     },
     {
@@ -1216,7 +1241,8 @@
         "icon-rotate": -270.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#8a4dd3"
       }
     },
     {
@@ -1238,7 +1264,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#8a4dd3"
       }
     },
     {
@@ -1260,7 +1287,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ffffff"
       }
     },
     {
@@ -1282,7 +1310,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ffffff"
       }
     },
     {
@@ -1304,7 +1333,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ffffff"
       }
     },
     {
@@ -1348,7 +1378,8 @@
         "icon-rotate": -90.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#fdbf6f"
       }
     },
     {
@@ -1370,7 +1401,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#fdbf6f"
       }
     },
     {
@@ -1392,7 +1424,8 @@
         "icon-rotate": -45.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ff7f00"
       }
     },
     {
@@ -1414,7 +1447,8 @@
         "icon-rotate": -90.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#00a884"
       }
     },
     {
@@ -1436,7 +1470,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#732600"
       }
     },
     {
@@ -1458,7 +1493,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#004c73"
       }
     },
     {
@@ -1480,7 +1516,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#940abd"
       }
     },
     {
@@ -1502,7 +1539,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#940abd"
       }
     },
     {
@@ -1524,7 +1562,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ac570d"
       }
     },
     {

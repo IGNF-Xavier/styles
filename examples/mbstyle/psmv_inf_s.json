@@ -81,7 +81,7 @@
     },
     {
       "id": "INF-S_03-00_001-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_inf_s",
       "filter": [
@@ -92,9 +92,15 @@
         ],
         "INF-S_03-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_9553f5326e"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 16.25,
+        "icon-image": "cnig_picto_9553f5326e",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "INF-S_03-00_001-1",
@@ -116,7 +122,8 @@
       "paint": {
         "line-color": "#ffffff",
         "line-opacity": 1.0,
-        "line-width": 1.0
+        "line-width": 1.0,
+        "line-offset": -1.25
       }
     },
     {
@@ -144,7 +151,7 @@
     },
     {
       "id": "INF-S_04-00_001-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_inf_s",
       "filter": [
@@ -155,9 +162,15 @@
         ],
         "INF-S_04-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_9553f5326e"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 16.25,
+        "icon-image": "cnig_picto_9553f5326e",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "INF-S_04-00_001-1",
@@ -179,7 +192,8 @@
       "paint": {
         "line-color": "#ffffff",
         "line-opacity": 1.0,
-        "line-width": 1.0
+        "line-width": 1.0,
+        "line-offset": -1.25
       }
     },
     {
@@ -207,7 +221,7 @@
     },
     {
       "id": "INF-S_04-01_001-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_inf_s",
       "filter": [
@@ -218,9 +232,15 @@
         ],
         "INF-S_04-01_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_4e0c39c183"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 16.25,
+        "icon-image": "cnig_picto_4e0c39c183",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "INF-S_04-01_001-1",
@@ -242,7 +262,8 @@
       "paint": {
         "line-color": "#ffffff",
         "line-opacity": 1.0,
-        "line-width": 1.0
+        "line-width": 1.0,
+        "line-offset": -1.25
       }
     },
     {
@@ -950,7 +971,7 @@
     },
     {
       "id": "INF-S_23-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_inf_s",
       "filter": [
@@ -961,9 +982,15 @@
         ],
         "INF-S_23-00_001"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 23.75,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "INF-S_25-00_001-0",
@@ -1172,7 +1199,7 @@
     },
     {
       "id": "INF-S_33-00_001-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_inf_s",
       "filter": [
@@ -1183,9 +1210,15 @@
         ],
         "INF-S_33-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_89c7f2208d"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 13.749999999999998,
+        "icon-image": "cnig_picto_89c7f2208d",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "INF-S_33-00_001-1",
@@ -1207,7 +1240,8 @@
       "paint": {
         "line-color": "#ffffff",
         "line-opacity": 1.0,
-        "line-width": 1.0
+        "line-width": 1.0,
+        "line-offset": -1.25
       }
     },
     {
@@ -1812,7 +1846,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#c31a38"
       }
     },
     {
@@ -1834,7 +1869,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ffffff"
       }
     },
     {
@@ -1856,7 +1892,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ffffff"
       }
     },
     {
@@ -1878,7 +1915,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#c31a38"
       }
     },
     {
@@ -1900,7 +1938,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#c31a38"
       }
     },
     {
@@ -1922,7 +1961,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ffffff"
       }
     },
     {
@@ -1944,7 +1984,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#c31a38"
       }
     },
     {
@@ -1966,7 +2007,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ffffff"
       }
     },
     {
@@ -1988,7 +2030,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#c31a38"
       }
     },
     {
@@ -2010,7 +2053,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ffffff"
       }
     },
     {
@@ -2032,7 +2076,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#c31a38"
       }
     },
     {

@@ -38,7 +38,7 @@
     },
     {
       "id": "INF-L_16-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_inf_l",
       "filter": [
@@ -49,13 +49,19 @@
         ],
         "INF-L_16-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_6c2e8cb9d1"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 20.0,
+        "icon-image": "cnig_picto_6c2e8cb9d1",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "INF-L_19-01_001",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_inf_l",
       "filter": [
@@ -66,13 +72,19 @@
         ],
         "INF-L_19-01_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_f26ef2b329"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 20.0,
+        "icon-image": "cnig_picto_f26ef2b329",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "INF-L_22-00_001",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_inf_l",
       "filter": [
@@ -83,9 +95,15 @@
         ],
         "INF-L_22-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_ef5696200e"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 8.749999999999998,
+        "icon-image": "cnig_picto_ef5696200e",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "INF-L_99-00_001",

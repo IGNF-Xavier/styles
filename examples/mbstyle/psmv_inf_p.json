@@ -28,7 +28,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#d7b09e"
       }
     },
     {
@@ -50,7 +51,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#00734c"
       }
     },
     {
@@ -72,7 +74,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#c31a38"
       }
     },
     {
@@ -94,7 +97,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ffffff"
       }
     },
     {
@@ -116,7 +120,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ffffff"
       }
     },
     {
@@ -138,7 +143,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#c31a38"
       }
     },
     {
@@ -160,7 +166,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#c31a38"
       }
     },
     {
@@ -182,7 +189,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ffffff"
       }
     },
     {
@@ -204,7 +212,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#c31a38"
       }
     },
     {
@@ -226,7 +235,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ffffff"
       }
     },
     {
@@ -248,7 +258,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#c31a38"
       }
     },
     {
@@ -270,7 +281,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#ffffff"
       }
     },
     {
@@ -292,7 +304,8 @@
         "icon-rotate": 0.0
       },
       "paint": {
-        "icon-opacity": 1.0
+        "icon-opacity": 1.0,
+        "icon-color": "#c31a38"
       }
     },
     {

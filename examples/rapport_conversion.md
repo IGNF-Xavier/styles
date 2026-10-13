@@ -22,14 +22,37 @@ compte réellement pour le rendu. Analyse par catégorie (hors doublons des deux
 | `rotate` (toujours valeur 0.0, symbolizers cercle) | 71 | **Aucun.** Toujours 0.0 dans ce corpus (aucune rotation demandée), et un cercle n'a de toute façon pas d'orientation visible. |
 | `Opacity=1.0` non vérifiée par l'oracle QGIS (SLD) | 357 | **Quasi nul.** Vérifié que QGIS ignore ce tag (rendu pixel identique à Opacity=0.2), et 1.0 est la valeur « sans effet » — ne jouerait que pour une transparence réelle configurée, absente de ce corpus. Non vérifiable sous GeoServer faute d'oracle. |
 | `graphicStroke` avec un Icon imbriqué, non vérifié par l'oracle QGIS (SLD) | 89 | Écrit conformément à OGC SE 1.1.0, mais QGIS lui-même ne sait pas relire cet élément — à confirmer par un rendu GeoServer réel. |
-| **`color` sur IconSymbolizer (SVG paramétrique QGIS) non écrit** | 99 (SLD) + 99 (MBStyle) | **Réel et significatif** — voir le paragraphe dédié ci-dessous. |
 | `graphicFillPadding` non écrit (MBStyle) | 222 | Réel mais mineur — espacement du motif de hachure légèrement différent (motif jointif plutôt qu'avec marge). |
-| `spacing` MarkerLine non écrit (MBStyle) | 145 | Réel, modéré — l'espacement entre pictogrammes répétés le long d'une ligne est perdu côté MBStyle (le SLD le gère correctement). |
-| `perpendicularOffset` non écrit (MBStyle) | 91 | Réel, modéré — les doubles liserés décalés (ex. limites de zone PLU) se superposent au lieu d'être parallèles, en MBStyle uniquement (le SLD le gère correctement). |
 | `dashOffset` non écrit | 65 (SLD) + 65 (MBStyle) | Réel, mineur — décalage de phase du pointillé. |
 | `outlineWidth`/contour sur couche *fill* (MBStyle) | 66 | **Non réparable** dans ce format — la spec Mapbox GL Style elle-même n'a aucune propriété de contour pour une couche fill (le contour reste toujours un simple trait plein de largeur fixe). Contournement possible : une couche "line" séparée, hors périmètre actuel. |
 
-### Le cas `color` (pictogrammes SVG paramétriques)
+### Corrigé depuis la version précédente de ce rapport
+
+Les trois lignes suivantes figuraient dans la version précédente comme
+« NON écrit » avec un impact réel ; elles sont maintenant implémentées côté
+MBStyle (le SLD gérait déjà `perpendicularOffset` et `spacing` correctement,
+et gère `color` depuis le correctif précédent) :
+
+| Catégorie | Occurrences (avant correctif) | Correctif |
+|---|---:|---|
+| `color` sur IconSymbolizer (SVG paramétrique QGIS) | 99 (SLD) + 99 (MBStyle) | **SLD** : couleur transmise en paramètre de requête sur l'`xlink:href` (`?fill=%23…`), convention GeoServer « Parametric SVG ». **MBStyle** : écrite en `icon-color` (paint), combinée à un sprite marqué `"sdf": true` dans `sprite.json` quand le SVG source suit la convention paramétrique QGIS (`fill="param(fill)"`, détection sur le contenu du fichier — s'applique automatiquement à tout futur QML suivant la même convention, pas une liste figée). Non vérifiable par l'oracle QGIS habituel (`QgsMapBoxGlStyleConverter` n'implémente ni `icon-color` ni le drapeau `sdf`, confirmé en lisant son code source C++, versions 3.28 à 3.40) — conforme à la spec Mapbox GL Style officielle, à confirmer par un rendu réel (Mapbox GL JS/MapLibre GL JS/GeoServer) avant mise en production. |
+| `spacing` MarkerLine non écrit (MBStyle) | 145 | Couche Mapbox reclassée en `type: "symbol"` avec `symbol-placement: "line"` et `symbol-spacing` (au lieu de `type: "line"` + `line-pattern`) — seule construction Mapbox qui répète un pictogramme le long d'une ligne. Vérifié par oracle QGIS (`QgsMapBoxGlStyleConverter` round-trip → `QgsMarkerLineSymbolLayer` avec le bon `interval`). |
+| `perpendicularOffset` non écrit (MBStyle) | 91 | Écrit en `line-offset`, avec **inversion de signe** par rapport à la convention SLD/pivot — vérifié par deux aller-retours oracle QGIS indépendants (SLD `PerpendicularOffset` et MBStyle `line-offset` chargés séparément dans QGIS donnent des signes opposés pour la même valeur). |
+
+**Limite résiduelle découverte en implémentant le correctif `color`/SDF** : sur
+les 127 pictogrammes SVG paramétriques déployés dans ce corpus, 3 ont pour
+seul contenu visible un tracé en contour (`stroke`, pas de `fill`) — par
+exemple un simple trait. Le mécanisme de masque SDF neutralise aujourd'hui
+`fill="param(fill)"` en blanc mais remplace `stroke="param(outline)"` par
+`stroke="none"` (la convention de substitution ne gère, côté SLD comme côté
+MBStyle, que le paramètre `fill` — jamais `outline`, limite déjà présente
+avant ce correctif). Pour ces 3 pictogrammes précis, le résultat est un
+masque entièrement vide (aucun pixel opaque) : le pictogramme ne
+s'afficherait pas du tout en MBStyle, contre un rendu correct en SLD/QGIS. À
+traiter séparément si ces 3 pictogrammes sont utilisés en pratique (vérifié
+par inspection pixel directe de la feuille de sprites régénérée).
+
+### Le cas `color` (pictogrammes SVG paramétriques) — récapitulatif
 
 99 occurrences par écrivain (198 au total) concernent un `IconSymbolizer` dont
 le pivot porte un champ `color` : c'est la couleur de substitution que QGIS
@@ -38,18 +61,11 @@ sans repli). Sur ce corpus, 871 des 873 SVG déployés par le CLI (backend
 `styleforge`, source complète) utilisent cette convention — un même
 pictogramme générique, retenté différemment selon la couche/règle QGIS.
 
-Aujourd'hui, ni l'écrivain SLD ni l'écrivain MBStyle ne consomment ce champ
-`color` : le SVG est référencé/déployé tel quel, sans sa teinte. Comme
-`fill="param(fill)"` est un attribut SVG invalide pour un moteur de rendu qui
-ne le résout pas, le résultat le plus probable sous GeoServer est un rendu en
-noir (la valeur de repli du groupe englobant du SVG) au lieu de la couleur
-configurée par règle — une perte visuelle réelle, pas cosmétique.
-
-GeoServer documente précisément ce cas (« Parametric SVG ») : la couleur se
-transmet en paramètres de requête ajoutés à l'`xlink:href`, par exemple
-`poi_peak.svg?fill=%23d7b09e` (voir la documentation GeoServer, Graphic
-symbology, section SVG parametric). C'est la correction en cours côté SLD.
-
+Les deux écrivains consomment maintenant ce champ `color` (voir le tableau
+ci-dessus pour le mécanisme propre à chacun). GeoServer documente précisément
+le cas SLD (« Parametric SVG ») : la couleur se transmet en paramètres de
+requête ajoutés à l'`xlink:href`, par exemple `poi_peak.svg?fill=%23d7b09e`
+(voir la documentation GeoServer, Graphic symbology, section SVG parametric).
 
 ## Correctifs appliqués en phase 4
 
@@ -103,11 +119,11 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - … et 6 autre(s) avertissement(s) « SLD » non affiché(s) ici — voir rapport_conversion.json.
   - MBStyle : Rule[0] (INF-L_16-00_001).symbolizers[0] : propriété de symbolizer 'dashOffset' (valeur 0.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (INF-L_16-00_001).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - MBStyle : Rule[0] (INF-L_16-00_001).symbolizers[1] : propriété de symbolizer 'spacing' (valeur 20.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (INF-L_16-00_001).symbolizers[1] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (INF-L_16-00_001) : 2 symbolizers empilés en autant de couches Mapbox distinctes (id INF-L_16-00_001-0..1), même filtre et source-layer, dans l'ORDRE du pivot — coexistence confirmée contre l'oracle QGIS (QgsMapBoxGlStyleConverter), voir le commentaire précédant _ecrire_layers ; l'ordre de superposition visuel exact n'est, lui, pas re-vérifié indépendamment — à confirmer par un rendu GeoServer réel si cet ordre importe.
-  - MBStyle : Rule[1] (INF-L_19-01_001).symbolizers[0] : propriété de symbolizer 'spacing' (valeur 20.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - … et 4 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
+  - MBStyle : Rule[1] (INF-L_19-01_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - MBStyle : Rule[2] (INF-L_22-00_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - … et 1 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `plu_inf_p.qml`
   - Lecture QML : examples/qml/PLU/plu_inf_p.qml : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
   - Lecture QML : examples/qml/PLU/plu_inf_p.qml [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (6.60156Point -> 8.252px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
@@ -116,15 +132,14 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - Lecture QML : examples/qml/PLU/plu_inf_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - Lecture QML : examples/qml/PLU/plu_inf_p.qml [SimpleMarker].strokeWidth : unité QML 'Point' convertie en pixels via dpi=90.0 (0.0Point -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - SLD : Rule[0] (INF-P_16-00_001).symbolizers[0] : Opacity=1.0 écrit dans le SLD (construction OGC SE 1.0 standard) mais NON vérifié comme appliqué par l'oracle QGIS pour IconSymbolizer — testé par introspection des propriétés ET par rendu pixel réel (Opacity=0.2 vs 1.0 du même symbole produisent un pixel de sortie strictement identique), QGIS 3.40 ignore ce <Graphic><Opacity>. Peut fonctionner sous GeoServer (non vérifiable ici, aucun oracle GeoServer disponible).
-  - SLD : Rule[0] (INF-P_16-00_001).symbolizers[0] : propriété de symbolizer 'color' (valeur '#d7b09e') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[0] (INF-P_16-00_001).symbolizers[0] : propriété de symbolizer 'sizeUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[1] (INF-P_19-01_001).symbolizers[0] : Opacity=1.0 écrit dans le SLD (construction OGC SE 1.0 standard) mais NON vérifié comme appliqué par l'oracle QGIS pour IconSymbolizer — testé par introspection des propriétés ET par rendu pixel réel (Opacity=0.2 vs 1.0 du même symbole produisent un pixel de sortie strictement identique), QGIS 3.40 ignore ce <Graphic><Opacity>. Peut fonctionner sous GeoServer (non vérifiable ici, aucun oracle GeoServer disponible).
-  - SLD : Rule[1] (INF-P_19-01_001).symbolizers[0] : propriété de symbolizer 'color' (valeur '#00734c') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[1] (INF-P_19-01_001).symbolizers[0] : propriété de symbolizer 'sizeUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - … et 2 autre(s) avertissement(s) « SLD » non affiché(s) ici — voir rapport_conversion.json.
-  - MBStyle : Rule[0] (INF-P_16-00_001).symbolizers[0] : propriété de symbolizer 'color' (valeur '#d7b09e') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - SLD : Rule[2] (INF-P_99-00_001).symbolizers[0] : propriété de symbolizer 'radiusUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - SLD : Rule[2] (INF-P_99-00_001).symbolizers[0] : propriété de symbolizer 'strokeWidthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - MBStyle : Rule[0] (INF-P_16-00_001).symbolizers[0] : color='#d7b09e' écrit en icon-color (paint) — NON vérifié contre l'oracle QGIS habituel (QgsMapBoxGlStyleConverter n'implémente ni icon-color ni le drapeau 'sdf' d'un sprite, confirmé en lisant son code source, versions 3.28 à 3.40), mais conforme à la spec Mapbox GL Style officielle (icon-color + sprite SDF) — n'a d'effet que si la vignette résolue est effectivement déclarée "sdf": true dans sprite.json (cf. styleforge_core.sprites.SpriteRegistry) : à confirmer par un rendu réel (Mapbox GL JS/MapLibre GL JS/GeoServer) avant mise en production.
   - MBStyle : Rule[0] (INF-P_16-00_001).symbolizers[0] : propriété de symbolizer 'sizeUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - MBStyle : Rule[1] (INF-P_19-01_001).symbolizers[0] : propriété de symbolizer 'color' (valeur '#00734c') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - MBStyle : Rule[1] (INF-P_19-01_001).symbolizers[0] : color='#00734c' écrit en icon-color (paint) — NON vérifié contre l'oracle QGIS habituel (QgsMapBoxGlStyleConverter n'implémente ni icon-color ni le drapeau 'sdf' d'un sprite, confirmé en lisant son code source, versions 3.28 à 3.40), mais conforme à la spec Mapbox GL Style officielle (icon-color + sprite SDF) — n'a d'effet que si la vignette résolue est effectivement déclarée "sdf": true dans sprite.json (cf. styleforge_core.sprites.SpriteRegistry) : à confirmer par un rendu réel (Mapbox GL JS/MapLibre GL JS/GeoServer) avant mise en production.
   - MBStyle : Rule[1] (INF-P_19-01_001).symbolizers[0] : propriété de symbolizer 'sizeUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[2] (INF-P_99-00_001).symbolizers[0] : propriété de symbolizer 'radiusUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[2] (INF-P_99-00_001).symbolizers[0] : propriété de symbolizer 'rotate' (valeur 0.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
@@ -148,9 +163,9 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[0] (INF-S_02-00_001).symbolizers[0] : outlineWidthUnit='px' NON écrit — la spec Mapbox GL Style n'a AUCUNE propriété "paint" pour une couche "fill" contrôlant l'épaisseur, le pointillé, ou les extrémités du contour (paint_fill se limite à fill-antialias/fill-opacity/fill-color/fill-outline-color/fill-translate*/fill-pattern) : le contour d'une couche fill Mapbox est TOUJOURS un simple trait plein de largeur fixe. Ceci n'est pas une limite de conversion découverte en testant (comme pour l'écrivain SLD) mais un fait de la spec elle-même — contourner cela nécessiterait une couche "line" séparée, hors de la portée de cet écrivain pour cette itération.
   - MBStyle : Rule[0] (INF-S_02-00_001).symbolizers[1] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (INF-S_02-00_001) : 2 symbolizers empilés en autant de couches Mapbox distinctes (id INF-S_02-00_001-0..1), même filtre et source-layer, dans l'ORDRE du pivot — coexistence confirmée contre l'oracle QGIS (QgsMapBoxGlStyleConverter), voir le commentaire précédant _ecrire_layers ; l'ordre de superposition visuel exact n'est, lui, pas re-vérifié indépendamment — à confirmer par un rendu GeoServer réel si cet ordre importe.
-  - MBStyle : Rule[1] (INF-S_03-00_001).symbolizers[0] : propriété de symbolizer 'spacing' (valeur 16.25) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[1] (INF-S_03-00_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - … et 135 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
+  - MBStyle : Rule[1] (INF-S_03-00_001).symbolizers[1] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - … et 126 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `plu_psc_l.qml`
   - Lecture QML : examples/qml/PLU/plu_psc_l.qml [MarkerLine] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (2.5Point -> 3.125px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - Lecture QML : examples/qml/PLU/plu_psc_l.qml [MarkerLine] [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
@@ -166,13 +181,13 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - SLD : Rule[2] (PSC-L_02-00_001).symbolizers[2] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[3] (PSC-L_02-00_110).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 190 autre(s) avertissement(s) « SLD » non affiché(s) ici — voir rapport_conversion.json.
-  - MBStyle : Rule[0] (PSC-L_01-00_001).symbolizers[0] : propriété de symbolizer 'spacing' (valeur 13.749999999999998) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (PSC-L_01-00_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - MBStyle : Rule[1] (PSC-L_01-03_001).symbolizers[0] : propriété de symbolizer 'spacing' (valeur 13.749999999999998) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[1] (PSC-L_01-03_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - MBStyle : Rule[2] (PSC-L_02-00_001).symbolizers[0] : propriété de symbolizer 'spacing' (valeur 5.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[2] (PSC-L_02-00_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - … et 262 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
+  - MBStyle : Rule[2] (PSC-L_02-00_001).symbolizers[1] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - MBStyle : Rule[2] (PSC-L_02-00_001).symbolizers[2] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - MBStyle : Rule[2] (PSC-L_02-00_001) : 3 symbolizers empilés en autant de couches Mapbox distinctes (id PSC-L_02-00_001-0..2), même filtre et source-layer, dans l'ORDRE du pivot — coexistence confirmée contre l'oracle QGIS (QgsMapBoxGlStyleConverter), voir le commentaire précédant _ecrire_layers ; l'ordre de superposition visuel exact n'est, lui, pas re-vérifié indépendamment — à confirmer par un rendu GeoServer réel si cet ordre importe.
+  - … et 163 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `plu_psc_p.qml`
   - Lecture QML : examples/qml/PLU/plu_psc_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (3.5Point -> 4.375px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - Lecture QML : examples/qml/PLU/plu_psc_p.qml [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
@@ -187,7 +202,7 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - SLD : Rule[1] (PSC-P_01-03_001).symbolizers[0] : propriété de symbolizer 'strokeWidthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[2] (PSC-P_02-00_001).symbolizers[0] : propriété de symbolizer 'radiusUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[2] (PSC-P_02-00_001).symbolizers[0] : propriété de symbolizer 'strokeWidthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - … et 160 autre(s) avertissement(s) « SLD » non affiché(s) ici — voir rapport_conversion.json.
+  - … et 128 autre(s) avertissement(s) « SLD » non affiché(s) ici — voir rapport_conversion.json.
   - MBStyle : Rule[0] (PSC-P_01-00_001).symbolizers[0] : propriété de symbolizer 'radiusUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (PSC-P_01-00_001).symbolizers[0] : propriété de symbolizer 'rotate' (valeur 0.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (PSC-P_01-00_001).symbolizers[0] : propriété de symbolizer 'strokeWidthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
@@ -216,7 +231,7 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[0] (PSC-S_01-00_001) : 3 symbolizers empilés en autant de couches Mapbox distinctes (id PSC-S_01-00_001-0..2), même filtre et source-layer, dans l'ORDRE du pivot — coexistence confirmée contre l'oracle QGIS (QgsMapBoxGlStyleConverter), voir le commentaire précédant _ecrire_layers ; l'ordre de superposition visuel exact n'est, lui, pas re-vérifié indépendamment — à confirmer par un rendu GeoServer réel si cet ordre importe.
   - MBStyle : Rule[1] (PSC-S_01-03_001).symbolizers[0] : propriété de symbolizer 'graphicFillPadding' (valeur [9.9, 9.9, 9.9, 9.9]) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[1] (PSC-S_01-03_001).symbolizers[1] : propriété de symbolizer 'graphicFillPadding' (valeur [9.9, 9.9, 9.9, 9.9]) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - … et 272 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
+  - … et 267 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `plu_zone_urba_ge.qml`
   - Lecture QML : examples/qml/PLU/plu_zone_urba_ge.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (7.0Point -> 8.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - Lecture QML : examples/qml/PLU/plu_zone_urba_ge.qml [SimpleLine].perpendicularOffset : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
@@ -232,13 +247,13 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - SLD : Rule[2] (ZONE_AUs_001_ge).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[2] (ZONE_AUs_001_ge).symbolizers[1] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 4 autre(s) avertissement(s) « SLD » non affiché(s) ici — voir rapport_conversion.json.
-  - MBStyle : Rule[0] (ZONE_A_001_ge).symbolizers[0] : propriété de symbolizer 'perpendicularOffset' (valeur 3.75) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (ZONE_A_001_ge).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (ZONE_A_001_ge).symbolizers[1] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (ZONE_A_001_ge) : 2 symbolizers empilés en autant de couches Mapbox distinctes (id ZONE_A_001_ge-0..1), même filtre et source-layer, dans l'ORDRE du pivot — coexistence confirmée contre l'oracle QGIS (QgsMapBoxGlStyleConverter), voir le commentaire précédant _ecrire_layers ; l'ordre de superposition visuel exact n'est, lui, pas re-vérifié indépendamment — à confirmer par un rendu GeoServer réel si cet ordre importe.
-  - MBStyle : Rule[1] (ZONE_AUc_001_ge).symbolizers[0] : propriété de symbolizer 'perpendicularOffset' (valeur 3.75) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[1] (ZONE_AUc_001_ge).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - … et 14 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
+  - MBStyle : Rule[1] (ZONE_AUc_001_ge).symbolizers[1] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - MBStyle : Rule[1] (ZONE_AUc_001_ge) : 2 symbolizers empilés en autant de couches Mapbox distinctes (id ZONE_AUc_001_ge-0..1), même filtre et source-layer, dans l'ORDRE du pivot — coexistence confirmée contre l'oracle QGIS (QgsMapBoxGlStyleConverter), voir le commentaire précédant _ecrire_layers ; l'ordre de superposition visuel exact n'est, lui, pas re-vérifié indépendamment — à confirmer par un rendu GeoServer réel si cet ordre importe.
+  - … et 9 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `plu_zone_urba_pe.qml`
   - Lecture QML : examples/qml/PLU/plu_zone_urba_pe.qml [SimpleFill].outlineWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - Lecture QML : examples/qml/PLU/plu_zone_urba_pe.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (0.8Point -> 1.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
@@ -278,11 +293,11 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - … et 6 autre(s) avertissement(s) « SLD » non affiché(s) ici — voir rapport_conversion.json.
   - MBStyle : Rule[0] (INF-L_16-00_001).symbolizers[0] : propriété de symbolizer 'dashOffset' (valeur 0.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (INF-L_16-00_001).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - MBStyle : Rule[0] (INF-L_16-00_001).symbolizers[1] : propriété de symbolizer 'spacing' (valeur 20.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (INF-L_16-00_001).symbolizers[1] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (INF-L_16-00_001) : 2 symbolizers empilés en autant de couches Mapbox distinctes (id INF-L_16-00_001-0..1), même filtre et source-layer, dans l'ORDRE du pivot — coexistence confirmée contre l'oracle QGIS (QgsMapBoxGlStyleConverter), voir le commentaire précédant _ecrire_layers ; l'ordre de superposition visuel exact n'est, lui, pas re-vérifié indépendamment — à confirmer par un rendu GeoServer réel si cet ordre importe.
-  - MBStyle : Rule[1] (INF-L_19-01_001).symbolizers[0] : propriété de symbolizer 'spacing' (valeur 20.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - … et 4 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
+  - MBStyle : Rule[1] (INF-L_19-01_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - MBStyle : Rule[2] (INF-L_22-00_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - … et 1 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `psmv_inf_p.qml`
   - Lecture QML : examples/qml/PSMV/psmv_inf_p.qml : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
   - Lecture QML : examples/qml/PSMV/psmv_inf_p.qml [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (6.60156Point -> 8.252px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
@@ -292,17 +307,17 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - Lecture QML : examples/qml/PSMV/psmv_inf_p.qml [SvgMarker].size : unité QML 'Point' convertie en pixels via dpi=90.0 (20.0Point -> 25.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - … et 22 autre(s) avertissement(s) « Lecture QML » non affiché(s) ici — voir rapport_conversion.json.
   - SLD : Rule[0] (INF-P_16-00_001).symbolizers[0] : Opacity=1.0 écrit dans le SLD (construction OGC SE 1.0 standard) mais NON vérifié comme appliqué par l'oracle QGIS pour IconSymbolizer — testé par introspection des propriétés ET par rendu pixel réel (Opacity=0.2 vs 1.0 du même symbole produisent un pixel de sortie strictement identique), QGIS 3.40 ignore ce <Graphic><Opacity>. Peut fonctionner sous GeoServer (non vérifiable ici, aucun oracle GeoServer disponible).
-  - SLD : Rule[0] (INF-P_16-00_001).symbolizers[0] : propriété de symbolizer 'color' (valeur '#d7b09e') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[0] (INF-P_16-00_001).symbolizers[0] : propriété de symbolizer 'sizeUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[1] (INF-P_19-01_001).symbolizers[0] : Opacity=1.0 écrit dans le SLD (construction OGC SE 1.0 standard) mais NON vérifié comme appliqué par l'oracle QGIS pour IconSymbolizer — testé par introspection des propriétés ET par rendu pixel réel (Opacity=0.2 vs 1.0 du même symbole produisent un pixel de sortie strictement identique), QGIS 3.40 ignore ce <Graphic><Opacity>. Peut fonctionner sous GeoServer (non vérifiable ici, aucun oracle GeoServer disponible).
-  - SLD : Rule[1] (INF-P_19-01_001).symbolizers[0] : propriété de symbolizer 'color' (valeur '#00734c') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[1] (INF-P_19-01_001).symbolizers[0] : propriété de symbolizer 'sizeUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - … et 35 autre(s) avertissement(s) « SLD » non affiché(s) ici — voir rapport_conversion.json.
-  - MBStyle : Rule[0] (INF-P_16-00_001).symbolizers[0] : propriété de symbolizer 'color' (valeur '#d7b09e') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - SLD : Rule[2] (INF-P_70-00_001).symbolizers[0] : Opacity=1.0 écrit dans le SLD (construction OGC SE 1.0 standard) mais NON vérifié comme appliqué par l'oracle QGIS pour IconSymbolizer — testé par introspection des propriétés ET par rendu pixel réel (Opacity=0.2 vs 1.0 du même symbole produisent un pixel de sortie strictement identique), QGIS 3.40 ignore ce <Graphic><Opacity>. Peut fonctionner sous GeoServer (non vérifiable ici, aucun oracle GeoServer disponible).
+  - SLD : Rule[2] (INF-P_70-00_001).symbolizers[0] : propriété de symbolizer 'sizeUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - … et 22 autre(s) avertissement(s) « SLD » non affiché(s) ici — voir rapport_conversion.json.
+  - MBStyle : Rule[0] (INF-P_16-00_001).symbolizers[0] : color='#d7b09e' écrit en icon-color (paint) — NON vérifié contre l'oracle QGIS habituel (QgsMapBoxGlStyleConverter n'implémente ni icon-color ni le drapeau 'sdf' d'un sprite, confirmé en lisant son code source, versions 3.28 à 3.40), mais conforme à la spec Mapbox GL Style officielle (icon-color + sprite SDF) — n'a d'effet que si la vignette résolue est effectivement déclarée "sdf": true dans sprite.json (cf. styleforge_core.sprites.SpriteRegistry) : à confirmer par un rendu réel (Mapbox GL JS/MapLibre GL JS/GeoServer) avant mise en production.
   - MBStyle : Rule[0] (INF-P_16-00_001).symbolizers[0] : propriété de symbolizer 'sizeUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - MBStyle : Rule[1] (INF-P_19-01_001).symbolizers[0] : propriété de symbolizer 'color' (valeur '#00734c') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - MBStyle : Rule[1] (INF-P_19-01_001).symbolizers[0] : color='#00734c' écrit en icon-color (paint) — NON vérifié contre l'oracle QGIS habituel (QgsMapBoxGlStyleConverter n'implémente ni icon-color ni le drapeau 'sdf' d'un sprite, confirmé en lisant son code source, versions 3.28 à 3.40), mais conforme à la spec Mapbox GL Style officielle (icon-color + sprite SDF) — n'a d'effet que si la vignette résolue est effectivement déclarée "sdf": true dans sprite.json (cf. styleforge_core.sprites.SpriteRegistry) : à confirmer par un rendu réel (Mapbox GL JS/MapLibre GL JS/GeoServer) avant mise en production.
   - MBStyle : Rule[1] (INF-P_19-01_001).symbolizers[0] : propriété de symbolizer 'sizeUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - MBStyle : Rule[2] (INF-P_70-00_001).symbolizers[0] : propriété de symbolizer 'color' (valeur '#c31a38') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - MBStyle : Rule[2] (INF-P_70-00_001).symbolizers[0] : color='#c31a38' écrit en icon-color (paint) — NON vérifié contre l'oracle QGIS habituel (QgsMapBoxGlStyleConverter n'implémente ni icon-color ni le drapeau 'sdf' d'un sprite, confirmé en lisant son code source, versions 3.28 à 3.40), mais conforme à la spec Mapbox GL Style officielle (icon-color + sprite SDF) — n'a d'effet que si la vignette résolue est effectivement déclarée "sdf": true dans sprite.json (cf. styleforge_core.sprites.SpriteRegistry) : à confirmer par un rendu réel (Mapbox GL JS/MapLibre GL JS/GeoServer) avant mise en production.
   - MBStyle : Rule[2] (INF-P_70-00_001).symbolizers[0] : propriété de symbolizer 'sizeUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 24 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `psmv_inf_s.qml`
@@ -319,14 +334,14 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - SLD : Rule[1] (INF-S_02-00_001).symbolizers[1] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[2] (INF-S_03-00_001).symbolizers[0] : LineSymbolizer.graphicStroke avec un Icon (ExternalGraphic) imbriqué — écrit conformément à OGC SE 1.1.0 (Graphic = ExternalGraphic | Mark), mais PAS VÉRIFIÉ PAR L'ORACLE QGIS : QGIS lui-même ne sait pas relire cet élément (round-trip loadSldStyle() retombe sur une ligne unie par défaut), ce qui rend la vérification habituelle de ce module impossible ici. Écrit sur demande explicite de maximiser la compatibilité plutôt que d'échouer — à confirmer par un test de rendu GeoServer réel avant mise en production.
   - SLD : Rule[2] (INF-S_03-00_001).symbolizers[0].graphicStroke : Opacity=1.0 écrit dans le SLD (construction OGC SE 1.0 standard) mais NON vérifié comme appliqué par l'oracle QGIS pour IconSymbolizer — testé par introspection des propriétés ET par rendu pixel réel (Opacity=0.2 vs 1.0 du même symbole produisent un pixel de sortie strictement identique), QGIS 3.40 ignore ce <Graphic><Opacity>. Peut fonctionner sous GeoServer (non vérifiable ici, aucun oracle GeoServer disponible).
-  - … et 145 autre(s) avertissement(s) « SLD » non affiché(s) ici — voir rapport_conversion.json.
+  - … et 134 autre(s) avertissement(s) « SLD » non affiché(s) ici — voir rapport_conversion.json.
   - MBStyle : Rule[0] (INF-S_01-00_001).symbolizers[0] : propriété de symbolizer 'dashOffset' (valeur 0.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (INF-S_01-00_001).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[1] (INF-S_02-00_001).symbolizers[0] : outlineWidth=0.0 NON écrit — la spec Mapbox GL Style n'a AUCUNE propriété "paint" pour une couche "fill" contrôlant l'épaisseur, le pointillé, ou les extrémités du contour (paint_fill se limite à fill-antialias/fill-opacity/fill-color/fill-outline-color/fill-translate*/fill-pattern) : le contour d'une couche fill Mapbox est TOUJOURS un simple trait plein de largeur fixe. Ceci n'est pas une limite de conversion découverte en testant (comme pour l'écrivain SLD) mais un fait de la spec elle-même — contourner cela nécessiterait une couche "line" séparée, hors de la portée de cet écrivain pour cette itération.
   - MBStyle : Rule[1] (INF-S_02-00_001).symbolizers[0] : outlineWidthUnit='px' NON écrit — la spec Mapbox GL Style n'a AUCUNE propriété "paint" pour une couche "fill" contrôlant l'épaisseur, le pointillé, ou les extrémités du contour (paint_fill se limite à fill-antialias/fill-opacity/fill-color/fill-outline-color/fill-translate*/fill-pattern) : le contour d'une couche fill Mapbox est TOUJOURS un simple trait plein de largeur fixe. Ceci n'est pas une limite de conversion découverte en testant (comme pour l'écrivain SLD) mais un fait de la spec elle-même — contourner cela nécessiterait une couche "line" séparée, hors de la portée de cet écrivain pour cette itération.
   - MBStyle : Rule[1] (INF-S_02-00_001).symbolizers[1] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[1] (INF-S_02-00_001) : 2 symbolizers empilés en autant de couches Mapbox distinctes (id INF-S_02-00_001-0..1), même filtre et source-layer, dans l'ORDRE du pivot — coexistence confirmée contre l'oracle QGIS (QgsMapBoxGlStyleConverter), voir le commentaire précédant _ecrire_layers ; l'ordre de superposition visuel exact n'est, lui, pas re-vérifié indépendamment — à confirmer par un rendu GeoServer réel si cet ordre importe.
-  - … et 160 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
+  - … et 151 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `psmv_psc_l.qml`
   - Lecture QML : examples/qml/PSMV/psmv_psc_l.qml [MarkerLine] [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (2.5Point -> 3.125px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - Lecture QML : examples/qml/PSMV/psmv_psc_l.qml [MarkerLine] [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
@@ -342,13 +357,13 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - SLD : Rule[2] (PSC-L_02-00_001).symbolizers[2] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[3] (PSC-L_02-00_110).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - … et 204 autre(s) avertissement(s) « SLD » non affiché(s) ici — voir rapport_conversion.json.
-  - MBStyle : Rule[0] (PSC-L_01-00_001).symbolizers[0] : propriété de symbolizer 'spacing' (valeur 13.749999999999998) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (PSC-L_01-00_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - MBStyle : Rule[1] (PSC-L_01-03_001).symbolizers[0] : propriété de symbolizer 'spacing' (valeur 13.749999999999998) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[1] (PSC-L_01-03_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - MBStyle : Rule[2] (PSC-L_02-00_001).symbolizers[0] : propriété de symbolizer 'spacing' (valeur 5.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[2] (PSC-L_02-00_001).symbolizers[0] : propriété de symbolizer 'spacingUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - … et 271 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
+  - MBStyle : Rule[2] (PSC-L_02-00_001).symbolizers[1] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - MBStyle : Rule[2] (PSC-L_02-00_001).symbolizers[2] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
+  - MBStyle : Rule[2] (PSC-L_02-00_001) : 3 symbolizers empilés en autant de couches Mapbox distinctes (id PSC-L_02-00_001-0..2), même filtre et source-layer, dans l'ORDRE du pivot — coexistence confirmée contre l'oracle QGIS (QgsMapBoxGlStyleConverter), voir le commentaire précédant _ecrire_layers ; l'ordre de superposition visuel exact n'est, lui, pas re-vérifié indépendamment — à confirmer par un rendu GeoServer réel si cet ordre importe.
+  - … et 175 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `psmv_psc_p.qml`
   - Lecture QML : examples/qml/PSMV/psmv_psc_p.qml [SimpleMarker].radius : unité QML 'Point' convertie en pixels via dpi=90.0 (3.5Point -> 4.375px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - Lecture QML : examples/qml/PSMV/psmv_psc_p.qml [SimpleMarker].strokeWidth : unité QML 'MM' convertie en pixels via dpi=90.0 (0.0MM -> 0.000px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
@@ -363,7 +378,7 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - SLD : Rule[1] (PSC-P_01-03_001).symbolizers[0] : propriété de symbolizer 'strokeWidthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[2] (PSC-P_02-00_001).symbolizers[0] : propriété de symbolizer 'radiusUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[2] (PSC-P_02-00_001).symbolizers[0] : propriété de symbolizer 'strokeWidthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - … et 175 autre(s) avertissement(s) « SLD » non affiché(s) ici — voir rapport_conversion.json.
+  - … et 136 autre(s) avertissement(s) « SLD » non affiché(s) ici — voir rapport_conversion.json.
   - MBStyle : Rule[0] (PSC-P_01-00_001).symbolizers[0] : propriété de symbolizer 'radiusUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (PSC-P_01-00_001).symbolizers[0] : propriété de symbolizer 'rotate' (valeur 0.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (PSC-P_01-00_001).symbolizers[0] : propriété de symbolizer 'strokeWidthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
@@ -385,14 +400,14 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - SLD : Rule[1] (PSC-S_01-03_001).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le SLD produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - SLD : Rule[1] (PSC-S_01-03_001).symbolizers[1] : graphicFillPadding=[4.95, 2.475, 4.95, 2.475] NON écrit — pas encore vérifié contre l'oracle pour cette itération (l'espacement du motif reste déterminé par Size seul, motif jointif par défaut).
   - SLD : Rule[1] (PSC-S_01-03_001).symbolizers[2] : graphicFillPadding=[4.95, 4.95, 4.95, 4.95] NON écrit — pas encore vérifié contre l'oracle pour cette itération (l'espacement du motif reste déterminé par Size seul, motif jointif par défaut).
-  - … et 255 autre(s) avertissement(s) « SLD » non affiché(s) ici — voir rapport_conversion.json.
+  - … et 253 autre(s) avertissement(s) « SLD » non affiché(s) ici — voir rapport_conversion.json.
   - MBStyle : Rule[0] (PSC-S_01-00_001).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (PSC-S_01-00_001).symbolizers[1] : propriété de symbolizer 'graphicFillPadding' (valeur [4.95, 4.95, 4.95, 4.95]) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (PSC-S_01-00_001).symbolizers[2] : propriété de symbolizer 'graphicFillPadding' (valeur [4.95, 4.95, 4.95, 4.95]) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[0] (PSC-S_01-00_001) : 3 symbolizers empilés en autant de couches Mapbox distinctes (id PSC-S_01-00_001-0..2), même filtre et source-layer, dans l'ORDRE du pivot — coexistence confirmée contre l'oracle QGIS (QgsMapBoxGlStyleConverter), voir le commentaire précédant _ecrire_layers ; l'ordre de superposition visuel exact n'est, lui, pas re-vérifié indépendamment — à confirmer par un rendu GeoServer réel si cet ordre importe.
   - MBStyle : Rule[1] (PSC-S_01-03_001).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[1] (PSC-S_01-03_001).symbolizers[1] : propriété de symbolizer 'graphicFillPadding' (valeur [4.95, 2.475, 4.95, 2.475]) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - … et 298 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
+  - … et 293 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `psmv_zone_urba.qml`
   - Lecture QML : examples/qml/PSMV/psmv_zone_urba.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - Lecture QML : examples/qml/PSMV/psmv_zone_urba.qml [SimpleLine].dasharray : unité QML 'Point' convertie en pixels via dpi=90.0 (3.0Point -> 3.750px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
@@ -423,7 +438,7 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[0] (Protection des bois et forêts à Mayotte - A1) : 2 symbolizers empilés en autant de couches Mapbox distinctes (id Protection des bois et forêts à Mayotte - A1-0..1), même filtre et source-layer, dans l'ORDRE du pivot — coexistence confirmée contre l'oracle QGIS (QgsMapBoxGlStyleConverter), voir le commentaire précédant _ecrire_layers ; l'ordre de superposition visuel exact n'est, lui, pas re-vérifié indépendamment — à confirmer par un rendu GeoServer réel si cet ordre importe.
   - MBStyle : Rule[1] (Conduites d'irrigation - A2).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[2] (Entretien des canaux d'irigation - A3).symbolizers[0] : propriété de symbolizer 'dashOffset' (valeur 0.0) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
-  - … et 153 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
+  - … et 152 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
 - `sup_ass.qml`
   - Lecture QML : examples/qml/SUP/sup_ass.qml [SimpleLine].width : unité QML 'Point' convertie en pixels via dpi=90.0 (0.5Point -> 0.625px) — approximation dépendante d'une résolution supposée, pas une conversion exacte.
   - Lecture QML : examples/qml/SUP/sup_ass.qml [PointPatternFill] : outline_color/outline_width non représentables par IconSymbolizer (pas de champ de trait séparé) — non traduits.
@@ -445,4 +460,4 @@ Chaque avertissement précise le document concerné par son préfixe : **`Lectur
   - MBStyle : Rule[1] (A10|gen|ass).symbolizers[0] : propriété de symbolizer 'widthUnit' (valeur 'px') NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[1] (A10|gen|ass).symbolizers[1] : propriété de symbolizer 'graphicFillPadding' (valeur [4.455, 4.455, 4.455, 4.455]) NON écrite dans le document Mapbox produit — hors de la portée bornée de cet écrivain pour cette itération, PAS silencieusement ignorée.
   - MBStyle : Rule[1] (A10|gen|ass) : 2 symbolizers empilés en autant de couches Mapbox distinctes (id A10|gen|ass-0..1), même filtre et source-layer, dans l'ORDRE du pivot — coexistence confirmée contre l'oracle QGIS (QgsMapBoxGlStyleConverter), voir le commentaire précédant _ecrire_layers ; l'ordre de superposition visuel exact n'est, lui, pas re-vérifié indépendamment — à confirmer par un rendu GeoServer réel si cet ordre importe.
-  - … et 156 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.
+  - … et 155 autre(s) avertissement(s) « MBStyle » non affiché(s) ici — voir rapport_conversion.json.

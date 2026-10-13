@@ -1930,7 +1930,7 @@
     },
     {
       "id": "JS1|gen|ass",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "sup_ass",
       "filter": [
@@ -1941,9 +1941,15 @@
         ],
         "JS1|gen|ass"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_b695fd51a9"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 11.25,
+        "icon-image": "cnig_picto_b695fd51a9",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PM1|gen_pprnp|ass-0",

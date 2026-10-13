@@ -1501,7 +1501,7 @@
     },
     {
       "id": "PSC-S_03-00_001-2",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "plu_psc_s",
       "filter": [
@@ -1512,9 +1512,15 @@
         ],
         "PSC-S_03-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_01b73419c5"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 16.25,
+        "icon-image": "cnig_picto_01b73419c5",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-S_04-00_001-0",
@@ -3432,7 +3438,7 @@
     },
     {
       "id": "PSC-S_24-00_001",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "plu_psc_s",
       "filter": [
@@ -3443,9 +3449,15 @@
         ],
         "PSC-S_24-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_c108040295"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 6.25,
+        "icon-image": "cnig_picto_c108040295",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-S_25-00_001-0",
@@ -3472,7 +3484,7 @@
     },
     {
       "id": "PSC-S_25-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "plu_psc_s",
       "filter": [
@@ -3483,9 +3495,15 @@
         ],
         "PSC-S_25-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_927f4c2298"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 16.25,
+        "icon-image": "cnig_picto_927f4c2298",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-S_26-00_001-0",
@@ -4696,7 +4714,8 @@
       "paint": {
         "line-color": "#005ce6",
         "line-opacity": 1.0,
-        "line-width": 2.0
+        "line-width": 2.0,
+        "line-offset": -1.0
       }
     },
     {
@@ -4759,7 +4778,8 @@
       "paint": {
         "line-color": "#73b2ff",
         "line-opacity": 1.0,
-        "line-width": 2.0
+        "line-width": 2.0,
+        "line-offset": -1.0
       }
     },
     {

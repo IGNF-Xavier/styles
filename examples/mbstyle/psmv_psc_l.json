@@ -11,7 +11,7 @@
   "layers": [
     {
       "id": "PSC-L_01-00_001",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -22,13 +22,19 @@
         ],
         "PSC-L_01-00_001"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 13.749999999999998,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_01-03_001",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -39,13 +45,19 @@
         ],
         "PSC-L_01-03_001"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 13.749999999999998,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-00_001-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -56,9 +68,15 @@
         ],
         "PSC-L_02-00_001"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-00_001-1",
@@ -80,7 +98,8 @@
       "paint": {
         "line-color": "#6e6e6e",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -103,12 +122,13 @@
       "paint": {
         "line-color": "#6e6e6e",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-00_110-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -119,9 +139,15 @@
         ],
         "PSC-L_02-00_110"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-00_110-1",
@@ -143,7 +169,8 @@
       "paint": {
         "line-color": "#6e6e6e",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -166,12 +193,13 @@
       "paint": {
         "line-color": "#6e6e6e",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-00_120-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -182,9 +210,15 @@
         ],
         "PSC-L_02-00_120"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-00_120-1",
@@ -206,7 +240,8 @@
       "paint": {
         "line-color": "#6e6e6e",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -229,12 +264,13 @@
       "paint": {
         "line-color": "#6e6e6e",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-00_140-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -245,9 +281,15 @@
         ],
         "PSC-L_02-00_140"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-00_140-1",
@@ -269,7 +311,8 @@
       "paint": {
         "line-color": "#6e6e6e",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -292,12 +335,13 @@
       "paint": {
         "line-color": "#6e6e6e",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-00_160-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -308,9 +352,15 @@
         ],
         "PSC-L_02-00_160"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-00_160-1",
@@ -332,7 +382,8 @@
       "paint": {
         "line-color": "#6e6e6e",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -355,12 +406,13 @@
       "paint": {
         "line-color": "#6e6e6e",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-00_200-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -371,9 +423,15 @@
         ],
         "PSC-L_02-00_200"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-00_200-1",
@@ -395,7 +453,8 @@
       "paint": {
         "line-color": "#6e6e6e",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -418,12 +477,13 @@
       "paint": {
         "line-color": "#6e6e6e",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-01_001-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -434,9 +494,15 @@
         ],
         "PSC-L_02-01_001"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-01_001-1",
@@ -458,7 +524,8 @@
       "paint": {
         "line-color": "#df73e1",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -481,12 +548,13 @@
       "paint": {
         "line-color": "#df73e1",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-01_110-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -497,9 +565,15 @@
         ],
         "PSC-L_02-01_110"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-01_110-1",
@@ -521,7 +595,8 @@
       "paint": {
         "line-color": "#df73e1",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -544,12 +619,13 @@
       "paint": {
         "line-color": "#df73e1",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-01_120-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -560,9 +636,15 @@
         ],
         "PSC-L_02-01_120"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-01_120-1",
@@ -584,7 +666,8 @@
       "paint": {
         "line-color": "#df73e1",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -607,12 +690,13 @@
       "paint": {
         "line-color": "#df73e1",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-01_140-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -623,9 +707,15 @@
         ],
         "PSC-L_02-01_140"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-01_140-1",
@@ -647,7 +737,8 @@
       "paint": {
         "line-color": "#df73e1",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -670,12 +761,13 @@
       "paint": {
         "line-color": "#df73e1",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-01_160-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -686,9 +778,15 @@
         ],
         "PSC-L_02-01_160"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-01_160-1",
@@ -710,7 +808,8 @@
       "paint": {
         "line-color": "#df73e1",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -733,12 +832,13 @@
       "paint": {
         "line-color": "#df73e1",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-01_200-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -749,9 +849,15 @@
         ],
         "PSC-L_02-01_200"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-01_200-1",
@@ -773,7 +879,8 @@
       "paint": {
         "line-color": "#df73e1",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -796,12 +903,13 @@
       "paint": {
         "line-color": "#df73e1",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-02_001-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -812,9 +920,15 @@
         ],
         "PSC-L_02-02_001"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-02_001-1",
@@ -836,7 +950,8 @@
       "paint": {
         "line-color": "#ffa77f",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -859,12 +974,13 @@
       "paint": {
         "line-color": "#ffa77f",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-02_110-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -875,9 +991,15 @@
         ],
         "PSC-L_02-02_110"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-02_110-1",
@@ -899,7 +1021,8 @@
       "paint": {
         "line-color": "#ffa77f",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -922,12 +1045,13 @@
       "paint": {
         "line-color": "#ffa77f",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-02_120-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -938,9 +1062,15 @@
         ],
         "PSC-L_02-02_120"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-02_120-1",
@@ -962,7 +1092,8 @@
       "paint": {
         "line-color": "#ffa77f",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -985,12 +1116,13 @@
       "paint": {
         "line-color": "#ffa77f",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-02_140-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1001,9 +1133,15 @@
         ],
         "PSC-L_02-02_140"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-02_140-1",
@@ -1025,7 +1163,8 @@
       "paint": {
         "line-color": "#ffa77f",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -1048,12 +1187,13 @@
       "paint": {
         "line-color": "#ffa77f",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-02_160-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1064,9 +1204,15 @@
         ],
         "PSC-L_02-02_160"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-02_160-1",
@@ -1088,7 +1234,8 @@
       "paint": {
         "line-color": "#ffa77f",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -1111,12 +1258,13 @@
       "paint": {
         "line-color": "#ffa77f",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
       "id": "PSC-L_02-02_200-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1127,9 +1275,15 @@
         ],
         "PSC-L_02-02_200"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 5.0,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_02-02_200-1",
@@ -1151,7 +1305,8 @@
       "paint": {
         "line-color": "#ffa77f",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": -1.25
       }
     },
     {
@@ -1174,7 +1329,8 @@
       "paint": {
         "line-color": "#ffa77f",
         "line-opacity": 1.0,
-        "line-width": 0.75
+        "line-width": 0.75,
+        "line-offset": 1.25
       }
     },
     {
@@ -1233,7 +1389,7 @@
     },
     {
       "id": "PSC-L_07-00_001-2",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1244,13 +1400,19 @@
         ],
         "PSC-L_07-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_f59268a6e3"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 22.5,
+        "icon-image": "cnig_picto_f59268a6e3",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_07-00_001-3",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1261,9 +1423,15 @@
         ],
         "PSC-L_07-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_cbf2e5c3a6"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 22.5,
+        "icon-image": "cnig_picto_cbf2e5c3a6",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_07-01_001-0",
@@ -1290,7 +1458,7 @@
     },
     {
       "id": "PSC-L_07-01_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1301,13 +1469,19 @@
         ],
         "PSC-L_07-01_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_f59268a6e3"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 22.5,
+        "icon-image": "cnig_picto_f59268a6e3",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_07-01_001-2",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1318,9 +1492,15 @@
         ],
         "PSC-L_07-01_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_cbf2e5c3a6"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 22.5,
+        "icon-image": "cnig_picto_cbf2e5c3a6",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_07-02_001-0",
@@ -1347,7 +1527,7 @@
     },
     {
       "id": "PSC-L_07-02_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1358,13 +1538,19 @@
         ],
         "PSC-L_07-02_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_f59268a6e3"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 22.5,
+        "icon-image": "cnig_picto_f59268a6e3",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_07-02_001-2",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1375,9 +1561,15 @@
         ],
         "PSC-L_07-02_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_cbf2e5c3a6"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 22.5,
+        "icon-image": "cnig_picto_cbf2e5c3a6",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_07-03_001-0",
@@ -1404,7 +1596,7 @@
     },
     {
       "id": "PSC-L_07-03_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1415,13 +1607,19 @@
         ],
         "PSC-L_07-03_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_f59268a6e3"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 22.5,
+        "icon-image": "cnig_picto_f59268a6e3",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_07-03_001-2",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1432,9 +1630,15 @@
         ],
         "PSC-L_07-03_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_cbf2e5c3a6"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 22.5,
+        "icon-image": "cnig_picto_cbf2e5c3a6",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_07-04_001-0",
@@ -1461,7 +1665,7 @@
     },
     {
       "id": "PSC-L_07-04_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1472,13 +1676,19 @@
         ],
         "PSC-L_07-04_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_f59268a6e3"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 22.5,
+        "icon-image": "cnig_picto_f59268a6e3",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_07-04_001-2",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1489,9 +1699,15 @@
         ],
         "PSC-L_07-04_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_cbf2e5c3a6"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 22.5,
+        "icon-image": "cnig_picto_cbf2e5c3a6",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_07-05_001-0",
@@ -1518,7 +1734,7 @@
     },
     {
       "id": "PSC-L_07-05_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1529,13 +1745,19 @@
         ],
         "PSC-L_07-05_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_f59268a6e3"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 22.5,
+        "icon-image": "cnig_picto_f59268a6e3",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_07-05_001-2",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1546,9 +1768,15 @@
         ],
         "PSC-L_07-05_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_cbf2e5c3a6"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 22.5,
+        "icon-image": "cnig_picto_cbf2e5c3a6",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_07-53_001-0",
@@ -1598,7 +1826,7 @@
     },
     {
       "id": "PSC-L_07-55_001",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1609,13 +1837,19 @@
         ],
         "PSC-L_07-55_001"
       ],
-      "paint": {
-        "line-pattern": "marque_triangle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 7.5,
+        "icon-image": "marque_triangle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_07-56_001",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1626,13 +1860,19 @@
         ],
         "PSC-L_07-56_001"
       ],
-      "paint": {
-        "line-pattern": "marque_triangle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 7.5,
+        "icon-image": "marque_triangle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_07-59_001",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1643,9 +1883,15 @@
         ],
         "PSC-L_07-59_001"
       ],
-      "paint": {
-        "line-pattern": "marque_circle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 7.5,
+        "icon-image": "marque_circle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_07-64_001",
@@ -1699,7 +1945,7 @@
     },
     {
       "id": "PSC-L_15-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1710,9 +1956,15 @@
         ],
         "PSC-L_15-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_b3cb99c10f"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 13.749999999999998,
+        "icon-image": "cnig_picto_b3cb99c10f",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_15-50_001",
@@ -1766,7 +2018,7 @@
     },
     {
       "id": "PSC-L_22-00_001",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1777,13 +2029,19 @@
         ],
         "PSC-L_22-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_cd46e60ef6"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 10.0,
+        "icon-image": "cnig_picto_cd46e60ef6",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_24-00_001",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1794,13 +2052,19 @@
         ],
         "PSC-L_24-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_c108040295"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 6.25,
+        "icon-image": "cnig_picto_c108040295",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_24-50_001-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1811,13 +2075,19 @@
         ],
         "PSC-L_24-50_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_ab5c2d3ced"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 16.875,
+        "icon-image": "cnig_picto_ab5c2d3ced",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_24-50_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1828,9 +2098,15 @@
         ],
         "PSC-L_24-50_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_0463c649f8"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 16.875,
+        "icon-image": "cnig_picto_0463c649f8",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_25-00_001-0",
@@ -1857,7 +2133,7 @@
     },
     {
       "id": "PSC-L_25-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1868,9 +2144,15 @@
         ],
         "PSC-L_25-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_927f4c2298"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 16.25,
+        "icon-image": "cnig_picto_927f4c2298",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_28-00_001-0",
@@ -1901,7 +2183,7 @@
     },
     {
       "id": "PSC-L_28-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1912,9 +2194,15 @@
         ],
         "PSC-L_28-00_001"
       ],
-      "paint": {
-        "line-pattern": "marque_square_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 15.0,
+        "icon-image": "marque_square_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_31-00_001-0",
@@ -1945,7 +2233,7 @@
     },
     {
       "id": "PSC-L_31-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -1956,9 +2244,15 @@
         ],
         "PSC-L_31-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_8cc4b48967"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 15.0,
+        "icon-image": "cnig_picto_8cc4b48967",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_33-00_001-0",
@@ -1989,7 +2283,7 @@
     },
     {
       "id": "PSC-L_33-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -2000,9 +2294,15 @@
         ],
         "PSC-L_33-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_d285a65b48"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 15.0,
+        "icon-image": "cnig_picto_d285a65b48",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_34-00_001-0",
@@ -2033,7 +2333,7 @@
     },
     {
       "id": "PSC-L_34-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -2044,9 +2344,15 @@
         ],
         "PSC-L_34-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_7ea4c90027"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 15.0,
+        "icon-image": "cnig_picto_7ea4c90027",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_35-00_001-0",
@@ -2073,7 +2379,7 @@
     },
     {
       "id": "PSC-L_35-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -2084,13 +2390,19 @@
         ],
         "PSC-L_35-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_d8da12e6f0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 15.0,
+        "icon-image": "cnig_picto_d8da12e6f0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_37-00_001-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -2101,13 +2413,19 @@
         ],
         "PSC-L_37-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_8392fd6bbe"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 10.0,
+        "icon-image": "cnig_picto_8392fd6bbe",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_37-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -2118,13 +2436,19 @@
         ],
         "PSC-L_37-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_718e82b303"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 10.0,
+        "icon-image": "cnig_picto_718e82b303",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_39-00_001",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -2135,9 +2459,15 @@
         ],
         "PSC-L_39-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_567d38d5ea"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 11.25,
+        "icon-image": "cnig_picto_567d38d5ea",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_39-50_001",
@@ -2218,7 +2548,7 @@
     },
     {
       "id": "PSC-L_40-00_001",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -2229,9 +2559,15 @@
         ],
         "PSC-L_40-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_d7760c0a05"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 18.75,
+        "icon-image": "cnig_picto_d7760c0a05",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_41-00_001-0",
@@ -2258,7 +2594,7 @@
     },
     {
       "id": "PSC-L_41-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -2269,13 +2605,19 @@
         ],
         "PSC-L_41-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_56ed353c4b"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 15.0,
+        "icon-image": "cnig_picto_56ed353c4b",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_43-00_001-0",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -2286,13 +2628,19 @@
         ],
         "PSC-L_43-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_85fdb9462f"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 8.749999999999998,
+        "icon-image": "cnig_picto_85fdb9462f",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_43-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -2303,13 +2651,19 @@
         ],
         "PSC-L_43-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_f8bc38944e"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 8.749999999999998,
+        "icon-image": "cnig_picto_f8bc38944e",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_44-00_001",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -2320,9 +2674,15 @@
         ],
         "PSC-L_44-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_cc9dbe592c"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 11.25,
+        "icon-image": "cnig_picto_cc9dbe592c",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_47-00_001-0",
@@ -2353,7 +2713,7 @@
     },
     {
       "id": "PSC-L_47-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -2364,9 +2724,15 @@
         ],
         "PSC-L_47-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_d892b51317"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 27.499999999999996,
+        "icon-image": "cnig_picto_d892b51317",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_48-00_001-0",
@@ -2397,7 +2763,7 @@
     },
     {
       "id": "PSC-L_48-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -2408,9 +2774,15 @@
         ],
         "PSC-L_48-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_3755331718"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 27.499999999999996,
+        "icon-image": "cnig_picto_3755331718",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_50-00_001-0",
@@ -2441,7 +2813,7 @@
     },
     {
       "id": "PSC-L_50-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -2452,9 +2824,15 @@
         ],
         "PSC-L_50-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_85da52b4ca"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 15.0,
+        "icon-image": "cnig_picto_85da52b4ca",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_51-00_001-0",
@@ -2485,7 +2863,7 @@
     },
     {
       "id": "PSC-L_51-00_001-1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -2496,13 +2874,19 @@
         ],
         "PSC-L_51-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_bd76b237c9"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 15.0,
+        "icon-image": "cnig_picto_bd76b237c9",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_52-00_001",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "psmv_psc_l",
       "filter": [
@@ -2513,9 +2897,15 @@
         ],
         "PSC-L_52-00_001"
       ],
-      "paint": {
-        "line-pattern": "cnig_picto_0ae7063c45"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 13.749999999999998,
+        "icon-image": "cnig_picto_0ae7063c45",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "PSC-L_53-00_001-0",
@@ -2537,7 +2927,8 @@
       "paint": {
         "line-color": "#e60000",
         "line-opacity": 1.0,
-        "line-width": 2.0
+        "line-width": 2.0,
+        "line-offset": 5.0
       }
     },
     {

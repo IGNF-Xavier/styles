@@ -2963,7 +2963,7 @@
     },
     {
       "id": "Equipements sportifs - JS1",
-      "type": "line",
+      "type": "symbol",
       "source": "cnig",
       "source-layer": "ASSIETTE_SUP_S",
       "filter": [
@@ -2982,9 +2982,15 @@
         ],
         "js1-"
       ],
-      "paint": {
-        "line-pattern": "marque_triangle_000000_none_1_8_0"
-      }
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 11.0,
+        "icon-image": "marque_triangle_000000_none_1_8_0",
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      "paint": {}
     },
     {
       "id": "Plans de prévention des risques naturels et miniers - PM1-0",

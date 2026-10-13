@@ -29,7 +29,8 @@
       "paint": {
         "line-color": "#fff000",
         "line-opacity": 0.6,
-        "line-width": 8.749999999999998
+        "line-width": 8.749999999999998,
+        "line-offset": -3.75
       }
     },
     {
@@ -75,7 +76,8 @@
       "paint": {
         "line-color": "#d40006",
         "line-opacity": 0.6,
-        "line-width": 8.749999999999998
+        "line-width": 8.749999999999998,
+        "line-offset": -3.75
       }
     },
     {
@@ -121,7 +123,8 @@
       "paint": {
         "line-color": "#e88766",
         "line-opacity": 0.6,
-        "line-width": 8.749999999999998
+        "line-width": 8.749999999999998,
+        "line-offset": -3.75
       }
     },
     {
@@ -167,7 +170,8 @@
       "paint": {
         "line-color": "#23a600",
         "line-opacity": 0.6,
-        "line-width": 8.749999999999998
+        "line-width": 8.749999999999998,
+        "line-offset": -3.75
       }
     },
     {
@@ -213,7 +217,8 @@
       "paint": {
         "line-color": "#b00006",
         "line-opacity": 0.6,
-        "line-width": 8.749999999999998
+        "line-width": 8.749999999999998,
+        "line-offset": -3.75
       }
     },
     {
