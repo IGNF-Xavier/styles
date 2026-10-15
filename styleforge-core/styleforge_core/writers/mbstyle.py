@@ -300,6 +300,7 @@ de périmètre, voir plus haut, _ecrire_layers et _classifier_motif_like).
 """
 from __future__ import annotations
 
+import enum
 import re
 from typing import Any, Callable
 
@@ -313,10 +314,45 @@ import json as _json
 from styleforge_core.writers.sld import _detecter_motif_like_depuis_regex
 
 
+class CategorieEcart(enum.Enum):
+    """Classification explicite de la RAISON pour laquelle une construction
+    pivot n'est pas écrite (voir docs/limites.md, section 0, pour la grille
+    complète et des exemples côté SLD) :
+
+    HORS_PERIMETRE : la construction a, en principe, un équivalent
+    représentable dans le format cible (Mapbox GL Style) ; elle n'est
+    simplement pas (encore) traduite par CETTE itération de l'écrivain —
+    un développement futur peut combler l'écart SANS changer le format
+    cible ni son vocabulaire.
+
+    LIMITE_STRUCTURELLE : le format cible n'a, dans sa spécification,
+    AUCUN moyen de représenter cette construction — quel que soit l'effort
+    de développement futur sur cet écrivain, seul un changement du format
+    lui-même (ou l'adoption d'une extension non standard) lèverait la
+    limite.
+
+    Optionnelle (None par défaut) pour ne pas casser les levées déjà en
+    place avant l'introduction de cette classification (0.2.2) ; les
+    nouvelles levées DEVRAIENT la renseigner plutôt que laisser le lecteur
+    deviner lequel des deux cas s'applique."""
+
+    HORS_PERIMETRE = "hors_perimetre"
+    LIMITE_STRUCTURELLE = "limite_structurelle"
+
+
 class ExpressionPivotNonEcrite(Exception):
     """Levée quand une valeur, un filtre, un symbolizer ou une propriété du
     pivot sort de la portée BORNÉE de cet écrivain (voir la docstring de
-    module). Toujours accompagnée du fragment précis en cause."""
+    module). Toujours accompagnée du fragment précis en cause.
+
+    Depuis 0.2.2, porte une classification optionnelle (voir
+    CategorieEcart) distinguant « pas encore traduit par cette itération »
+    de « le format cible ne peut structurellement pas le représenter » —
+    docs/limites.md en tient le registre détaillé."""
+
+    def __init__(self, message: str, *, categorie: "CategorieEcart | None" = None) -> None:
+        super().__init__(message)
+        self.categorie = categorie
 
 
 def _normaliser(valeur: Any) -> Any:
@@ -1277,7 +1313,8 @@ def _construire_motif_like_mapbox(operande: Any, regex: Any, contexte: str) -> A
             f"formes à UN SEUL segment littéral (exact/préfixe/suffixe/contient, ex. "
             f"\"a1-%\"/\"%abc%\") sont traduites par cette itération ; un motif à joker '_' "
             f"ou à plusieurs segments ('a%b%c') demanderait de chaîner plusieurs recherches, "
-            f"non construit ni vérifié ici — voir _classifier_motif_like."
+            f"non construit ni vérifié ici — voir _classifier_motif_like.",
+            categorie=CategorieEcart.HORS_PERIMETRE,
         )
     forme, litteral = classifie
     champ = _valeur_filtre_mapbox(operande, contexte)
@@ -1336,13 +1373,20 @@ def _construire_filtre_mapbox(filtre: Any, avertissements: list[str], contexte: 
                 f"{contexte} : '!' (négation générale) non écrit par cette itération — "
                 f"vérifié contre l'oracle QGIS que ['!', ['==',...]] et ['!', ['all'/'any',...]] "
                 f"sont rejetés et font perdre TOUTE la Rule en silence (filtre vide -> "
-                f"correspond à tout), voir la docstring de _construire_filtre_mapbox."
+                f"correspond à tout), voir la docstring de _construire_filtre_mapbox. "
+                f"HORS_PERIMETRE, pas LIMITE_STRUCTURELLE confirmée : la spec Mapbox GL "
+                f"legacy filter a '!=' et 'none', potentiellement suffisants pour couvrir "
+                f"ce cas sans négation générique — à vérifier contre "
+                f"@maplibre/maplibre-gl-style-spec (pas seulement l'oracle QGIS, cf. "
+                f"docs/limites.md §6) avant de conclure à une impossibilité de format.",
+                categorie=CategorieEcart.HORS_PERIMETRE,
             )
         if op == "*=":
             raise ExpressionPivotNonEcrite(
                 f"{contexte} : '*=' (LIKE) non écrit par cette itération — aucun "
                 f"opérateur de correspondance par motif générique dans la spec Mapbox "
-                f"GL Expressions (voir la docstring de _construire_filtre_mapbox)."
+                f"GL Expressions (voir la docstring de _construire_filtre_mapbox).",
+                categorie=CategorieEcart.LIMITE_STRUCTURELLE,
             )
         raise ExpressionPivotNonEcrite(f"{contexte} : opérateur de filtre tuple {op!r} non écrit par cette itération.")
     if isinstance(filtre, dict) and "name" in filtre:

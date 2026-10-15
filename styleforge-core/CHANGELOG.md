@@ -5,6 +5,45 @@ changement de champ du pivot typé (`styleforge_core.pivot`) est une version
 MAJEURE, jamais un correctif mineur, parce que des clients de l'API ou de
 la bibliothèque en dépendent directement.
 
+## 0.2.2 — classification explicite des écarts (`CategorieEcart`)
+
+- Nouvelle énumération `styleforge_core.writers.mbstyle.CategorieEcart`
+  (`HORS_PERIMETRE` / `LIMITE_STRUCTURELLE`) et nouveau paramètre optionnel
+  `categorie` sur `ExpressionPivotNonEcrite.__init__` — distingue
+  explicitement « non écrit parce que hors périmètre actuel de cette
+  itération » (un équivalent existe dans le format cible, juste pas encore
+  traduit) de « non écrit parce que le format cible ne le permet pas
+  structurellement » (aucun développement futur sur cet écrivain ne peut
+  lever la limite). Rétrocompatible : `categorie` est optionnel (`None` par
+  défaut), aucune des 46 levées existantes de `mbstyle.py` n'est cassée.
+- Trois levées représentatives de `mbstyle.py` reclassées avec cette
+  nouvelle grille, à la relecture :
+  - motif LIKE à plusieurs segments ou au joker `_` (`_classifier_motif_like`) :
+    `HORS_PERIMETRE` — reformulation plus précise que ce qui était documenté
+    jusqu'ici : ce n'est pas une impossibilité du format, juste une
+    traduction non construite/vérifiée cette itération.
+  - opérateur `'*='` (LIKE générique) dans `_construire_filtre_mapbox` :
+    `LIMITE_STRUCTURELLE` confirmée — aucun opérateur de correspondance par
+    motif générique dans la spec Mapbox GL Expressions elle-même.
+  - négation générale `'!'` dans `_construire_filtre_mapbox` : `HORS_PERIMETRE`
+    (et non `LIMITE_STRUCTURELLE`) malgré le rejet par l'oracle QGIS — la
+    spec Mapbox GL legacy filter propose déjà `'!='` et `'none'`, non encore
+    vérifiés comme couverture suffisante ; voir le point de vigilance
+    méthodologique ajouté à `docs/limites.md` section 0 (ne jamais conclure à
+    une limite de format sur la seule foi du comportement de l'oracle, cf.
+    section 6 déjà existante).
+  Les ~43 autres levées de `mbstyle.py` restent non classées (`categorie=None`)
+  en attendant une relecture au cas par cas plutôt qu'un étiquetage hâtif.
+- `docs/limites.md` : nouvelle section 0 présentant la grille de lecture
+  (trois catégories, dont la « contrainte d'environnement d'exécution » qui
+  n'est ni l'une ni l'autre — ex. la rasterisation de glyphes de police
+  dépendante d'une plate-forme Qt graphique), et sections 1 à 3 annotées
+  avec leur catégorie.
+- Aucun changement de champ du pivot typé, aucun changement de
+  comportement observable (même document SLD/MBStyle produit pour les
+  mêmes entrées) — uniquement une classification diagnostique ajoutée aux
+  exceptions déjà levées. Version MINEURE.
+
 ## 0.2.1 — correctifs MBStyle (perpendicularOffset, spacing, color) et SLD (color)
 
 - `styleforge_core.writers.mbstyle` : `LineSymbolizer.perpendicularOffset` est
