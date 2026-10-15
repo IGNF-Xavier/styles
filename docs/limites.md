@@ -6,6 +6,55 @@ soit détectée et signalée explicitement (exception nommée, avertissement,
 fichier d'index séparé), soit contournée par un mécanisme documenté — rien
 n'est tû ni approximé sans le dire.
 
+## 0. Grille de lecture : pourquoi une construction n'est pas écrite
+
+Une levée `ExpressionPivotNonEcrite` (voir
+`styleforge_core/writers/mbstyle.py` et `.../writers/sld.py`) peut porter
+une classification explicite (`categorie`, voir l'énumération
+`CategorieEcart` depuis la version 0.2.2) qui distingue trois raisons très
+différentes — à ne pas confondre, parce que les actions correctrices sont
+radicalement différentes selon le cas :
+
+- **Hors périmètre actuel** (`CategorieEcart.HORS_PERIMETRE`) : la
+  construction QML/pivot a, en principe, un équivalent représentable dans
+  le format cible. Elle n'est simplement pas (encore) traduite par CETTE
+  itération de l'écrivain — par choix de « cœur minimal d'abord », ou
+  parce qu'elle n'a pas encore été construite/vérifiée contre l'oracle.
+  Un développement futur peut combler l'écart **sans changer ni le
+  format cible ni son vocabulaire**. Exemple : §1 ci-dessous (motif LIKE à
+  plusieurs segments ou au joker `_` — chaînable en théorie via
+  `slice`/`length` Mapbox GL, « non construit ni vérifié » par ce module,
+  pas structurellement impossible).
+- **Limite structurelle du format cible** (`CategorieEcart.LIMITE_STRUCTURELLE`) :
+  le format cible n'a, dans sa spécification, **aucun** moyen de
+  représenter cette construction — quel que soit l'effort de
+  développement futur sur cet écrivain, seul un changement du format lui-
+  même (ou l'adoption d'une extension non standard) lèverait la limite.
+  Exemple : §1 ci-dessous (`'*=' `/LIKE générique : aucun opérateur de
+  correspondance par motif dans la spec Mapbox GL Expressions elle-même) ;
+  §2 ci-dessous, volet police (Mapbox GL Style n'a aucune notion de
+  police pour un symbole ponctuel).
+- **Contrainte d'environnement d'exécution** (hors de `CategorieEcart`,
+  ni l'une ni l'autre des deux catégories ci-dessus) : ni le format cible
+  ni le périmètre de l'outil ne sont en cause — c'est la PLATE-FORME qui
+  génère le style qui manque d'une capacité (ex. un serveur sans
+  affichage Qt). Exemple : §2 ci-dessous, volet rasterisation des
+  glyphes. Se résout en changeant de poste de génération, jamais en
+  modifiant le code.
+
+**Point de vigilance méthodologique (voir §6)** : un rejet observé contre
+l'**oracle** (QGIS, `QgsMapBoxGlStyleConverter`) n'est pas à lui seul une
+preuve de limite structurelle du format — l'oracle peut lui-même avoir
+une limite que le format cible n'a pas. Classer en
+`LIMITE_STRUCTURELLE` seulement après vérification contre la
+spécification de référence (`@maplibre/maplibre-gl-style-spec` pour
+Mapbox GL), jamais sur la seule foi du comportement de l'oracle. Cette
+classification est appliquée progressivement : seuls les sites déjà
+revus portent l'attribut `categorie` à ce stade (voir le CHANGELOG
+0.2.2) ; les ~40 autres levées de `mbstyle.py` restent non classées
+(`categorie=None`) en attendant une relecture au cas par cas plutôt
+qu'un étiquetage hâtif.
+
 ## 1. Expressions QGIS traduites en Mapbox GL (`strMatches` / `ILIKE`)
 
 Mapbox GL Style n'a pas d'opérateur d'expression regex générique. L'outil
@@ -24,30 +73,53 @@ Exemple réel du corpus (ASSIETTE_SUP_S, règle sur le champ
 casse via les 4 formes ci-dessus combinées à une normalisation de casse
 amont — voir `cnig_qml2sld_geoserver.py`, PHASE 5.
 
-**Hors champ, lève une exception nommée plutôt que d'approximer** :
-motifs multi-segments (plusieurs groupes variables dans le même motif) et
-le joker `_` (caractère unique) de `LIKE`/`ILIKE`, qui n'ont pas
-d'équivalent composable dans les opérateurs Mapbox GL ci-dessus sans
-risque de faux positifs/négatifs. Si votre style utilise l'un de ces
-motifs, la conversion MBStyle de la règle concernée échoue explicitement
-(`ExpressionPivotNonEcrite`) — contournement : réécrire la règle QGIS
-source avec un motif canonique équivalent, ou traiter la couche
-séparément pour le SLD (non concerné par cette limite) et accepter
-l'absence de MBStyle pour cette règle précise.
+**[HORS PÉRIMÈTRE ACTUEL]** : motifs multi-segments (plusieurs groupes
+variables dans le même motif) et joker `_` (caractère unique) de
+`LIKE`/`ILIKE`. Reformulation plus précise que les versions antérieures de
+ce document : ce n'est **pas** une impossibilité du format — un motif
+`_`/multi-segments serait en principe exprimable en chaînant plusieurs
+`slice`/`length` Mapbox GL (comme le fait déjà ce module pour
+préfixe/suffixe), mais cette traduction n'a pas été construite ni vérifiée
+contre l'oracle par cette itération (voir `_classifier_motif_like`,
+`categorie=CategorieEcart.HORS_PERIMETRE`). Si votre style utilise l'un de
+ces motifs, la conversion MBStyle de la règle concernée échoue
+explicitement (`ExpressionPivotNonEcrite`) — contournement actuel :
+réécrire la règle QGIS source avec un motif canonique équivalent, ou
+traiter la couche séparément pour le SLD (non concerné par cette limite)
+et accepter l'absence de MBStyle pour cette règle précise.
+
+Par contraste, **[LIMITE STRUCTURELLE]** : l'opérateur `'*='`
+(LIKE générique, forme pivot distincte de `strMatches`) lève, lui,
+`ExpressionPivotNonEcrite` avec `categorie=CategorieEcart.LIMITE_STRUCTURELLE`
+— la spécification Mapbox GL Expressions elle-même ne définit aucun
+opérateur de correspondance par motif générique, quel que soit l'effort de
+développement consacré à ce module.
+
+Un troisième cas, dans `_construire_filtre_mapbox` : la négation générale
+`'!'` sur un sous-filtre arbitraire est classée `HORS_PERIMETRE` et non
+`LIMITE_STRUCTURELLE`, bien que l'oracle QGIS la rejette — par application
+du point de vigilance du §0 : la spec Mapbox GL legacy filter propose déjà
+`'!='` et `'none'`, potentiellement suffisants pour couvrir ce cas sans
+négation générique. Non vérifié contre la spec à ce stade, donc non promu
+en limite structurelle sur la seule foi du rejet de l'oracle.
 
 ## 2. Marques de police (`FontMarker`, ex. `ttf://Wingdings#0x00f1`)
 
-- **SLD** : traduit nativement en `WellKnownName` `ttf://<Police>#0x<hex>`
+- **SLD** [hors du périmètre de cette grille : pas une levée `ExpressionPivotNonEcrite`, SLD couvre ce cas nativement] : traduit nativement en `WellKnownName` `ttf://<Police>#0x<hex>`
   — GeoServer sait le tracer si la police est installée côté serveur (voir
   `docs/geoserver.md`, section police). Risque de substitution de glyphe
   silencieuse par GeoServer lui-même si la police est absente côté
   serveur — à vérifier visuellement après déploiement, l'outil ne peut
   pas le détecter à la génération.
-- **MBStyle** : Mapbox GL n'a aucune notion de police pour un symbole
-  ponctuel. L'outil rasterise donc chaque glyphe en vignette bitmap dans
+- **MBStyle** **[LIMITE STRUCTURELLE]** : Mapbox GL n'a aucune notion de police pour un symbole
+  ponctuel — aucun développement futur sur cet écrivain ne lève cette limite, seul un
+  changement de la spec Mapbox GL Style (ou une extension non standard) le pourrait ;
+  c'est pour cela que le contournement est un changement de MÉCANISME (rasterisation
+  en sprite) et non une approximation du même mécanisme. L'outil rasterise donc chaque glyphe en vignette bitmap dans
   la feuille de sprites, à la génération — mais seulement si
   l'environnement de génération dispose d'une plate-forme Qt graphique
-  utilisable. Si ce n'est pas le cas (poste serveur sans affichage), les
+  utilisable. **[CONTRAINTE D'ENVIRONNEMENT, ni hors-périmètre ni structurelle — voir §0]**
+  Si ce n'est pas le cas (poste serveur sans affichage), les
   glyphes concernés sont **exclus explicitement** (pas rendus
   approximativement) et listés dans `sprite_glyphes_a_generer.json`, avec
   un avertissement — contournement : régénérer la feuille de sprites sur
@@ -56,7 +128,7 @@ l'absence de MBStyle pour cette règle précise.
 
 ## 3. Ressources externes (images SVG embarquées, sprites) côté API synchrone et plugin QGIS
 
-La route `POST /v1/convert` de styleforge-api (phase 6) n'a, dans cette
+**[HORS PÉRIMÈTRE ACTUEL]** La route `POST /v1/convert` de styleforge-api (phase 6) n'a, dans cette
 première itération, aucun service de résolution de ressources externes :
 un QML dont un symbole référence une image SVG embarquée en base64, ou
 dont un `graphicFill`/`graphicStroke` a besoin d'un sprite, produit
